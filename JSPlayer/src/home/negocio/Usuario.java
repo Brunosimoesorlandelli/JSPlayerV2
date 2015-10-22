@@ -12,15 +12,15 @@ public class Usuario {
 
 	private String nome;
 	private String email;
-	private String localização;
+	private String localizacao;
 	private String sexo;
 	private String idade;
 
-	public Usuario(String nome, String email, String localização, String sexo, String idade) {
+	public Usuario(String nome, String email, String localizacao, String sexo, String idade) {
 
 		this.nome = nome;
 		this.email = email;
-		this.localização = localização;
+		this.localizacao = localizacao;
 		this.sexo = sexo;
 		this.idade = idade;
 
@@ -34,8 +34,8 @@ public class Usuario {
 		return email;
 	}
 
-	public String getLocalização() {
-		return localização;
+	public String getLocalizacao() {
+		return localizacao;
 	}
 
 	public String getSexo() {
@@ -54,8 +54,8 @@ public class Usuario {
 		this.email = email;
 	}
 
-	public void setLocalização(String localização) {
-		this.localização = localização;
+	public void setLocalizacao(String localizacao) {
+		this.localizacao = localizacao;
 	}
 
 	public void setSexo(String sexo) {
@@ -67,7 +67,7 @@ public class Usuario {
 	}
 
 	public String toString() {
-		return "\nUsuário: " + nome + "\nEmail: " + email + "\nLocalização: " + localização + "\nSexo: " + sexo
+		return "\nUsuario: " + nome + "\nEmail: " + email + "\nLocalizacao: " + localizacao + "\nSexo: " + sexo
 				+ "\nIdade: " + idade;
 	}
 
@@ -78,7 +78,7 @@ public class Usuario {
 		int proxima = 0;
 		proxima = proxima + 1;
 
-		System.out.println("Bem-vindo ao gerenciador de músicas JSPlayer, registre-se no nosso programa. AVISO: JSPlayer é recomendado para maiores de 10 anos.");
+		System.out.println("Bem-vindo ao gerenciador de musicas JSPlayer, registre-se no nosso programa. AVISO: JSPlayer e recomendado para maiores de 10 anos.");
 
 		Scanner sc = new Scanner(System.in);
 
@@ -88,8 +88,8 @@ public class Usuario {
 		System.out.print("\nDigite seu email: ");
 		String email = sc.nextLine();
 
-		System.out.print("\nDigite sua localização, no modelo(Cidade, UF): ");
-		String localização = sc.nextLine();
+		System.out.print("\nDigite sua localizacao, no modelo(Cidade, UF): ");
+		String localizacao = sc.nextLine();
 
 		System.out.print("\nDigite seu sexo: ");
 		String sexo = sc.nextLine();
@@ -103,10 +103,10 @@ public class Usuario {
 
 			if (inteiros.contains(idade.substring(0, 1)) && inteiros.contains(idade.substring(1, 2)) && idade.length() == 2) {
 
-				Usuario u1 = new Usuario(nome, email, localização, sexo, idade);
-				FileWriter arq = new FileWriter("res\\Usuários.txt");
+				Usuario u1 = new Usuario(nome, email, localizacao, sexo, idade);
+				FileWriter arq = new FileWriter("res\\Usuarios.txt");
 				PrintWriter gravarArq = new PrintWriter(arq);
-				gravarArq.printf("+--Usuários--+%n");
+				gravarArq.printf("+--Usuarios--+%n");
 
 				for (i = 0; i <= proxima; i++) {
 
@@ -129,7 +129,7 @@ public class Usuario {
 		
 		System.out.println("\n");
 
-		System.out.println("Qual música deseja tocar?\n Digite o número da faixa:\n1. Imagine Dragons - Radioactive\n2. O Rappa - Pescador de Ilusões\n3. Onime - Tenro(Sprtn Remix)\n4. Phil Collins - Another Day in Paradise\n5. Above & Beyond - Counting Down The Days");
+		System.out.println("Qual musica deseja tocar?\n Digite o numero da faixa:\n1. Imagine Dragons - Radioactive\n2. O Rappa - Pescador de Ilusoes\n3. Onime - Tenro(Sprtn Remix)\n4. Phil Collins - Another Day in Paradise\n5. Above and Beyond - Counting Down The Days");
 
 		new Play();
 	}

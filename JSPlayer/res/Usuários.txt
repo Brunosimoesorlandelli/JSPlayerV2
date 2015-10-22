@@ -1,13 +1,13 @@
 +--Usuários--+
 
-Usuário: BRUNO
-Email: BRUNOSORLANDELLI@GMAIL.COM
-Localização: RECIFE, PE
-Sexo: MASCULINO
+Usuário: Bruno
+Email: brunosorlandelli@gmail.com
+Localização: Recife, PE
+Sexo: Masculino
 Idade: 19
-Usuário: BRUNO
-Email: BRUNOSORLANDELLI@GMAIL.COM
-Localização: RECIFE, PE
-Sexo: MASCULINO
+Usuário: Bruno
+Email: brunosorlandelli@gmail.com
+Localização: Recife, PE
+Sexo: Masculino
 Idade: 19
 +-------------+
