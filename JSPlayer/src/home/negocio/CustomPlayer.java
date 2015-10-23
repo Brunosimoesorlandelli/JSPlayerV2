@@ -20,7 +20,7 @@ public class CustomPlayer {
 	private int total;
 	private int stopped;
 	private boolean valid;
-	private int w = 0;
+	
 
 	public CustomPlayer(){
 	    player = null;

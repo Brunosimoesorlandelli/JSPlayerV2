@@ -1,0 +1,8 @@
++--Usuarios--+
+
+Usuario: Huezord
+Email: huezord_t@gmail.com
+Localizacao: Recife, PE
+Sexo: Masculino
+Idade: 19
++-------------+
