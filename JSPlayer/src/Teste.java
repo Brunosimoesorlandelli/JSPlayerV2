@@ -3,6 +3,8 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Scanner;
 
+import home.dados.RepositorioUsuarioArray;
+import home.negocio.Controlador;
 import home.negocio.Play;
 import home.negocio.Usuario;
 
@@ -31,10 +33,21 @@ public class Teste {
 
 		System.out.print("\nDigite sua idade: ");
 		String idade = sc.nextLine();
-
+		
+		RepositorioUsuarioArray R = new RepositorioUsuarioArray(50);
+		
+		Controlador c = Controlador.getInstance();
+		
+		c.cadastrarUsuario(new Usuario(nome, email, localizacao, sexo, idade));
+		c.existeUsuario("Bruno");
+		c.removerUsuario("Bruno");
+		c.procurarUsuario("Bruno");
+		
+		
+		
 		
 
-		while (controle == 0) {
+		/*while (controle == 0) {
 
 			if (inteiros.contains(idade.substring(0, 1)) && inteiros.contains(idade.substring(1, 2)) && idade.length() == 2) {
 
@@ -61,12 +74,13 @@ public class Teste {
 
 			
 
-		}
+		}*/
 		
 		System.out.println("\n");
 
 		System.out.println("Qual musica deseja tocar?\n Digite o numero da faixa:\n1. Imagine Dragons - Radioactive\n2. O Rappa - Pescador de Ilusoes\n3. Onime - Tenro(Sprtn Remix)\n4. Phil Collins - Another Day in Paradise\n5. Above and Beyond - Counting Down The Days");
 
 		new Play();
+		sc.close();
 	}
 }
