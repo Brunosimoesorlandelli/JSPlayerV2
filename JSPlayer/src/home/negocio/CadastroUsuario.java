@@ -1,5 +1,6 @@
 package home.negocio;
 import home.dados.RepositorioUsuarioArray;
+import home.negocio.Usuario;
 
 public class CadastroUsuario {
 
@@ -9,41 +10,37 @@ private RepositorioUsuarioArray repositorio;
         this.repositorio = new RepositorioUsuarioArray(100); 
     }
     
-    public void cadastrar(Usuario u) {
+    public void cadastrar (Usuario u) {
         if (u == null) {
             throw new IllegalArgumentException("Parâmetro inválido");
         } else {
-            if (!this.existe(u.getNome())) {
+            if (!this.existe(u.getEmail())) {
                 this.repositorio.cadastrar(u);
-            } else {
-                // Aqui não dever haver impressão de mensagem para o usuário, já
-                // que essa não é a responsabildiade do Cadastro/Controlador.
-                // O problema é resolvido com o uso de exceções
+                
+            }else{
+            	System.out.println("ERRO! EMAIL JÁ CADASTRADO!");
             }
         }        
     }
     
-    public void descadastrar(String nome) {
-    	Usuario u = this.repositorio.procurar(nome);
+    public void descadastrar(String email) {
+    	Usuario u = this.repositorio.procurar(email);
     	if (u != null) {
-    		this.repositorio.remover(nome);
+    		this.repositorio.remover(email);
     		
 		} else {
-		    // Aqui não dever haver impressão de mensagem para o usuário, já
-            // que essa não é a responsabildiade do Cadastro/Controlador.
-            // O problema é resolvido com o uso de exceções
-		}
+		    }
     }
 
-    public Usuario procurar(String nome) {
-        return this.repositorio.procurar(nome);
+    public Usuario procurar(String email) {
+        return this.repositorio.procurar(email);
     }
     
-    public boolean existe(String nome) {
-    	return this.repositorio.existe(nome);
+    public boolean existe(String email) {
+    	return this.repositorio.existe(email);
     }
 
-    public void remover(String nome) {
-        this.repositorio.remover(nome);
+    public void remover(String email) {
+        this.repositorio.remover(email);
     }
 }

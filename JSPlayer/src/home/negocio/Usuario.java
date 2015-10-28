@@ -1,13 +1,6 @@
 package home.negocio;
 
-import java.io.File;
 
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.Scanner;
-import home.negocio.Play;
-import home.dados.RepositorioUsuarioArray;
 public class Usuario {
 
 	

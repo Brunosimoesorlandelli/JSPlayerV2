@@ -34,47 +34,13 @@ public class Teste {
 		System.out.print("\nDigite sua idade: ");
 		String idade = sc.nextLine();
 		
-		RepositorioUsuarioArray R = new RepositorioUsuarioArray(50);
+		RepositorioUsuarioArray R = new RepositorioUsuarioArray(10);
 		
 		Controlador c = Controlador.getInstance();
 		
 		c.cadastrarUsuario(new Usuario(nome, email, localizacao, sexo, idade));
-		c.existeUsuario("Bruno");
-		c.removerUsuario("Bruno");
-		c.procurarUsuario("Bruno");
-		
-		
-		
-		
-
-		/*while (controle == 0) {
-
-			if (inteiros.contains(idade.substring(0, 1)) && inteiros.contains(idade.substring(1, 2)) && idade.length() == 2) {
-
-				Usuario u = new Usuario(nome, email, localizacao, sexo, idade);
-				FileWriter arq = new FileWriter("res\\Usuarios.txt");
-				PrintWriter gravarArq = new PrintWriter(arq);
-				gravarArq.printf("+--Usuarios--+%n");
-
-				for (int i = 0; i <= proxima; i++) {
-
-					gravarArq.print(u.toString());
-
-				}
-				gravarArq.printf("%n+-------------+");
-				arq.close();
-				System.out.print(u.toString());
-				controle++;
-				
-			} else {
-				System.out.println("ERRO");
-				System.out.print("Digite sua idade: ");
-				idade = sc.nextLine();
-			}
-
-			
-
-		}*/
+		c.existeUsuario("eduardo");
+		c.removerUsuario("alexandre");
 		
 		System.out.println("\n");
 

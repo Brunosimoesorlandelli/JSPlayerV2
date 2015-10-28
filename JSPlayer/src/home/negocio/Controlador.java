@@ -34,8 +34,9 @@ public class Controlador {
      * @return
      * @see br.ufrpe.sistema_bancario.negocio.CadastroContas#procurar(java.lang.String)
      */
-    public Usuario procurarUsuario(String nome) {
-        return usuarios.procurar(nome);
+    public Usuario procurarUsuario(String email) {
+        return usuarios.procurar(email);
+        
     }
 
     /**
@@ -43,15 +44,15 @@ public class Controlador {
      * @return
      * @see br.ufrpe.sistema_bancario.negocio.CadastroContas#existe(java.lang.String)
      */
-    public boolean existeUsuario(String nome) {
-        return usuarios.existe(nome);
+    public boolean existeUsuario(String email) {
+        return usuarios.existe(email);
     }
 
     /**
      * @param num
      * @see br.ufrpe.sistema_bancario.negocio.CadastroContas#remover(java.lang.String)
      */
-    public void removerUsuario(String nome) {
-        usuarios.remover(nome);
+    public void removerUsuario(String email) {
+        usuarios.remover(email);
     }
 }
