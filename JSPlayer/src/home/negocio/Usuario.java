@@ -4,11 +4,7 @@ package home.negocio;
 public class Usuario {
 
 	
-	private String nome;
-	private String email;
-	private String localizacao;
-	private String sexo;
-	private String idade;
+	private String nome, email, localizacao, sexo, idade;
 
 	public Usuario(String nome, String email, String localizacao, String sexo, String idade) {
 
@@ -60,10 +56,15 @@ public class Usuario {
 		this.idade = idade;
 	}
 
+	@Override
 	public String toString() {
-		return "\nUsuario: " + nome + "\nEmail: " + email + "\nLocalizacao: " + localizacao + "\nSexo: " + sexo
-				+ "\nIdade: " + idade;
+		return "Usuario [nome=" + nome + ", email=" + email + ", localizacao=" + localizacao + ", sexo=" + sexo
+				+ ", idade=" + idade + "]";
 	}
+
+	
+
+
 
 	
 

@@ -1,8 +1,9 @@
 package home.dados;
 
+import home.negocio.IRepositorio;
 import home.negocio.Usuario;
 
-public class RepositorioUsuarioArray {
+public class RepositorioUsuarioArray implements IRepositorio{
 
 	private Usuario[] usuarios;
 	private int next;
@@ -10,9 +11,16 @@ public class RepositorioUsuarioArray {
 	
 	public RepositorioUsuarioArray(int tamanho) {
 		this.usuarios = new Usuario[tamanho];
-		this.next = 0;
+		this.next = 1;
 	}
 
+	public void administrador (){
+		  
+		  Usuario adm = new Usuario("Dream Team", "dreamteamof@gmail.com", "Lugar nenhum", "M", "10");
+		  usuarios[0] = adm;
+		  
+		 }
+	
 	public void cadastrar(Usuario u) {
 		this.usuarios[this.next] = u;
 		if (u.getEmail().equals(this.usuarios[this.next].getEmail())) {
@@ -38,11 +46,11 @@ public class RepositorioUsuarioArray {
 		}
 	}
 
-	private int procurarIndice(String email) {
+	public int procurarIndice(String nome, String email) {
 		int i = 0;
 		boolean achou = false;
 		while ((!achou) && (i < this.next)) {
-			if (email.equals(this.usuarios[i].getEmail())) {
+			if (nome.equals(this.usuarios[i].getNome()) && email.equals(this.usuarios[i].getEmail())) {
 				achou = true;
 			} else {
 				i++;
@@ -51,8 +59,8 @@ public class RepositorioUsuarioArray {
 		return i;
 	}
 
-	public void remover(String email) {
-		int i = this.procurarIndice(email);
+	public void remover(String nome, String email) {
+		int i = this.procurarIndice(nome, email);
 		if (i != this.next) {
 			this.usuarios[i] = this.usuarios[this.next - 1];
 			this.usuarios[this.next - 1] = null;
@@ -63,9 +71,9 @@ public class RepositorioUsuarioArray {
 		}
 	}
 
-	public boolean existe(String email) {
+	public boolean existe(String nome, String email) {
 		boolean existe = false;
-		int indice = this.procurarIndice(email);
+		int indice = this.procurarIndice(nome, email);
 		if (indice != next) {
 			existe = true;
 			System.out.println("O USUARIO EXISTE!");
@@ -75,16 +83,22 @@ public class RepositorioUsuarioArray {
 		return existe;
 	}
 
-	public Usuario procurar(String email) {
-		int isearch = this.procurarIndice(email);
+	public Usuario procurar(String nome, String email) {
+		int isearch = this.procurarIndice(nome, email);
 		Usuario resultado = null;
 		if (isearch != this.next) {
 			resultado = this.usuarios[isearch];
-			System.out.printf("O USUARIO FOI ENCONTRADO: %s", email);
 		} else {
 			System.out.println("O USUARIO NAO FOI ENCONTRADO.");
 		}
 		return resultado;
 	}
+	
+	public void printar(Usuario u){
+		System.out.printf("Nome: %s\nSexo: %s\nIdade: %s\nLocalização: %s\nEmail: %s", u.getNome(), u.getSexo(), u.getIdade(), u.getLocalizacao(), u.getEmail());
+	}
+		
+	
+
 
 }

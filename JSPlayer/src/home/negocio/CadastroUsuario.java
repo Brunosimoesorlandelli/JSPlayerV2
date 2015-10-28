@@ -10,11 +10,15 @@ private RepositorioUsuarioArray repositorio;
         this.repositorio = new RepositorioUsuarioArray(100); 
     }
     
+    public void administrador(){
+        repositorio.administrador();
+       }
+    
     public void cadastrar (Usuario u) {
         if (u == null) {
             throw new IllegalArgumentException("Parâmetro inválido");
         } else {
-            if (!this.existe(u.getEmail())) {
+            if (!this.existe(u.getNome(), u.getEmail())) {
                 this.repositorio.cadastrar(u);
                 
             }else{
@@ -23,24 +27,36 @@ private RepositorioUsuarioArray repositorio;
         }        
     }
     
-    public void descadastrar(String email) {
-    	Usuario u = this.repositorio.procurar(email);
+    public void descadastrar(String nome, String email) {
+    	Usuario u = this.repositorio.procurar(nome, email);
     	if (u != null) {
-    		this.repositorio.remover(email);
+    		this.repositorio.remover(nome, email);
     		
 		} else {
 		    }
     }
 
-    public Usuario procurar(String email) {
-        return this.repositorio.procurar(email);
+    public Usuario procurar(String nome, String email) {
+        return this.repositorio.procurar(nome, email);
     }
     
-    public boolean existe(String email) {
-    	return this.repositorio.existe(email);
+    public boolean existe(String nome, String email) {
+    	return this.repositorio.existe(nome, email);
     }
 
-    public void remover(String email) {
-        this.repositorio.remover(email);
+    public void remover(String nome, String email) {
+        this.repositorio.remover(nome, email); 
     }
+    
+    public boolean login(String nome, String email){
+		boolean login = false;
+		if(repositorio.existe(nome, email)){
+			login = true;
+			System.out.println("LOGIN REALIZADO COM SUCESSO");
+			repositorio.printar(repositorio.procurar(nome, email));
+		}else{
+			System.out.println("O USUARIO NAO EXISTE!");
+		}
+			return login;
+	}
 }

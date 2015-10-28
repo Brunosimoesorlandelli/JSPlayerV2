@@ -2,8 +2,12 @@ package home.negocio;
 
 import java.io.BufferedInputStream;
 import java.io.FileInputStream;
+import java.util.Scanner;
+
 import javax.swing.JOptionPane;
 import javazoom.jl.player.Player;
+import home.dados.RepositorioMusicaArray;
+import home.dados.RepositorioUsuarioArray;
 
 public class CustomPlayer {
 
@@ -81,5 +85,33 @@ public class CustomPlayer {
 			valid = false;
 		}
 		return valid;
+	}
+
+	public void Play(Musica m) {
+		int w = 0;
+		Scanner sc = new Scanner(System.in);
+		String musica = m.getEndereco();
+		setPath(musica);
+		play(-1);
+		System.out.println("\nTOCANDO!");
+		while (w == 0) {
+
+			String controle = sc.nextLine();
+			if (controle.equals("P") || controle.equals("p")) {
+				pause();
+				System.out.println("PAUSADA!");
+			} else if (controle.equals("R") || controle.equals("r")) {
+				resume();
+				System.out.println("TOCANDO!");
+
+			} else if (controle.equals("S") || controle.equals("s")) {
+				pause();
+				player = null;
+				System.out.println("ENCERRADA!");
+				w++;
+			}
+
+		}
+		sc.close();
 	}
 }
