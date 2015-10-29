@@ -7,7 +7,6 @@ import java.util.Scanner;
 import javax.swing.JOptionPane;
 import javazoom.jl.player.Player;
 import home.dados.RepositorioMusicaArray;
-import home.dados.RepositorioUsuarioArray;
 
 public class CustomPlayer {
 

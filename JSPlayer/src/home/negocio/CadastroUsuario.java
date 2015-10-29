@@ -16,7 +16,7 @@ private RepositorioUsuarioArray repositorio;
     
     public void cadastrar (Usuario u) {
         if (u == null) {
-            throw new IllegalArgumentException("Parâmetro inválido");
+        	System.out.println("PARAMETRO INVALIDO");
         } else {
             if (!this.existe(u.getNome(), u.getEmail())) {
                 this.repositorio.cadastrar(u);
@@ -55,8 +55,12 @@ private RepositorioUsuarioArray repositorio;
 			System.out.println("LOGIN REALIZADO COM SUCESSO");
 			repositorio.printar(repositorio.procurar(nome, email));
 		}else{
-			System.out.println("O USUARIO NAO EXISTE!");
+			System.out.println("LOGIN NÃO REALIZADO");
 		}
-			return login;
+			return login;			
 	}
+    
+    public void printar(Usuario u){
+    	this.repositorio.printar(u);
+    }
 }

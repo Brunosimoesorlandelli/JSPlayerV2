@@ -84,10 +84,10 @@ public class RepositorioUsuarioArray implements IRepositorio{
 	}
 
 	public Usuario procurar(String nome, String email) {
-		int isearch = this.procurarIndice(nome, email);
+		int usearch = this.procurarIndice(nome, email);
 		Usuario resultado = null;
-		if (isearch != this.next) {
-			resultado = this.usuarios[isearch];
+		if (usearch != this.next) {
+			resultado = this.usuarios[usearch];
 		} else {
 			System.out.println("O USUARIO NAO FOI ENCONTRADO.");
 		}

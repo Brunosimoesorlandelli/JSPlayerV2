@@ -2,17 +2,10 @@ package home.negocio;
 
 import java.util.Scanner;
 import home.negocio.Usuario;
-import home.dados.RepositorioMusicaArray;
-import home.dados.RepositorioUsuarioArray;
 
 public class Menu {
-
-	
-         
-    
 	
 	public static void main(String[] args) {
-		RepositorioMusicaArray repositorio = new RepositorioMusicaArray(100);
 		int opcao, escolha, k = 0;
 		RecebimentoDados dados = new RecebimentoDados();
 		System.out.println("Bem-vindo ao gerenciador de musicas JSPlayer.");
@@ -20,7 +13,7 @@ public class Menu {
 		Controlador c = Controlador.getInstance();
 		c.administrador();
 		while (k == 0) {
-			System.out.println("\nO que deseja fazer?\n1 - Cadastrar Usuario\n2 - Logar\n3 - Sair");
+			System.out.println("\nO que deseja fazer?\n1 - Cadastrar Usuario\n2 - Logar\n3 - Sair do programa!");
 			
 			opcao = scan.nextInt();
 
@@ -32,24 +25,39 @@ public class Menu {
 				break;
 
 			case 2:
-				c.loginUsuario(dados.recebimentoNome(), dados.recebimentoEmail());
+				if(c.loginUsuario(dados.recebimentoNome(), dados.recebimentoEmail())){
+					
+				
 				k++;
 				
-				System.out.println("\n1 - Criar Playlist\n2 - Tocar Playlist\n3 - Procurar outros usuarios");
+				System.out.println("\n1 - Criar Playlist\n2 - Tocar Playlist\n3 - Procurar outros usuarios\n4 - Deslogar e retornar ao menu!\n5 - Sair do programa!");
 				escolha = scan.nextInt();
+				
+
 				switch(escolha){
 				
 				case 1:
+					Playlist lista = new Playlist(dados.recebimentoNomeP());
+					
 					break;
 				case 2:
-					repositorio.musicas();
-					repositorio.call();
 					break;
 				case 3:
+					System.out.println("\nEscreva os dados do usuario que deseja procurar");					
+					c.printarDados(c.procurarUsuario(dados.recebimentoNome(), dados.recebimentoEmail()));
 					break;
+				case 4:				
+					k--;
+					break;
+				case 5:				
+					break;
+						
 				default:
 					System.out.println("NAO EXISTE ESSA ESCOLHA");
 					break;		
+				}
+				} else {
+					System.out.println("REALIZE O CADASTRO DESSE USUARIO ANTES DE LOGAR!");
 				}
 				break;
 

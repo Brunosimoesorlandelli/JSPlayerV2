@@ -78,10 +78,10 @@ public class RepositorioMusicaArray implements IRepositorio{
 	}
 
 	public Musica procurar(String titulo, String artista) {
-		int isearch = this.procurarIndice(titulo, artista);
+		int msearch = this.procurarIndice(titulo, artista);
 		Musica resultado = null;
-		if (isearch != this.prox) {
-			resultado = this.musicas[isearch];
+		if (msearch != this.prox) {
+			resultado = this.musicas[msearch];
 			System.out.printf("A MUSICA FOI ENCONTRADA: %s - %s", titulo, artista);
 		} else {
 			System.out.println("A MUSICA NAO FOI ENCONTRADA.");

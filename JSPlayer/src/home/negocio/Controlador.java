@@ -5,6 +5,7 @@ import home.negocio.Musica;
 
 public class Controlador {
 
+	private CadastroPlaylist listas;
 	private CadastroMusica musicas;
 	private CadastroUsuario usuarios;
 
@@ -12,6 +13,8 @@ public class Controlador {
 
 	private Controlador() {
 		this.usuarios = new CadastroUsuario();
+		this.musicas = new CadastroMusica();
+		this.listas = new CadastroPlaylist();
 	}
 
 	public void administrador(){
@@ -64,5 +67,24 @@ public class Controlador {
 	}
 	public void callMusica(){
 		musicas.call();
+	}
+	public void cadastrarPlaylist(Playlist list) {
+		listas.cadastrar(list);
+	}
+
+	public Playlist procurarPlaylist(String nomeP) {
+		return listas.procurar(nomeP);
+
+	}
+
+	public boolean existePlaylist(String nomeP) {
+		return listas.existe(nomeP);
+	}
+
+	public void removerPlaylist(String nomeP) {
+		listas.remover(nomeP);
+	}
+	public void printarDados(Usuario u){
+		usuarios.printar(u);
 	}
 }

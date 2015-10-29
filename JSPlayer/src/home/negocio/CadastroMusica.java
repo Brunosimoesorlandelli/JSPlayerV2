@@ -12,7 +12,7 @@ private RepositorioMusicaArray repositorio;
     
     public void cadastrar (Musica mus) {
         if (mus == null) {
-            throw new IllegalArgumentException("Parâmetro inválido");
+        	System.out.println("PARAMETRO INVALIDO");
         } else {
             if (!this.existe(mus.getTitulo(), mus.getArtista())) {
                 this.repositorio.cadastrar(mus);
