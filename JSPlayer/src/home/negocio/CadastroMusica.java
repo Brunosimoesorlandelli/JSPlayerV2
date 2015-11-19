@@ -1,8 +1,9 @@
 package home.negocio;
 
 import home.dados.RepositorioMusicaArray;
+import home.negocio.beans.Musica;
 
-public class CadastroMusica {
+public class CadastroMusica implements ICadastroMusica{
 
 private RepositorioMusicaArray repositorio;
     
@@ -43,7 +44,7 @@ private RepositorioMusicaArray repositorio;
     public void remover(String titulo, String artista) {
         this.repositorio.remover(titulo, artista);
     }
-    public void call(){
+    public void call() {
     	this.repositorio.call();
     }
 }

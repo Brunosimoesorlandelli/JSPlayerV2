@@ -1,8 +1,10 @@
 package home.negocio;
-import home.dados.RepositorioUsuarioArray;
-import home.negocio.Usuario;
+import javax.swing.JOptionPane;
 
-public class CadastroUsuario {
+import home.dados.RepositorioUsuarioArray;
+import home.negocio.beans.Usuario;
+
+public class CadastroUsuario implements ICadastroUsuario{
 
 private RepositorioUsuarioArray repositorio;
     
@@ -10,19 +12,17 @@ private RepositorioUsuarioArray repositorio;
         this.repositorio = new RepositorioUsuarioArray(100); 
     }
     
-    public void administrador(){
-        repositorio.administrador();
-       }
+    
     
     public void cadastrar (Usuario u) {
         if (u == null) {
-        	System.out.println("PARAMETRO INVALIDO");
+        	JOptionPane.showMessageDialog(null,"PARAMETRO INVALIDO");
         } else {
             if (!this.existe(u.getNome(), u.getEmail())) {
                 this.repositorio.cadastrar(u);
                 
             }else{
-            	System.out.println("ERRO! EMAIL JÁ CADASTRADO!");
+            	JOptionPane.showMessageDialog(null,"ERRO! EMAIL JÁ CADASTRADO!");
             }
         }        
     }
@@ -48,19 +48,19 @@ private RepositorioUsuarioArray repositorio;
         this.repositorio.remover(nome, email); 
     }
     
-    public boolean login(String nome, String email){
+    public boolean login(String nome, String email) {
 		boolean login = false;
 		if(repositorio.existe(nome, email)){
 			login = true;
-			System.out.println("LOGIN REALIZADO COM SUCESSO");
+			JOptionPane.showMessageDialog(null,"LOGIN REALIZADO COM SUCESSO");
 			repositorio.printar(repositorio.procurar(nome, email));
 		}else{
-			System.out.println("LOGIN NÃO REALIZADO");
+			JOptionPane.showMessageDialog(null,"LOGIN NÃO REALIZADO");
 		}
 			return login;			
 	}
     
-    public void printar(Usuario u){
+    public void printar(Usuario u) {
     	this.repositorio.printar(u);
     }
 }

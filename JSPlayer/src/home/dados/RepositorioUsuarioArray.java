@@ -1,9 +1,15 @@
 package home.dados;
 
-import home.negocio.IRepositorio;
-import home.negocio.Usuario;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 
-public class RepositorioUsuarioArray implements IRepositorio{
+import javax.swing.JOptionPane;
+
+import home.negocio.beans.Usuario;
+
+public class RepositorioUsuarioArray implements IRepositorioUsuarios{
 
 	private Usuario[] usuarios;
 	private int next;
@@ -11,25 +17,29 @@ public class RepositorioUsuarioArray implements IRepositorio{
 	
 	public RepositorioUsuarioArray(int tamanho) {
 		this.usuarios = new Usuario[tamanho];
-		this.next = 1;
+		this.next = 0;
 	}
 
-	public void administrador (){
-		  
-		  Usuario adm = new Usuario("Dream Team", "dreamteamof@gmail.com", "Lugar nenhum", "M", "10");
-		  usuarios[0] = adm;
-		  
-		 }
 	
 	public void cadastrar(Usuario u) {
 		this.usuarios[this.next] = u;
 		if (u.getEmail().equals(this.usuarios[this.next].getEmail())) {
+			File usuario = new File("Usuarios\\" + u.getEmail() + ".txt");
+			try{
+				FileWriter fw = new FileWriter(usuario);
+				BufferedWriter dados = new BufferedWriter(fw);
+				dados.write("Nome: " + u.getNome() + "\nEmail: " + u.getEmail() + "\nLocalizacao: " + u.getLocalizacao() + "\nSexo: " + u.getSexo() + "\nIdade: " + u.getIdade());
+				dados.close();
+				fw.close();
+			}catch(IOException ex){
+				
+			}
 			
 			this.next = this.next + 1;
 			if (this.next == this.usuarios.length) {
 				this.duplicaArrayUsuario();
 			}
-			System.out.println("O USUARIO FOI CADASTRADO!");
+			JOptionPane.showMessageDialog(null,"O USUARIO FOI CADASTRADO!");
 		} else {
 			
 
@@ -65,9 +75,9 @@ public class RepositorioUsuarioArray implements IRepositorio{
 			this.usuarios[i] = this.usuarios[this.next - 1];
 			this.usuarios[this.next - 1] = null;
 			this.next = this.next - 1;
-			System.out.println("O USUARIO FOI REMOVIDO!");
+			JOptionPane.showMessageDialog(null,"O USUARIO FOI REMOVIDO!");
 		} else {
-			System.out.println("ERRO, O USUARIO NAO PODE SER REMOVIDO");
+			JOptionPane.showMessageDialog(null,"ERRO, O USUARIO NAO PODE SER REMOVIDO");
 		}
 	}
 
@@ -76,9 +86,9 @@ public class RepositorioUsuarioArray implements IRepositorio{
 		int indice = this.procurarIndice(nome, email);
 		if (indice != next) {
 			existe = true;
-			System.out.println("O USUARIO EXISTE!");
+			System.out.println("O USUARIO EXISTE!" );
 		} else {
-			System.out.println("O USUARIO NAO EXISTE!");
+			JOptionPane.showMessageDialog(null,"O USUARIO NAO EXISTE!");
 		}
 		return existe;
 	}
@@ -89,13 +99,13 @@ public class RepositorioUsuarioArray implements IRepositorio{
 		if (usearch != this.next) {
 			resultado = this.usuarios[usearch];
 		} else {
-			System.out.println("O USUARIO NAO FOI ENCONTRADO.");
+			JOptionPane.showMessageDialog(null,"O USUARIO NAO FOI ENCONTRADO.");
 		}
 		return resultado;
 	}
 	
 	public void printar(Usuario u){
-		System.out.printf("Nome: %s\nSexo: %s\nIdade: %s\nLocalização: %s\nEmail: %s", u.getNome(), u.getSexo(), u.getIdade(), u.getLocalizacao(), u.getEmail());
+		JOptionPane.showMessageDialog(null,u.toString());
 	}
 		
 	

@@ -1,10 +1,11 @@
 package home.dados;
 
-import home.negocio.CustomPlayer;
-import home.negocio.IRepositorio;
-import home.negocio.Musica;
+import javax.swing.JOptionPane;
 
-public class RepositorioMusicaArray implements IRepositorio{
+import home.negocio.CustomPlayer;
+import home.negocio.beans.Musica;
+
+public class RepositorioMusicaArray implements IRepositorioMusica {
 
 	private Musica[] musicas;
 	private int prox;
@@ -38,8 +39,7 @@ public class RepositorioMusicaArray implements IRepositorio{
 			this.musicas = arrayDuplicado;
 		}
 	}
-	
-	
+
 	public int procurarIndice(String titulo, String artista) {
 		int i = 0;
 		boolean achou = false;
@@ -52,7 +52,7 @@ public class RepositorioMusicaArray implements IRepositorio{
 		}
 		return i;
 	}
-	
+
 	public void remover(String titulo, String artista) {
 		int i = this.procurarIndice(titulo, artista);
 		if (i != this.prox) {
@@ -65,7 +65,7 @@ public class RepositorioMusicaArray implements IRepositorio{
 		}
 	}
 
-	public boolean existe(String titulo,String artista) {
+	public boolean existe(String titulo, String artista) {
 		boolean existe = false;
 		int indice = this.procurarIndice(titulo, artista);
 		if (indice != prox) {
@@ -89,16 +89,51 @@ public class RepositorioMusicaArray implements IRepositorio{
 		return resultado;
 	}
 	
-	public void musicas(){
-		Musica mus = new Musica("Hey Brother", "Avicii", "True", "2013", "EDM", "res/"+ "Avicii   Hey Brother (Lyric).mp3");
-		musicas[0] = mus;
+	public String retornarMusicas(){
+		String resultado0 = null;
+		String resultado1 = null;
+		String resultado2 = null;
+		String resultado3 = null;
+		String resultadofinal = null;
+		int i;
+		for(i = 0; i < prox; i++){
+			if(resultado0 == null){
+				resultado0 = "\nMusica 1: " + musicas[i].toString();	
+			} else if(resultado1 == null){
+				resultado1 = "\nMusica 2: " + musicas[i].toString();
+				} else if(resultado2 == null){
+					resultado2 = "\nMusica 3: " + musicas[i].toString();
+					}else if(resultado3 == null){
+						resultado3 = "\nMusica 4: " + musicas[i].toString();
+						}
+			
+		}
+		resultadofinal = resultado0 + resultado1 + resultado2 + resultado3;
+	return resultadofinal;
 	}
 
-	public void call(){
+	public void call() {
 		CustomPlayer player = new CustomPlayer();
-		System.out.println(musicas[0].toString());
-		player.Play(musicas[0]);
-		
+		String escolhaMusica;
+		escolhaMusica = JOptionPane.showInputDialog(retornarMusicas());
+
+		switch (escolhaMusica) {
+		case "1":
+			player.Play(musicas[0]);
+			break;
+		case "2":
+			player.Play(musicas[1]);
+			break;
+		case "3":
+			player.Play(musicas[2]);
+			break;
+		case "4":
+			player.Play(musicas[3]);
+			break;
+		default:
+			System.out.println("A MUSICA NAO EXISTE!");
+		}
+
 	}
-	
+
 }

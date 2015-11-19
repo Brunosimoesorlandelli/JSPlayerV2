@@ -1,12 +1,14 @@
 package home.negocio;
 
+import home.negocio.beans.Musica;
+
 import java.io.BufferedInputStream;
 import java.io.FileInputStream;
 import java.util.Scanner;
 
 import javax.swing.JOptionPane;
+
 import javazoom.jl.player.Player;
-import home.dados.RepositorioMusicaArray;
 
 public class CustomPlayer {
 
@@ -55,7 +57,7 @@ public class CustomPlayer {
 	public void resume() {
 		if (!canResume)
 			return;
-		if (play(total - stopped))
+		if (play(total - stopped - 30000))
 			canResume = false;
 	}
 
@@ -89,12 +91,12 @@ public class CustomPlayer {
 	public void Play(Musica m) {
 		int w = 0;
 		Scanner sc = new Scanner(System.in);
-		String musica = m.getEndereco();
+		String musica = "Musicas\\" + m.getEndereco();
 		setPath(musica);
 		play(-1);
-		System.out.println("\nTOCANDO!");
+		System.out.println("\nTOCANDO: " + m.getArtista() + " - " + m.getTitulo());
 		while (w == 0) {
-
+			w =0;
 			String controle = sc.nextLine();
 			if (controle.equals("P") || controle.equals("p")) {
 				pause();

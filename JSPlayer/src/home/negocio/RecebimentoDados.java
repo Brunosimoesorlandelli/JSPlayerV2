@@ -2,6 +2,8 @@ package home.negocio;
 
 import java.util.Scanner;
 
+import javax.swing.JOptionPane;
+
 public class RecebimentoDados {
 
 	public RecebimentoDados() {
@@ -11,26 +13,79 @@ public class RecebimentoDados {
 	Scanner sc = new Scanner(System.in);
 
 	public String recebimentoNome() {
-		System.out.print("Nome: ");
-		String nome = sc.nextLine();
+		int h = 0;
+		String nome = null;
+		while (h == 0) {
+			nome = JOptionPane.showInputDialog("\nNome: ");
+			if (nome.length() > 0) {
+				h++;
+			} else {
+				JOptionPane.showMessageDialog(null,"PARAMETRO INVALIDO");
+			}
+		}
 		return nome;
 	}
 
 	public String recebimentoEmail() {
-		System.out.print("\nEmail: ");
-		String email = sc.nextLine();
-		return email;
+		int h = 0;
+		String email = null;
+		while (h == 0) {
+			
+			email = JOptionPane.showInputDialog("\nEmail: ");
+			
+			if (email.contains("@") && email.length() > 0) {
+				h++;
+			} else {
+				JOptionPane.showMessageDialog(null,"PARAMETRO INVALIDO");
+			}
+
+		}
+		return email.toLowerCase();
 	}
 
 	public String recebimentoLocalizacao() {
-		System.out.print("\nLocalizacao, no modelo(Cidade, UF): ");
-		String localizacao = sc.nextLine();
+		int h = 0;
+		String localizacao = null;
+		while (h == 0) {
+			
+			localizacao = JOptionPane.showInputDialog("\nLocalizacao, no modelo(Cidade, UF): ");
+			
+			if (localizacao.length() > 0) {
+				h++;
+			} else {
+				JOptionPane.showMessageDialog(null,"PARAMETRO INVALIDO");
+			}
+		}
 		return localizacao;
 	}
 
 	public String recebimentoSexo() {
-		System.out.print("\nSexo: ");
-		String sexo = sc.nextLine();
+		int h = 0;
+		String sexo = null;
+		while (h == 0) {
+			
+			sexo = JOptionPane.showInputDialog("M - Masculino, F - Feminino\nSexo: ");
+			
+			if (sexo.length() == 1 || sexo.equals("Masculino") || sexo.equals("masculino") || sexo.equals("Feminino")
+					|| sexo.equals("feminino")) {
+				if (sexo.substring(0, 1).equals("M") || sexo.substring(0, 1).equals("m")
+						|| sexo.substring(0, 1).equals("F") || sexo.substring(0, 1).equals("f")) {
+
+					if (sexo.substring(0, 1).equals("M") || sexo.substring(0, 1).equals("m")) {
+						sexo = "Masculino";
+						h++;
+					} else if (sexo.substring(0, 1).equals("F") || sexo.substring(0, 1).equals("f")) {
+						sexo = "Feminino";
+						h++;
+					}
+				} else {
+					JOptionPane.showMessageDialog(null,"PARAMETRO INVALIDO");
+				}
+			} else {
+				JOptionPane.showMessageDialog(null,"PARAMETRO INVALIDO");
+			}
+
+		}
 		return sexo;
 	}
 
@@ -39,28 +94,31 @@ public class RecebimentoDados {
 		String result = null;
 		String troll = "0123456789";
 		while (h == 0) {
-			System.out.print("\nIdade: ");
-			String idade = sc.nextLine();
-			if (idade.length() < 3) {
-				if (idade.length() < 2) {
-					if (troll.contains(idade.substring(0, 1))) {
-						result = idade;
-						h++;
-					} else {
-						System.out.println("PARAMETRO INVALIDO");
-					}
+			
+			String idade = JOptionPane.showInputDialog("\nIdade: ");
+			
+			switch (idade.length()) {
+			case 1:
+				if (troll.contains(idade.substring(0, 1))) {
+					result = idade;
+					h++;
 				} else {
-
-					if (troll.contains(idade.substring(0, 2))) {
-						result = idade;
-						h++;
-					} else {
-						System.out.println("PARAMETRO INVALIDO");
-					}
+					JOptionPane.showMessageDialog(null,"PARAMETRO INVALIDO");
 				}
-			} else {
-				System.out.println("PARAMETRO INVALIDO");
+				break;
+
+			case 2:
+				if (troll.contains(idade.substring(0, 1)) && (troll.contains(idade.substring(1, 2)))) {
+					result = idade;
+					h++;
+				} else {
+					JOptionPane.showMessageDialog(null,"PARAMETRO INVALIDO");
+				}
+				break;
+			default:
+				JOptionPane.showMessageDialog(null,"PARAMETRO INVALIDO");
 			}
+
 		}
 
 		return result;
@@ -68,20 +126,60 @@ public class RecebimentoDados {
 	}
 
 	public String recebimentoTitulo() {
-		System.out.print("Titulo: ");
-		String titulo = sc.nextLine();
+		int h = 0;
+		String titulo = null;
+		while (h == 0) {
+			titulo = JOptionPane.showInputDialog("\nTitulo: ");
+			
+			if (titulo.length() > 0) {
+				h++;
+			} else {
+				JOptionPane.showMessageDialog(null,"PARAMETRO INVALIDO");
+			}
+		}
 		return titulo;
 	}
 
 	public String recebimentoArtista() {
-		System.out.print("Artista: ");
-		String artista = sc.nextLine();
+		int h = 0;
+		String artista = null;
+		while (h == 0) {
+			artista = JOptionPane.showInputDialog("\nArtista: ");
+			
+			if (artista.length() > 0) {
+				h++;
+			} else {
+				JOptionPane.showMessageDialog(null,"PARAMETRO INVALIDO");
+			}
+		}
 		return artista;
 	}
 
+	public String recebimentoEndereco(){
+		int h = 0;
+		String endereco = null;
+		while (h == 0) {
+			endereco = JOptionPane.showInputDialog("\nCaminho: ");
+			
+			if (endereco.length() > 0) {
+				h++;
+			} else {
+				JOptionPane.showMessageDialog(null,"PARAMETRO INVALIDO");
+			}
+		}
+		return endereco;
+	}
 	public String recebimentoNomeP() {
-		System.out.print("Nome da Playlist: ");
-		String nomeP = sc.nextLine();
+		int h = 0;
+		String nomeP = null;
+		while (h == 0) {
+			nomeP = JOptionPane.showInputDialog("\nNome da Playlist:");
+			if (nomeP.length() > 0) {
+				h++;
+			} else {
+				JOptionPane.showMessageDialog(null,"PARAMETRO INVALIDO");
+			}
+		}
 		return nomeP;
 	}
 }

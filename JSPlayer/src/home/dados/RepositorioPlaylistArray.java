@@ -1,8 +1,8 @@
 package home.dados;
 
-import home.negocio.Playlist;
+import home.negocio.beans.Playlist;
 
-public class RepositorioPlaylistArray {
+public class RepositorioPlaylistArray implements IRepositorioPlaylist{
 
 		private Playlist[] playlists;
 		private int prox;
