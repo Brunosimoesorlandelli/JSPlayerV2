@@ -1,5 +1,0 @@
-Nome: Bruno
-Email: bruno@gmail.com
-Localizacao: Recife, PE
-Sexo: Masculino
-Idade: 19

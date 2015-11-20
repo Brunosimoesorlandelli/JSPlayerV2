@@ -113,6 +113,5 @@ public class CustomPlayer {
 			}
 
 		}
-		sc.close();
 	}
 }

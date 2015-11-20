@@ -10,6 +10,7 @@ import home.negocio.beans.Usuario;
 public class Menu {
 	
 	public Menu(){
+		
 		String opcao, escolha;
 		int k = 0, retorno = 0; // variaveis que iniciam as estruturas de controle, while e switchs
 		RecebimentoDados dados = new RecebimentoDados(); 

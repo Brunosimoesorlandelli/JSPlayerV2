@@ -1,5 +1,0 @@
-Nome: ok
-Email: ok@
-Localizacao: ok
-Sexo: Masculino
-Idade: 04

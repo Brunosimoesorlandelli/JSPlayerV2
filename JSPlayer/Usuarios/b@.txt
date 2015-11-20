@@ -1,5 +1,0 @@
-Nome: B
-Email: b@
-Localizacao: B
-Sexo: Masculino
-Idade: 6

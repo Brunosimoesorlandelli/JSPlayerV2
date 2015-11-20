@@ -1,7 +1,12 @@
 package home.negocio.beans;
 
+import java.io.Serializable;
 
-public class Usuario {
+
+
+
+
+public class Usuario implements Serializable{
 
 	
 	private String nome, email, localizacao, sexo, idade;
