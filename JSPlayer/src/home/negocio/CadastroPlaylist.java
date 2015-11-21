@@ -1,11 +1,12 @@
 package home.negocio;
 
+import home.dados.IRepositorioPlaylist;
 import home.dados.RepositorioPlaylistArray;
 import home.negocio.beans.Playlist;
 
 public class CadastroPlaylist implements ICadastroPlaylist{
 
-private RepositorioPlaylistArray repositorio;
+private IRepositorioPlaylist repositorio;
     
     public CadastroPlaylist() {
         this.repositorio = new RepositorioPlaylistArray(100); 

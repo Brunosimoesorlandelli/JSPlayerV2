@@ -1,12 +1,13 @@
 package home.negocio;
 import javax.swing.JOptionPane;
 
+import home.dados.IRepositorioUsuarios;
 import home.dados.RepositorioUsuarioArray;
 import home.negocio.beans.Usuario;
 
 public class CadastroUsuario implements ICadastroUsuario{
 
-private RepositorioUsuarioArray repositorio;
+private IRepositorioUsuarios repositorio;
     
     public CadastroUsuario() {
         this.repositorio = new RepositorioUsuarioArray(100); 

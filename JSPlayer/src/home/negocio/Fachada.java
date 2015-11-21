@@ -6,9 +6,9 @@ import home.negocio.beans.Usuario;
 
 public class Fachada implements IFachada{
 
-	private CadastroPlaylist listas;
-	private CadastroMusica musicas;
-	private CadastroUsuario usuarios;
+	private ICadastroPlaylist listas;
+	private ICadastroMusica musicas;
+	private ICadastroUsuario usuarios;
 
 	private static Fachada instance;
 
