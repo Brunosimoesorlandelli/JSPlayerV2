@@ -4,7 +4,7 @@ import home.negocio.beans.Musica;
 import home.negocio.beans.Playlist;
 import home.negocio.beans.Usuario;
 
-public class Fachada implements IFachada{
+public class Fachada implements IFachada {
 
 	private ICadastroPlaylist listas;
 	private ICadastroMusica musicas;
@@ -18,12 +18,15 @@ public class Fachada implements IFachada{
 		this.listas = new CadastroPlaylist();
 	}
 
-	
 	public static Fachada getInstance() {
 		if (instance == null) {
 			instance = new Fachada();
 		}
 		return instance;
+	}
+	
+	public void instanciarRepositorioUsuarios(){
+		usuarios.instanciar();
 	}
 
 	public void cadastrarUsuario(Usuario u) {
@@ -59,13 +62,15 @@ public class Fachada implements IFachada{
 	public void removerMusica(String titulo, String artista) {
 		musicas.remover(titulo, artista);
 	}
-	
+
 	public boolean loginUsuario(String nome, String email) {
 		return usuarios.login(nome, email);
 	}
+
 	public void callMusica() {
 		musicas.call();
 	}
+
 	public void cadastrarPlaylist(Playlist list) {
 		listas.cadastrar(list);
 	}
@@ -82,6 +87,7 @@ public class Fachada implements IFachada{
 	public void removerPlaylist(String nomeP) {
 		listas.remover(nomeP);
 	}
+
 	public void printarDados(Usuario u) {
 		usuarios.printar(u);
 	}
