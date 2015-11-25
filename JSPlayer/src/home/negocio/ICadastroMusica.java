@@ -4,8 +4,6 @@ import home.negocio.beans.Musica;
 
 public interface ICadastroMusica {
 	
-	public void instanciar();
-
 	public void cadastrar (Musica mus);
 	
 	public void descadastrar(String titulo, String artista);

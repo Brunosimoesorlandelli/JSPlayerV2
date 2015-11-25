@@ -24,11 +24,6 @@ public class Fachada implements IFachada {
 		}
 		return instance;
 	}
-	
-	public void instanciarRepositorios(){
-		usuarios.instanciar();
-		musicas.instanciar();
-	}
 
 	public void cadastrarUsuario(Usuario u) {
 		usuarios.cadastrar(u);

@@ -11,9 +11,6 @@ public class CadastroUsuario implements ICadastroUsuario {
 	private IRepositorioUsuarios repositorio;
 
 	public CadastroUsuario() {
-	}
-	
-	public void instanciar(){
 		this.repositorio = RepositorioUsuarioArray.getInstance();
 	}
 

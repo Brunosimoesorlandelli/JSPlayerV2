@@ -1,5 +1,6 @@
 package home.negocio;
 
+import java.io.FileInputStream;
 import java.util.Scanner;
 
 import javax.swing.JOptionPane;
@@ -18,6 +19,7 @@ public class RecebimentoDados {
 		while (h == 0) {
 			nome = JOptionPane.showInputDialog("\nNome: ");
 			if (nome.length() > 0) {
+				
 				h++;
 			} else {
 				JOptionPane.showMessageDialog(null, "PARAMETRO INVALIDO");
@@ -196,15 +198,30 @@ public class RecebimentoDados {
 		}
 		return genero;
 	}
+	
+	private boolean condicaoEndereco(String endereco){
+		try{
+			FileInputStream fis = new FileInputStream(endereco);
+			fis.close();
+			return true;
+		} catch (Exception e) {
+			return false;
+		}
+	}
 
 	public String recebimentoEndereco() {
 		int h = 0;
 		String endereco = null;
 		while (h == 0) {
-			endereco = JOptionPane.showInputDialog("\nCaminho: ");
+			endereco = JOptionPane.showInputDialog("\nCaminho (sem especificacoes): ");
+			endereco = "Musicas\\" + endereco + ".mp3";
 
 			if (endereco.length() > 0) {
-				h++;
+				if(condicaoEndereco(endereco)){
+					h++;
+				} else {
+					JOptionPane.showMessageDialog(null, "Caminho incorreto ou inexistente");
+				}
 			} else {
 				JOptionPane.showMessageDialog(null, "PARAMETRO INVALIDO");
 			}

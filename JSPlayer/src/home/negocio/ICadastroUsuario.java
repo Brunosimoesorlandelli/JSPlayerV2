@@ -5,8 +5,6 @@ import home.negocio.beans.Usuario;
 
 public interface ICadastroUsuario {
 	
-	public void instanciar ();
-	
 	public void cadastrar (Usuario u);
 	
 	public void descadastrar(String nome, String email);

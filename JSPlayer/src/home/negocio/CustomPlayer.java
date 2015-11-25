@@ -91,8 +91,7 @@ public class CustomPlayer {
 	public void Play(Musica m) {
 		int w = 0;
 		Scanner sc = new Scanner(System.in);
-		String musica = "Musicas\\" + m.getTitulo() + ".mp3";
-		setPath(musica);
+		setPath(m.getEndereco());
 		play(-1);
 		System.out.println("\nTOCANDO: " + m.getArtista() + " - " + m.getTitulo());
 		while (w == 0) {

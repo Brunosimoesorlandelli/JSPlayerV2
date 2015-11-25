@@ -36,7 +36,7 @@ public class RepositorioMusicaArray implements IRepositorioMusica, Serializable 
 
 	public void salvar() {
 		try {
-			File f2 = new File("Musicas\\RepositorioMusicaArray.db");
+			File f2 = new File("BancoDeMusicas\\RepositorioMusicaArray.db");
 			FileOutputStream fos = new FileOutputStream(f2);
 			ObjectOutputStream oms = new ObjectOutputStream(fos);
 			oms.writeObject(instanceMusic);
@@ -50,7 +50,7 @@ public class RepositorioMusicaArray implements IRepositorioMusica, Serializable 
 	private static IRepositorioMusica ler() {
 		IRepositorioMusica repo = null;
 		try {
-			File f = new File("Musicas\\RepositorioMusicaArray.db");
+			File f = new File("BancoDeMusicas\\RepositorioMusicaArray.db");
 
 			FileInputStream fis = new FileInputStream(f);
 			ObjectInputStream mis = new ObjectInputStream(fis);

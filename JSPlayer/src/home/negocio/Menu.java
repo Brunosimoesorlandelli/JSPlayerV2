@@ -20,7 +20,6 @@ public class Menu {
 		JOptionPane.showMessageDialog(null, "Bem-vindo ao gerenciador de musicas JSPlayer.");
 		Scanner scan = new Scanner(System.in);
 		IFachada f = Fachada.getInstance();
-		f.instanciarRepositorios();
 		while (k == 0) {
 			retorno = 0;
 

@@ -9,7 +9,11 @@ import java.io.Serializable;
 public class Usuario implements Serializable{
 
 	
-	private String nome, email, localizacao, sexo, idade;
+	private String nome;
+	private String email;
+	private String localizacao;
+	private String sexo;
+	private String idade;
 
 	public Usuario(String nome, String email, String localizacao, String sexo, String idade) {
 

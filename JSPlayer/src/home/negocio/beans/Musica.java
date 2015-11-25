@@ -1,10 +1,12 @@
 package home.negocio.beans;
 
-public class Musica {
+import java.io.Serializable;
+
+public class Musica implements Serializable{
 
 	private String titulo, artista, album, ano, genero, endereco;
 
-	public Musica(String titulo, String artista, String endereco) {
+	public Musica(String titulo, String artista, String endereco)  {
 
 		this.titulo = titulo;
 		this.artista = artista;
