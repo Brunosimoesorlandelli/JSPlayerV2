@@ -6,7 +6,7 @@ import home.negocio.beans.Usuario;
 
 public interface IFachada {
 	
-	public void instanciarRepositorioUsuarios();
+	public void instanciarRepositorios();
 	
 	public void cadastrarUsuario(Usuario u);
 	
@@ -36,5 +36,7 @@ public interface IFachada {
 	
 	public void removerPlaylist(String nomeP);
 	
-	public void printarDados(Usuario u);
+	public void printarDadosUsuario(Usuario u);
+	
+	public void printarDadosMusica(Musica m);
 }

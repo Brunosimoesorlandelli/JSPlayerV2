@@ -91,13 +91,14 @@ public class CustomPlayer {
 	public void Play(Musica m) {
 		int w = 0;
 		Scanner sc = new Scanner(System.in);
-		String musica = "Musicas\\" + m.getEndereco();
+		String musica = "Musicas\\" + m.getTitulo() + ".mp3";
 		setPath(musica);
 		play(-1);
 		System.out.println("\nTOCANDO: " + m.getArtista() + " - " + m.getTitulo());
 		while (w == 0) {
 			w =0;
 			String controle = sc.nextLine();
+			
 			if (controle.equals("P") || controle.equals("p")) {
 				pause();
 				System.out.println("PAUSADA!");
@@ -110,8 +111,23 @@ public class CustomPlayer {
 				player = null;
 				System.out.println("ENCERRADA!");
 				w++;
+			} else if (controle.equals(".")){
+				nextMusic();
+				System.out.println("PROXIMA MUSICA\n");
+			} else if (controle.equals(",")) {
+				previousMusic();
+				System.out.println("MUSICA ANTERIOR\n");
 			}
 
 		}
+	}
+	
+	
+	public void nextMusic(){
+	
+	}
+	
+	public void previousMusic(){
+		
 	}
 }

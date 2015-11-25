@@ -9,7 +9,10 @@ public class CadastroMusica implements ICadastroMusica{
 private IRepositorioMusica repositorio;
     
     public CadastroMusica() {
-        this.repositorio = new RepositorioMusicaArray(100); 
+    }
+    
+    public void instanciar(){
+    	this.repositorio = RepositorioMusicaArray.getInstance(); 
     }
     
     public void cadastrar (Musica mus) {
@@ -47,5 +50,8 @@ private IRepositorioMusica repositorio;
     }
     public void call() {
     	this.repositorio.call();
+    }
+    public void printar (Musica m){
+    	this.repositorio.printar(m);
     }
 }

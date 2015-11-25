@@ -4,6 +4,8 @@ import home.negocio.beans.Musica;
 
 public interface IRepositorioMusica {
 	
+	public void salvar();
+	
 	public void cadastrar(Musica mus);
 	
 	public int procurarIndice(String titulo, String artista);
@@ -15,5 +17,7 @@ public interface IRepositorioMusica {
 	public Musica procurar(String titulo, String artista);
 	
 	public void call();
+	
+	public void printar(Musica m);
 
 }

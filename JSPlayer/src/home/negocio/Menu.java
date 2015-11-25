@@ -11,14 +11,16 @@ public class Menu {
 
 	public Menu() {
 
-		String opcao, escolha;
-		int k = 0, retorno = 0; // variaveis que iniciam as estruturas de
-								// controle, while e switchs
+		String opcao;
+		String escolha;
+		int k = 0;
+		int retorno = 0; // variaveis que iniciam as estruturas de
+							// controle, while e switchs
 		RecebimentoDados dados = new RecebimentoDados();
 		JOptionPane.showMessageDialog(null, "Bem-vindo ao gerenciador de musicas JSPlayer.");
 		Scanner scan = new Scanner(System.in);
 		IFachada f = Fachada.getInstance();
-		f.instanciarRepositorioUsuarios();
+		f.instanciarRepositorios();
 		while (k == 0) {
 			retorno = 0;
 
@@ -43,7 +45,7 @@ public class Menu {
 					while (retorno == 0) {
 
 						escolha = JOptionPane.showInputDialog(
-								"\n1 - Tocar Playlist\n2 - Criar Playlist\n3 - Procurar outros usuarios\n4 - Deslogar e retornar ao menu!\n5 - Sair do programa!");
+								"\n1 - Tocar Playlist\n2 - Cadastrar música\n3 - Procurar outros usuarios\n4 - Procurar informacoes da musica\n5 - Deslogar e retornar ao menu!\n6 - Sair do programa!");
 
 						switch (escolha) {
 
@@ -55,9 +57,14 @@ public class Menu {
 									dados.recebimentoEndereco()));
 
 							break;
+						case "4":
+							System.out.println("\nEscreva os dados da musica que deseja procurar");
+							f.printarDadosMusica(
+									f.procurarMusica(dados.recebimentoTitulo(), dados.recebimentoArtista()));
+							break;
 						case "3":
 							System.out.println("\nEscreva os dados do usuario que deseja procurar");
-							f.printarDados(f.procurarUsuario(dados.recebimentoNome(), dados.recebimentoEmail()));
+							f.printarDadosUsuario(f.procurarUsuario(dados.recebimentoNome(), dados.recebimentoEmail()));
 							// Neste case, usamos os metodos procurarUsuario,
 							// com os metodos recebimentoNome e recebimentoEmail
 							// como parametros
@@ -66,14 +73,14 @@ public class Menu {
 							// disponibilizam as playlists
 							// do usuario procurado.
 							break;
-						case "4":
+						case "5":
 							retorno++;
 							k--;
 							// Neste case, usamos um decremento da variavel k,
 							// para assim, voltar ao while, que seria o menu
 							// principal.
 							break;
-						case "5":
+						case "6":
 							retorno++;
 							// Neste case, fechamos o programa, simplesmente
 							// saindo do while

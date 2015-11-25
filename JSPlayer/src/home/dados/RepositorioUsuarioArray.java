@@ -12,7 +12,8 @@ import javax.swing.JOptionPane;
 import home.negocio.beans.Usuario;
 
 public class RepositorioUsuarioArray implements IRepositorioUsuarios, Serializable {
-	private static RepositorioUsuarioArray instance;
+
+	private static RepositorioUsuarioArray instanceUser;
 	private Usuario[] usuarios;
 	private int next;
 
@@ -22,14 +23,14 @@ public class RepositorioUsuarioArray implements IRepositorioUsuarios, Serializab
 	}
 
 	public static synchronized RepositorioUsuarioArray getInstance() {
-		if (instance == null) {
+		if (instanceUser == null) {
 			if (ler() == null) {
-				instance = new RepositorioUsuarioArray(100);
+				instanceUser = new RepositorioUsuarioArray(100);
 			} else {
-				instance = (RepositorioUsuarioArray) ler();
+				instanceUser = (RepositorioUsuarioArray) ler();
 			}
 		}
-		return instance;
+		return instanceUser;
 	}
 
 	public void salvar() {
@@ -37,7 +38,7 @@ public class RepositorioUsuarioArray implements IRepositorioUsuarios, Serializab
 			File f = new File("Usuarios\\RepositorioUsuarioArray.db");
 			FileOutputStream fos = new FileOutputStream(f);
 			ObjectOutputStream oos = new ObjectOutputStream(fos);
-			oos.writeObject(instance);
+			oos.writeObject(instanceUser);
 			oos.close();
 			System.out.println("Objeto serializado com sucesso");
 		} catch (Exception e) {
@@ -67,22 +68,20 @@ public class RepositorioUsuarioArray implements IRepositorioUsuarios, Serializab
 				System.out.println("agora ele foi des-serializado com sucesso");
 			}
 			ois.close();
-			System.out.println("Objeto intanciado: OK!");
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
-		/**
-		 * IRepositorioUsuarios repo = null; try { FileInputStream fi = new
-		 * FileInputStream( "Usuarios\\RepositorioUsuarioArray.db");
-		 * ObjectInputStream oi = new ObjectInputStream(fi); repo =
-		 * (IRepositorioUsuarios) oi.readObject(); oi.close();
-		 * System.out.println("agora ele foi des-serializado com sucesso"); }
-		 * catch (Exception ex) { repo = new RepositorioUsuarioArray(next);
-		 * ex.printStackTrace(); }
-		 */
-
 		return repo;
 	}
+
+	/**
+	 * IRepositorioUsuarios repo = null; try { FileInputStream fi = new
+	 * FileInputStream( "Usuarios\\RepositorioUsuarioArray.db");
+	 * ObjectInputStream oi = new ObjectInputStream(fi); repo =
+	 * (IRepositorioUsuarios) oi.readObject(); oi.close(); System.out.println(
+	 * "agora ele foi des-serializado com sucesso"); } catch (Exception ex) {
+	 * repo = new RepositorioUsuarioArray(next); ex.printStackTrace(); }
+	 */
 
 	public void cadastrar(Usuario u) {
 		this.usuarios[this.next] = u;
@@ -158,9 +157,9 @@ public class RepositorioUsuarioArray implements IRepositorioUsuarios, Serializab
 	}
 
 	public void printar(Usuario u) {
-		try{
+		try {
 			JOptionPane.showMessageDialog(null, u.toString());
-		} catch (Exception e){
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}

@@ -3,28 +3,28 @@ package home.negocio.beans;
 public class Musica {
 
 	private String titulo, artista, album, ano, genero, endereco;
-	
-	public Musica(String titulo,String artista,String endereco){
-		
+
+	public Musica(String titulo, String artista, String endereco) {
+
 		this.titulo = titulo;
 		this.artista = artista;
 		this.endereco = endereco;
-		
+
 	}
-	public Musica(String titulo,String artista,String album, String ano, String genero, String endereco){
-		
-		this.titulo = titulo;
-		this.artista = artista;
-		this.album = album;
-		this.ano = ano;
-		this.genero = genero;
-		this.endereco = endereco;
-		
-	}
+
+	/*
+	 * public Musica(String titulo, String artista, String album, String ano,
+	 * String genero, String endereco) {
+	 * 
+	 * this.titulo = titulo; this.artista = artista; this.album = album;
+	 * this.ano = ano; this.genero = genero; this.endereco = endereco;
+	 * 
+	 * }
+	 */
 
 	@Override
 	public String toString() {
-		return "\nTitulo:" + titulo + "\nArtista:" + artista;
+		return "\nTitulo:" + titulo + "\nArtista:" + artista + "\nEndereco:" + endereco;
 	}
 
 	public String getTitulo() {
@@ -74,6 +74,5 @@ public class Musica {
 	public void setGenero(String genero) {
 		this.genero = genero;
 	}
-	
-	
+
 }

@@ -25,8 +25,9 @@ public class Fachada implements IFachada {
 		return instance;
 	}
 	
-	public void instanciarRepositorioUsuarios(){
+	public void instanciarRepositorios(){
 		usuarios.instanciar();
+		musicas.instanciar();
 	}
 
 	public void cadastrarUsuario(Usuario u) {
@@ -88,7 +89,11 @@ public class Fachada implements IFachada {
 		listas.remover(nomeP);
 	}
 
-	public void printarDados(Usuario u) {
+	public void printarDadosUsuario(Usuario u) {
 		usuarios.printar(u);
+	}
+	
+	public void printarDadosMusica(Musica m) {
+		musicas.printar(m);
 	}
 }

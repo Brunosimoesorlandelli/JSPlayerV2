@@ -3,6 +3,8 @@ package home.negocio;
 import home.negocio.beans.Musica;
 
 public interface ICadastroMusica {
+	
+	public void instanciar();
 
 	public void cadastrar (Musica mus);
 	
@@ -15,4 +17,6 @@ public interface ICadastroMusica {
 	public void remover(String titulo, String artista);
 	
 	public void call();
+	
+	public void printar(Musica m);
 }

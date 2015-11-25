@@ -1,18 +1,69 @@
 package home.dados;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
+
 import javax.swing.JOptionPane;
 
 import home.negocio.CustomPlayer;
 import home.negocio.beans.Musica;
 
-public class RepositorioMusicaArray implements IRepositorioMusica {
+public class RepositorioMusicaArray implements IRepositorioMusica, Serializable {
 
+	private static RepositorioMusicaArray instanceMusic;
 	private Musica[] musicas;
 	private int prox;
 
-	public RepositorioMusicaArray(int tamanho) {
+	private RepositorioMusicaArray(int tamanho) {
 		this.musicas = new Musica[tamanho];
 		this.prox = 0;
+	}
+
+	public static synchronized RepositorioMusicaArray getInstance() {
+		if (instanceMusic == null) {
+			if (ler() == null) {
+				instanceMusic = new RepositorioMusicaArray(100);
+			} else {
+				instanceMusic = (RepositorioMusicaArray) ler();
+			}
+		}
+		return instanceMusic;
+	}
+
+	public void salvar() {
+		try {
+			File f2 = new File("Musicas\\RepositorioMusicaArray.db");
+			FileOutputStream fos = new FileOutputStream(f2);
+			ObjectOutputStream oms = new ObjectOutputStream(fos);
+			oms.writeObject(instanceMusic);
+			oms.close();
+			System.out.println("Objeto serializado com sucesso");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	private static IRepositorioMusica ler() {
+		IRepositorioMusica repo = null;
+		try {
+			File f = new File("Musicas\\RepositorioMusicaArray.db");
+
+			FileInputStream fis = new FileInputStream(f);
+			ObjectInputStream mis = new ObjectInputStream(fis);
+			Object mo = mis.readObject();
+			if (mo != null) {
+				repo = (RepositorioMusicaArray) mo;
+				System.out.println("MUSICA agora ele foi des-serializado com sucesso");
+			}
+			mis.close();
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+		return repo;
 	}
 
 	public void cadastrar(Musica mus) {
@@ -28,6 +79,7 @@ public class RepositorioMusicaArray implements IRepositorioMusica {
 		} else {
 
 		}
+		salvar();
 	}
 
 	private void duplicaArrayMusica() {
@@ -88,38 +140,39 @@ public class RepositorioMusicaArray implements IRepositorioMusica {
 		}
 		return resultado;
 	}
-	
-	public String retornarMusicas(){
-		String resultado0 = null;
-		String resultado1 = null;
-		String resultado2 = null;
-		String resultado3 = null;
-		String resultadofinal = null;
+
+	public String retornarMusicas() {
+		String resultado0 = "";
+		String resultado1 = "";
+		String resultado2 = "";
+		String resultado3 = "";
+		String resultadofinal = "";
 		int i;
-		for(i = 0; i < prox; i++){
-			if(resultado0 == null){
-				resultado0 = "\nMusica 1: " + musicas[i].toString();	
-			} else if(resultado1 == null){
+		for (i = 0; i < prox; i++) {
+			if (resultado0 == "") {
+				resultado0 = "\nMusica 1: " + musicas[i].toString();
+			} else if (resultado1 == "") {
 				resultado1 = "\nMusica 2: " + musicas[i].toString();
-				} else if(resultado2 == null){
-					resultado2 = "\nMusica 3: " + musicas[i].toString();
-					}else if(resultado3 == null){
-						resultado3 = "\nMusica 4: " + musicas[i].toString();
-						}
-			
+			} else if (resultado2 == "") {
+				resultado2 = "\nMusica 3: " + musicas[i].toString();
+			} else if (resultado3 == "") {
+				resultado3 = "\nMusica 4: " + musicas[i].toString();
+			}
+
 		}
 		resultadofinal = resultado0 + resultado1 + resultado2 + resultado3;
-	return resultadofinal;
+		return resultadofinal;
 	}
 
 	public void call() {
+		int i = 0;
 		CustomPlayer player = new CustomPlayer();
 		String escolhaMusica;
 		escolhaMusica = JOptionPane.showInputDialog(retornarMusicas());
 
 		switch (escolhaMusica) {
 		case "1":
-			player.Play(musicas[0]);
+			player.Play(musicas[i]);
 			break;
 		case "2":
 			player.Play(musicas[1]);
@@ -134,6 +187,14 @@ public class RepositorioMusicaArray implements IRepositorioMusica {
 			System.out.println("A MUSICA NAO EXISTE!");
 		}
 
+	}
+
+	public void printar(Musica m) {
+		try {
+			JOptionPane.showMessageDialog(null, m.toString());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 }
