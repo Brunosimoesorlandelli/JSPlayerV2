@@ -11,15 +11,17 @@ public class Usuario implements Serializable{
 	
 	private String nome;
 	private String email;
-	private String localizacao;
-	private String sexo;
-	private String idade;
+	private String cidade;
+	private Object estado;
+	private Object sexo;
+	private Object idade;
 
-	public Usuario(String nome, String email, String localizacao, String sexo, String idade) {
+	public Usuario(String nome, String email,String cidade, Object estado, Object sexo, Object idade) {
 
 		this.nome = nome;
 		this.email = email;
-		this.localizacao = localizacao;
+		this.cidade = cidade;
+		this.estado = estado;
 		this.sexo = sexo;
 		this.idade = idade;
 
@@ -33,16 +35,28 @@ public class Usuario implements Serializable{
 		return email;
 	}
 
-	public String getLocalizacao() {
-		return localizacao;
-	}
-
-	public String getSexo() {
+	public Object getSexo() {
 		return sexo;
 	}
 
-	public String getIdade() {
+	public Object getIdade() {
 		return idade;
+	}
+	
+	public String getCidade() {
+		return cidade;
+	}
+
+	public Object getEstado() {
+		return estado;
+	}
+
+	public void setCidade(String cidade) {
+		this.cidade = cidade;
+	}
+
+	public void setEstado(String estado) {
+		this.estado = estado;
 	}
 
 	public void setNome(String nome) {
@@ -51,10 +65,6 @@ public class Usuario implements Serializable{
 
 	public void setEmail(String email) {
 		this.email = email;
-	}
-
-	public void setLocalizacao(String localizacao) {
-		this.localizacao = localizacao;
 	}
 
 	public void setSexo(String sexo) {
@@ -67,7 +77,7 @@ public class Usuario implements Serializable{
 
 	@Override
 	public String toString() {
-		return "Nome: " + nome + "\nEmail: " + email + "\nLocalizacao: " + localizacao + "\nSexo: " + sexo
+		return "Nome: " + nome + "\nEmail: " + email + "\nLocalizacao: " + cidade + "," + estado + "\nSexo: " + sexo
 				+ "\nIdade: " + idade;
 	}
 

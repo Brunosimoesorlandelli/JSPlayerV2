@@ -14,17 +14,19 @@ public class CadastroUsuario implements ICadastroUsuario {
 		this.repositorio = RepositorioUsuarioArray.getInstance();
 	}
 
-	public void cadastrar(Usuario u) {
+	public boolean cadastrar(Usuario u) {
+		boolean i = false;
 		if (u == null) {
 			JOptionPane.showMessageDialog(null, "PARAMETRO INVALIDO");
 		} else {
-			if (!this.existe(u.getNome(), u.getEmail())) {
+			if (!this.existe(u.getEmail())) {
 				this.repositorio.cadastrar(u);
-
+				i = true;
 			} else {
 				JOptionPane.showMessageDialog(null, "ERRO! EMAIL JÁ CADASTRADO!");
 			}
 		}
+	return i;
 	}
 
 	public void descadastrar(String nome, String email) {
@@ -40,6 +42,10 @@ public class CadastroUsuario implements ICadastroUsuario {
 		return this.repositorio.procurar(nome, email);
 	}
 
+	public boolean existe(String email){
+		return this.repositorio.existe(email);
+	}
+	
 	public boolean existe(String nome, String email) {
 		return this.repositorio.existe(nome, email);
 	}

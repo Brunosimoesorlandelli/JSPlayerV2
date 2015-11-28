@@ -7,7 +7,7 @@ import javax.swing.JOptionPane;
 import home.negocio.beans.Musica;
 import home.negocio.beans.Usuario;
 
-public class Menu {
+/*public class Menu {
 
 	public Menu() {
 
@@ -17,8 +17,6 @@ public class Menu {
 		int retorno = 0; // variaveis que iniciam as estruturas de
 							// controle, while e switchs
 		RecebimentoDados dados = new RecebimentoDados();
-		JOptionPane.showMessageDialog(null, "Bem-vindo ao gerenciador de musicas JSPlayer.");
-		Scanner scan = new Scanner(System.in);
 		IFachada f = Fachada.getInstance();
 		while (k == 0) {
 			retorno = 0;
@@ -108,4 +106,4 @@ public class Menu {
 		}
 		scan.close();
 	}
-}
+}*/

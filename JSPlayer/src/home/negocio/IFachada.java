@@ -6,7 +6,7 @@ import home.negocio.beans.Usuario;
 
 public interface IFachada {
 	
-	public void cadastrarUsuario(Usuario u);
+	public boolean cadastrarUsuario(Usuario u);
 	
 	public Usuario procurarUsuario(String nome, String email);
 	

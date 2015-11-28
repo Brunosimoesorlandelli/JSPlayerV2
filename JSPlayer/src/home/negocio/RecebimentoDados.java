@@ -1,7 +1,6 @@
 package home.negocio;
 
 import java.io.FileInputStream;
-import java.util.Scanner;
 
 import javax.swing.JOptionPane;
 
@@ -11,78 +10,63 @@ public class RecebimentoDados {
 
 	}
 
-	Scanner sc = new Scanner(System.in);
 
-	public String recebimentoNome() {
+	public String recebimentoNome(String nome) {
 		int h = 0;
-		String nome = null;
 		while (h == 0) {
-			nome = JOptionPane.showInputDialog("\nNome: ");
 			if (nome.length() > 0) {
-				
 				h++;
 			} else {
-				JOptionPane.showMessageDialog(null, "PARAMETRO INVALIDO");
+				JOptionPane.showMessageDialog(null, "NOME INVALIDO");
 			}
 		}
 		return nome;
 	}
 
-	public String recebimentoEmail() {
+	public String recebimentoEmail(String email) {
 		int h = 0;
-		String email = null;
 		while (h == 0) {
-
-			email = JOptionPane.showInputDialog("\nEmail: ");
-
 			if (email.contains("@") && email.length() > 0) {
 				h++;
 			} else {
-				JOptionPane.showMessageDialog(null, "PARAMETRO INVALIDO");
+				JOptionPane.showMessageDialog(null, "EMAIL INVALIDO");
 			}
 
 		}
 		return email.toLowerCase();
 	}
 
-	public String recebimentoLocalizacao() {
+	public String recebimentoCidade(String cidade) {
 		int h = 0;
-		String localizacao = null;
 		while (h == 0) {
-
-			localizacao = JOptionPane.showInputDialog("\nLocalizacao, no modelo(Cidade, UF): ");
-
-			if (localizacao.length() > 0) {
+			if (cidade.length() > 0) {
 				h++;
 			} else {
 				JOptionPane.showMessageDialog(null, "PARAMETRO INVALIDO");
 			}
 		}
-		return localizacao;
+		return cidade;
+	}
+	
+	public Object recebimentoEstado(Object estado) {
+		int h = 0;
+		while (h == 0) {
+			if (estado.equals("<Selecione>")) {
+				JOptionPane.showMessageDialog(null, "PARAMETRO INVALIDO");
+			} else {
+				h++;
+			}
+		}
+		return estado;
 	}
 
-	public String recebimentoSexo() {
+	public Object recebimentoSexo(Object sexo) {
 		int h = 0;
-		String sexo = null;
 		while (h == 0) {
-
-			sexo = JOptionPane.showInputDialog("M - Masculino, F - Feminino\nSexo: ");
-
-			if (sexo.length() == 1 || sexo.equals("Masculino") || sexo.equals("masculino") || sexo.equals("Feminino")
-					|| sexo.equals("feminino")) {
-				if (sexo.substring(0, 1).equals("M") || sexo.substring(0, 1).equals("m")
-						|| sexo.substring(0, 1).equals("F") || sexo.substring(0, 1).equals("f")) {
-
-					if (sexo.substring(0, 1).equals("M") || sexo.substring(0, 1).equals("m")) {
-						sexo = "Masculino";
+			if (sexo.equals("Masculino")){
 						h++;
-					} else if (sexo.substring(0, 1).equals("F") || sexo.substring(0, 1).equals("f")) {
-						sexo = "Feminino";
-						h++;
-					}
-				} else {
-					JOptionPane.showMessageDialog(null, "PARAMETRO INVALIDO");
-				}
+			} else if(sexo.equals("Feminino")){
+				h++;
 			} else {
 				JOptionPane.showMessageDialog(null, "PARAMETRO INVALIDO");
 			}
@@ -91,14 +75,11 @@ public class RecebimentoDados {
 		return sexo;
 	}
 
-	public String recebimentoIdade() {
+	public String recebimentoIdade(String idade) {
 		int h = 0;
 		String result = null;
 		String troll = "0123456789";
 		while (h == 0) {
-
-			String idade = JOptionPane.showInputDialog("\nIdade: ");
-
 			switch (idade.length()) {
 			case 1:
 				if (troll.contains(idade.substring(0, 1))) {

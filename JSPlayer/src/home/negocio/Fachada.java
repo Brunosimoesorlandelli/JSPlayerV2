@@ -25,8 +25,8 @@ public class Fachada implements IFachada {
 		return instance;
 	}
 
-	public void cadastrarUsuario(Usuario u) {
-		usuarios.cadastrar(u);
+	public boolean cadastrarUsuario(Usuario u) {
+		return usuarios.cadastrar(u);
 	}
 
 	public Usuario procurarUsuario(String nome, String email) {

@@ -108,6 +108,19 @@ public class RepositorioUsuarioArray implements IRepositorioUsuarios, Serializab
 		}
 	}
 
+	public int procurarIndice(String email) {
+		int i = 0;
+		boolean achou = false;
+		while ((!achou) && (i < this.next)) {
+			if (email.equals(this.usuarios[i].getEmail())) {
+				achou = true;
+			} else {
+				i++;
+			}
+		}
+		return i;
+	}
+
 	public int procurarIndice(String nome, String email) {
 		int i = 0;
 		boolean achou = false;
@@ -131,6 +144,18 @@ public class RepositorioUsuarioArray implements IRepositorioUsuarios, Serializab
 		} else {
 			JOptionPane.showMessageDialog(null, "ERRO, O USUARIO NAO PODE SER REMOVIDO");
 		}
+	}
+
+	public boolean existe(String email) {
+		boolean existe = false;
+		int indice = this.procurarIndice(email);
+		if (indice != next) {
+			existe = true;
+			System.out.println("O USUARIO EXISTE!");
+		} else {
+			JOptionPane.showMessageDialog(null, "O USUARIO NAO EXISTE!");
+		}
+		return existe;
 	}
 
 	public boolean existe(String nome, String email) {
