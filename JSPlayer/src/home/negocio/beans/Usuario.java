@@ -2,9 +2,8 @@ package home.negocio.beans;
 
 import java.io.Serializable;
 
-
-
-
+import home.dados.IRepositorioPlaylist;
+import home.dados.RepositorioPlaylistArray;
 
 public class Usuario implements Serializable{
 
@@ -15,6 +14,7 @@ public class Usuario implements Serializable{
 	private Object estado;
 	private Object sexo;
 	private Object idade;
+	private IRepositorioPlaylist repoP;
 
 	public Usuario(String nome, String email,String cidade, Object estado, Object sexo, Object idade) {
 
@@ -24,6 +24,7 @@ public class Usuario implements Serializable{
 		this.estado = estado;
 		this.sexo = sexo;
 		this.idade = idade;
+		repoP = new RepositorioPlaylistArray(100);
 
 	}
 
@@ -81,10 +82,7 @@ public class Usuario implements Serializable{
 				+ "\nIdade: " + idade;
 	}
 
-	
-
-
-
-	
-
+	public IRepositorioPlaylist getRepoP() {
+		return repoP;
+	}
 }

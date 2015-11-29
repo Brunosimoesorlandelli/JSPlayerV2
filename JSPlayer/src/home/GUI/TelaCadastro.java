@@ -50,7 +50,7 @@ public class TelaCadastro extends JFrame {
 	public TelaCadastro() {
 		IFachada f = Fachada.getInstance();
 
-		setIconImage(Toolkit.getDefaultToolkit().getImage("Imagens\\IconeJSP.jpg"));
+		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\HP\\Pictures\\unnamed (2).png"));
 		setTitle("JSPlayer");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 850, 528);
@@ -62,7 +62,7 @@ public class TelaCadastro extends JFrame {
 		JSpinner spinIdade = new JSpinner();
 		spinIdade.setToolTipText("");
 		spinIdade.setModel(new SpinnerNumberModel(new Integer(13), new Integer(13), null, new Integer(1)));
-		spinIdade.setBounds(66, 274, 97, 20);
+		spinIdade.setBounds(66, 265, 97, 29);
 		contentPane.add(spinIdade);
 
 		JLabel lblConfirmaoDeEmail = new JLabel("Confirma\u00E7\u00E3o de Email: ");
@@ -105,7 +105,7 @@ public class TelaCadastro extends JFrame {
 		JComboBox comboSexo = new JComboBox();
 		comboSexo.setToolTipText("");
 		comboSexo.setModel(new DefaultComboBoxModel(new String[] { "<Selecione>", "Masculino", "Feminino" }));
-		comboSexo.setBounds(66, 222, 97, 20);
+		comboSexo.setBounds(66, 213, 132, 29);
 		contentPane.add(comboSexo);
 
 		JComboBox comboEstado = new JComboBox();
@@ -113,26 +113,26 @@ public class TelaCadastro extends JFrame {
 				new String[] { "<Selecione>", "AC\t ", "AL\t ", "AP\t ", "AM\t ", "BA\t ", "CE\t ", "DF\t ", "ES\t ",
 						"GO\t ", "MA\t ", "MT\t ", "MS\t ", "MG\t ", "PA\t ", "PB\t ", "PR\t ", "PE\t ", "PI\t ",
 						"RJ\t ", "RN\t ", "RS\t ", "RO\t ", "RR\t ", "SC\t ", "SP\t ", "SE\t ", "TO" }));
-		comboEstado.setBounds(322, 172, 97, 20);
+		comboEstado.setBounds(322, 163, 132, 29);
 		contentPane.add(comboEstado);
 
 		textCEmail = new JTextField();
-		textCEmail.setBounds(130, 126, 195, 20);
+		textCEmail.setBounds(130, 117, 195, 29);
 		contentPane.add(textCEmail);
 		textCEmail.setColumns(10);
 
 		textCidade = new JTextField();
-		textCidade.setBounds(66, 172, 190, 20);
+		textCidade.setBounds(66, 163, 190, 29);
 		contentPane.add(textCidade);
 		textCidade.setColumns(10);
 
 		textEmail = new JTextField();
-		textEmail.setBounds(130, 81, 195, 20);
+		textEmail.setBounds(130, 72, 195, 29);
 		contentPane.add(textEmail);
 		textEmail.setColumns(10);
 
 		textNome = new JTextField();
-		textNome.setBounds(130, 40, 195, 20);
+		textNome.setBounds(130, 32, 195, 28);
 		contentPane.add(textNome);
 		textNome.setColumns(10);
 
@@ -176,7 +176,7 @@ public class TelaCadastro extends JFrame {
 
 		);
 
-		btnNewButton.setBounds(252, 305, 190, 23);
+		btnNewButton.setBounds(252, 299, 190, 29);
 		contentPane.add(btnNewButton);
 		
 		JButton btnRetornar = new JButton("Retornar");
@@ -189,7 +189,7 @@ public class TelaCadastro extends JFrame {
 				telaLogin.setResizable(false);
 			}
 		});
-		btnRetornar.setBounds(130, 466, 89, 23);
+		btnRetornar.setBounds(130, 460, 89, 29);
 		contentPane.add(btnRetornar);
 		
 				JLabel label = new JLabel(" ");

@@ -1,5 +1,6 @@
 package home.negocio;
 
+import home.dados.IRepositorioPlaylist;
 import home.negocio.beans.Musica;
 import home.negocio.beans.Playlist;
 import home.negocio.beans.Usuario;
@@ -18,15 +19,23 @@ public class Fachada implements IFachada {
 		this.listas = new CadastroPlaylist();
 	}
 
-	public static Fachada getInstance() {
+	public static synchronized Fachada getInstance() {
 		if (instance == null) {
 			instance = new Fachada();
 		}
 		return instance;
 	}
+	
+	public void pegarRepositorioPlaylistDoUsuario(IRepositorioPlaylist repoP) {
+		listas.pegarRepositorioDoUsuario(repoP);
+	}
 
 	public boolean cadastrarUsuario(Usuario u) {
 		return usuarios.cadastrar(u);
+	}
+	
+	public boolean loginUsuario(String nome, String email) {
+		return usuarios.login(nome, email);
 	}
 
 	public Usuario procurarUsuario(String nome, String email) {
@@ -41,6 +50,10 @@ public class Fachada implements IFachada {
 	public void removerUsuario(String nome, String email) {
 		usuarios.remover(nome, email);
 	}
+	
+	public void printarDadosUsuario(Usuario u) {
+		usuarios.printar(u);
+	}
 
 	public void cadastrarMusica(Musica mus) {
 		musicas.cadastrar(mus);
@@ -51,20 +64,12 @@ public class Fachada implements IFachada {
 
 	}
 
-	public boolean existeMusica(String titulo, String artista) {
-		return musicas.existe(titulo, artista);
-	}
-
 	public void removerMusica(String titulo, String artista) {
-		musicas.remover(titulo, artista);
+		musicas.remover(procurarMusica(titulo, artista));
 	}
-
-	public boolean loginUsuario(String nome, String email) {
-		return usuarios.login(nome, email);
-	}
-
-	public void callMusica() {
-		musicas.call();
+	
+	public void printarDadosMusica(Musica m) {
+		musicas.printar(m);
 	}
 
 	public void cadastrarPlaylist(Playlist list) {
@@ -82,13 +87,5 @@ public class Fachada implements IFachada {
 
 	public void removerPlaylist(String nomeP) {
 		listas.remover(nomeP);
-	}
-
-	public void printarDadosUsuario(Usuario u) {
-		usuarios.printar(u);
-	}
-	
-	public void printarDadosMusica(Musica m) {
-		musicas.printar(m);
 	}
 }

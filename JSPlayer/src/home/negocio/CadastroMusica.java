@@ -13,41 +13,17 @@ private IRepositorioMusica repositorio;
     }
     
     public void cadastrar (Musica mus) {
-        if (mus == null) {
-        	System.out.println("PARAMETRO INVALIDO");
-        } else {
-            if (!this.existe(mus.getTitulo(), mus.getArtista())) {
-                this.repositorio.cadastrar(mus);
-                
-            }else{
-            	System.out.println("ERRO! MUSICA JÁ ADICIONADA!");
-            }
-        }        
+        repositorio.cadastrar(mus);      
     }
     
-    public void descadastrar(String titulo, String artista) {
-    	Musica mus = this.repositorio.procurar(titulo, artista);
-    	if (mus != null) {
-    		this.repositorio.remover(titulo, artista);
-    		
-		} else {
-		    }
+    public void remover(Musica s) {
+    	repositorio.remover(s);
     }
 
     public Musica procurar(String titulo, String artista) {
         return this.repositorio.procurar(titulo, artista);
     }
     
-    public boolean existe(String titulo, String artista) {
-    	return this.repositorio.existe(titulo, artista);
-    }
-
-    public void remover(String titulo, String artista) {
-        this.repositorio.remover(titulo, artista);
-    }
-    public void call() {
-    	this.repositorio.call();
-    }
     public void printar (Musica m){
     	this.repositorio.printar(m);
     }

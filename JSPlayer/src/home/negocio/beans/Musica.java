@@ -2,18 +2,29 @@ package home.negocio.beans;
 
 import java.io.Serializable;
 
-public class Musica implements Serializable{
+public class Musica implements Serializable, Comparable<Musica> {
 
-	private String titulo, artista, album, ano, genero, endereco;
+	private String titulo;
+	private String artista;
+	private String album;
+	private String ano;
+	private String genero;
+	private String endereco;
+	private int minutos;
+	private int segundos;
 
-	public Musica(String titulo, String artista, String endereco)  {
-
+	public Musica(String titulo, String artista, String endereco) {
 		this.titulo = titulo;
 		this.artista = artista;
 		this.endereco = endereco;
-
 	}
 
+	public Musica(String titulo, String artista, int minutos, int segundos) {
+		this.titulo = titulo;
+		this.artista = artista;
+		this.minutos = minutos;
+		this.segundos = segundos;
+	}
 	/*
 	 * public Musica(String titulo, String artista, String album, String ano,
 	 * String genero, String endereco) {
@@ -27,6 +38,22 @@ public class Musica implements Serializable{
 	@Override
 	public String toString() {
 		return "\nTitulo:" + titulo + "\nArtista:" + artista + "\nEndereco:" + endereco;
+	}
+
+	public int getMinutos() {
+		return minutos;
+	}
+
+	public int getSegundos() {
+		return segundos;
+	}
+
+	public void setMinutos(int minutos) {
+		this.minutos = minutos;
+	}
+
+	public void setSegundos(int segundos) {
+		this.segundos = segundos;
 	}
 
 	public String getTitulo() {
@@ -77,4 +104,37 @@ public class Musica implements Serializable{
 		this.genero = genero;
 	}
 
+	public boolean equals(Object o) {
+		if (o instanceof Musica) {
+			Musica s = (Musica) o;
+			if ((this.titulo.equals(s.titulo)) && (this.artista.equals(s.artista)) && (this.endereco.equals(s.endereco))){
+				return true;
+			} 
+		}  return false;
+			
+	}
+	
+	@Override
+	public int compareTo(Musica s) {
+		int artistaCmp = artista.compareTo(s.artista);
+		int tituloCmp = titulo.compareTo(s.titulo);
+		int minutosCmp = (this.minutos - s.minutos > 0 ? 1 : 0);
+		int segundosCmp = (this.segundos - s.segundos > 0 ? 1 : 0);
+
+		if (artistaCmp == 0) {
+			if (tituloCmp == 0) {
+				if (minutosCmp == 0) {
+					if (segundosCmp == 0) {
+						return 0;
+					} else
+						return segundosCmp;
+				} else
+					return minutosCmp;
+			} else
+				return tituloCmp;
+
+		} else
+			return artistaCmp;
+
+	}
 }

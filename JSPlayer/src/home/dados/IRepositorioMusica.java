@@ -8,16 +8,12 @@ public interface IRepositorioMusica {
 	
 	public void cadastrar(Musica mus);
 	
-	public int procurarIndice(String titulo, String artista);
-	
-	public void remover(String titulo, String artista);
-	
-	public boolean existe(String titulo,String artista);
+	public void remover(Musica s);
 	
 	public Musica procurar(String titulo, String artista);
 	
-	public void call();
-	
 	public void printar(Musica m);
+	
+	public void ordenarMusicas(Musica m);
 
 }

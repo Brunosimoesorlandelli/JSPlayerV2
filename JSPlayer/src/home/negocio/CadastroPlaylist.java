@@ -9,7 +9,10 @@ public class CadastroPlaylist implements ICadastroPlaylist{
 private IRepositorioPlaylist repositorio;
     
     public CadastroPlaylist() {
-        this.repositorio = new RepositorioPlaylistArray(100); 
+    }
+    
+    public void pegarRepositorioDoUsuario(IRepositorioPlaylist repoP) {
+    	this.repositorio = repoP;
     }
     
     public void cadastrar (Playlist list) {

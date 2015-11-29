@@ -19,6 +19,8 @@ import javax.swing.JEditorPane;
 import javax.swing.JFormattedTextField;
 import javax.swing.JToggleButton;
 import java.awt.Component;
+import java.awt.Dimension;
+
 import javax.swing.Box;
 import javax.swing.JLayeredPane;
 import javax.swing.JToolBar;
@@ -29,12 +31,23 @@ import javax.swing.JDesktopPane;
 import java.awt.SystemColor;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Insets;
+
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 import java.awt.event.ActionEvent;
 import java.awt.Toolkit;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import javax.swing.JInternalFrame;
+import java.awt.FlowLayout;
+import javax.swing.BoxLayout;
+import java.awt.GridLayout;
+import java.awt.CardLayout;
+import net.miginfocom.swing.MigLayout;
+import javax.swing.JTabbedPane;
 
 public class TelaUsuario extends JFrame {
 
@@ -45,7 +58,7 @@ public class TelaUsuario extends JFrame {
 	 * Create the frame.
 	 */
 	public TelaUsuario(Usuario u) {
-		setIconImage(Toolkit.getDefaultToolkit().getImage("Imagens\\IconeJSP.jpg"));
+		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\HP\\Pictures\\unnamed (2).png"));
 		setTitle("JSPlayer");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 850, 528);
@@ -70,6 +83,7 @@ public class TelaUsuario extends JFrame {
 				telaLogin.setVisible(true);
 				telaLogin.setLocationRelativeTo(null);
 				telaLogin.setResizable(false);
+				
 			}
 		});
 		mnPerfil.add(mntmDeslogar);
@@ -87,37 +101,36 @@ public class TelaUsuario extends JFrame {
 		JLabel label_1 = new JLabel("Bem Vindo ao JSPlayer");
 		label_1.setForeground(new Color(0, 255, 255));
 		label_1.setFont(new Font("OCR A Extended", Font.PLAIN, 14));
-		label_1.setBounds(10, 11, 188, 14);
+		label_1.setBounds(16, 6, 188, 14);
 		contentPane.add(label_1);
 		
 		JButton button = new JButton("Procurar Usuario");
-		button.setBounds(10, 36, 165, 23);
+		button.setBounds(16, 31, 165, 23);
 		contentPane.add(button);
 		
 		JButton button_1 = new JButton("Adicionar Musica");
-		button_1.setBounds(616, 232, 165, 23);
+		button_1.setBounds(645, 239, 165, 23);
 		contentPane.add(button_1);
-		
-		JButton button_2 = new JButton("Criar Playlist");
-		button_2.setBounds(616, 36, 165, 23);
-		contentPane.add(button_2);
-		
-		JLabel label_2 = new JLabel("Playlist");
-		label_2.setForeground(new Color(0, 255, 255));
-		label_2.setFont(new Font("OCR A Extended", Font.PLAIN, 14));
-		label_2.setBounds(616, 12, 85, 14);
-		contentPane.add(label_2);
 		
 		JLabel lblMusica = new JLabel("Musica");
 		lblMusica.setForeground(new Color(0, 255, 255));
 		lblMusica.setFont(new Font("OCR A Extended", Font.PLAIN, 14));
-		lblMusica.setBounds(616, 207, 85, 14);
+		lblMusica.setBounds(646, 213, 85, 14);
 		contentPane.add(lblMusica);
+		
+		JLabel lblPlaylist = new JLabel("Playlist");
+		lblPlaylist.setBounds(645, 18, 55, 16);
+		contentPane.add(lblPlaylist);
+		
+		
+		JButton button_2 = new JButton("Criar Playlist");
+		button_2.setBounds(645, 58, 146, 28);
+		contentPane.add(button_2);
 		
 		JLabel label = new JLabel(" ");
 		label.setBackground(new Color(119, 136, 153));
-		label.setBounds(0, 0, 844, 479);
-		label.setIcon(new ImageIcon("Imagens\\JSPlayer 3.jpg"));
+		label.setBounds(0, -19, 844, 479);
+		label.setIcon(new ImageIcon("C:\\Users\\HP\\Pictures\\soundwave_by_nova_g-d5h9lnz.jpg"));
 		contentPane.add(label);
 	}
 }

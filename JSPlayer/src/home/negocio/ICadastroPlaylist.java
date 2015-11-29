@@ -1,8 +1,11 @@
 package home.negocio;
 
+import home.dados.IRepositorioPlaylist;
 import home.negocio.beans.Playlist;
 
 public interface ICadastroPlaylist {
+	
+	public void pegarRepositorioDoUsuario(IRepositorioPlaylist repoP);
 
 	public void cadastrar (Playlist list);
 	

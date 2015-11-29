@@ -1,8 +1,10 @@
 package home.dados;
 
+import java.io.Serializable;
+
 import home.negocio.beans.Playlist;
 
-public class RepositorioPlaylistArray implements IRepositorioPlaylist{
+public class RepositorioPlaylistArray implements IRepositorioPlaylist, Serializable{
 
 		private Playlist[] playlists;
 		private int prox;

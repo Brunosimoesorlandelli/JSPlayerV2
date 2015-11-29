@@ -1,27 +1,31 @@
 package home.GUI;
 
-import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.EventQueue;
-import java.awt.Image;
+import java.awt.Insets;
+import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.UIManager;
+import javax.swing.UIManager.LookAndFeelInfo;
+import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.border.EmptyBorder;
 
 import home.negocio.Fachada;
 import home.negocio.IFachada;
 import home.negocio.beans.Usuario;
-
-import javax.swing.JLabel;
-import javax.swing.JTextField;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import java.awt.Toolkit;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import java.awt.Color;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
 
 public class TelaLogin extends JFrame {
 
@@ -39,7 +43,7 @@ public class TelaLogin extends JFrame {
 					TelaLogin frame = new TelaLogin();
 					frame.setVisible(true);
 					frame.setLocationRelativeTo(null);
-					frame.setResizable(false);
+					frame.setResizable(false);					
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -54,7 +58,24 @@ public class TelaLogin extends JFrame {
 		setTitle("JSPlayer");
 		IFachada f = Fachada.getInstance();
 
-		setIconImage(Toolkit.getDefaultToolkit().getImage("Imagens\\IconeJSP.jpg"));
+		try {
+			 for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
+			 if ("Nimbus".equals(info.getName())) {
+			 UIManager.setLookAndFeel(info.getClassName());
+			 break;
+			 }
+			 }
+			 } catch (UnsupportedLookAndFeelException e) {
+			 // handle exception
+			 } catch (ClassNotFoundException e) {
+			 // handle exception
+			 } catch (InstantiationException e) {
+			 // handle exception
+			 } catch (IllegalAccessException e) {
+			 // handle exception
+			 }
+		
+		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\HP\\Pictures\\unnamed (2).png"));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 850, 528);
 		contentPane = new JPanel();
@@ -69,16 +90,16 @@ public class TelaLogin extends JFrame {
 
 		JLabel lblEmail = new JLabel("Email: ");
 		lblEmail.setForeground(Color.LIGHT_GRAY);
-		lblEmail.setBounds(10, 95, 37, 14);
+		lblEmail.setBounds(10, 95, 51, 14);
 		contentPane.add(lblEmail);
 
 		textNome = new JTextField();
-		textNome.setBounds(136, 67, 245, 20);
+		textNome.setBounds(136, 64, 245, 23);
 		contentPane.add(textNome);
 		textNome.setColumns(10);
 
 		textEmail = new JTextField();
-		textEmail.setBounds(136, 92, 245, 20);
+		textEmail.setBounds(136, 92, 245, 23);
 		contentPane.add(textEmail);
 		textEmail.setColumns(10);
 
@@ -89,6 +110,7 @@ public class TelaLogin extends JFrame {
 				if(e.getKeyCode() == KeyEvent.VK_ENTER){
 					btnLogar.requestFocusInWindow();
 					Usuario u = f.procurarUsuario(textNome.getText(), textEmail.getText());
+					f.pegarRepositorioPlaylistDoUsuario(u.getRepoP());
 				if (f.loginUsuario(u.getNome(), u.getEmail())) {
 					dispose();
 					TelaUsuario telaUsuario = new TelaUsuario(u);
@@ -103,6 +125,7 @@ public class TelaLogin extends JFrame {
 		btnLogar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Usuario u = f.procurarUsuario(textNome.getText(), textEmail.getText());
+				f.pegarRepositorioPlaylistDoUsuario(u.getRepoP());
 				if (f.loginUsuario(u.getNome(), u.getEmail())) {
 					dispose();
 					TelaUsuario telaUsuario = new TelaUsuario(u);
@@ -112,7 +135,7 @@ public class TelaLogin extends JFrame {
 				}
 			}
 		});
-		btnLogar.setBounds(221, 123, 89, 23);
+		btnLogar.setBounds(216, 136, 89, 28);
 		contentPane.add(btnLogar);
 
 		JButton btnNewButton = new JButton("Registre-se agora!");
@@ -125,7 +148,7 @@ public class TelaLogin extends JFrame {
 				telaCadastro.setLocationRelativeTo(null);
 			}
 		});
-		btnNewButton.setBounds(136, 440, 245, 23);
+		btnNewButton.setBounds(136, 435, 245, 28);
 		contentPane.add(btnNewButton);
 
 		JLabel label = new JLabel(" ");
