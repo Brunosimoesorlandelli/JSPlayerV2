@@ -67,7 +67,7 @@ public class RepositorioMusicaArray implements IRepositorioMusica, Serializable 
 
 	public void cadastrar(Musica mus) {
 		for (Musica s : musicas) {
-			if (mus.equals(s)) {
+			if (mus.getTitulo().equals(s.getTitulo()) && mus.getArtista().equals(s.getArtista()) || mus.getEndereco().equals(s.getEndereco())) {
 				mus = null;
 				JOptionPane.showMessageDialog(null, "ERRO!\nMUSICA JA CADASTRADA!");
 			}
@@ -101,7 +101,7 @@ public class RepositorioMusicaArray implements IRepositorioMusica, Serializable 
 
 	public void printar(Musica m) {
 		try {
-			JOptionPane.showMessageDialog(null, m.toString());
+			JOptionPane.showMessageDialog(null, musicas.toString());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

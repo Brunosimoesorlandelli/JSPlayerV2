@@ -7,6 +7,9 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import home.negocio.Fachada;
+import home.negocio.IFachada;
+import home.negocio.beans.Musica;
 import home.negocio.beans.Usuario;
 
 import javax.swing.JMenuBar;
@@ -48,33 +51,39 @@ import java.awt.GridLayout;
 import java.awt.CardLayout;
 import net.miginfocom.swing.MigLayout;
 import javax.swing.JTabbedPane;
+import javax.swing.UIManager;
+import javax.swing.JTextField;
 
 public class TelaUsuario extends JFrame {
 
 	private JPanel contentPane;
-
+	private JTextField textTituloTocar;
+	private JTextField textArtistaTocar;
+	private JTextField textTitulo;
+	private JTextField textArtista;
 
 	/**
 	 * Create the frame.
 	 */
 	public TelaUsuario(Usuario u) {
+		IFachada f = Fachada.getInstance();
 		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\HP\\Pictures\\unnamed (2).png"));
 		setTitle("JSPlayer");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 850, 528);
-		
+
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
-		
+
 		JMenu mnPerfil = new JMenu("Perfil");
 		menuBar.add(mnPerfil);
-		
+
 		JMenuItem mntmAlterarDados = new JMenuItem("Alterar Dados");
 		mnPerfil.add(mntmAlterarDados);
-		
+
 		JMenuItem mntmProcurarUsuarios = new JMenuItem("Procurar Usuarios");
 		mnPerfil.add(mntmProcurarUsuarios);
-		
+
 		JMenuItem mntmDeslogar = new JMenuItem("Deslogar");
 		mntmDeslogar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -83,31 +92,31 @@ public class TelaUsuario extends JFrame {
 				telaLogin.setVisible(true);
 				telaLogin.setLocationRelativeTo(null);
 				telaLogin.setResizable(false);
-				
+
 			}
 		});
 		mnPerfil.add(mntmDeslogar);
-		
+
 		JMenu mnNewMenu = new JMenu("Ajuda");
 		menuBar.add(mnNewMenu);
-		
+
 		JMenuItem mntmSobreOJsplayer = new JMenuItem("Sobre o JSPlayer");
 		mnNewMenu.add(mntmSobreOJsplayer);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		
+
 		JLabel label_1 = new JLabel("Bem Vindo ao JSPlayer");
 		label_1.setForeground(new Color(0, 255, 255));
 		label_1.setFont(new Font("OCR A Extended", Font.PLAIN, 14));
 		label_1.setBounds(16, 6, 188, 14);
 		contentPane.add(label_1);
-		
+
 		JButton button = new JButton("Procurar Usuario");
 		button.setBounds(16, 31, 165, 23);
 		contentPane.add(button);
-		
+
 		JButton btnCMusica = new JButton("Cadastrar Musica");
 		btnCMusica.addActionListener(new ActionListener() {
 			@Override
@@ -121,26 +130,64 @@ public class TelaUsuario extends JFrame {
 		});
 		btnCMusica.setBounds(645, 239, 165, 23);
 		contentPane.add(btnCMusica);
-		
+
 		JLabel lblMusica = new JLabel("Musica");
 		lblMusica.setForeground(new Color(0, 255, 255));
 		lblMusica.setFont(new Font("OCR A Extended", Font.PLAIN, 14));
 		lblMusica.setBounds(646, 213, 85, 14);
 		contentPane.add(lblMusica);
-		
+
 		JLabel lblPlaylist = new JLabel("Playlist");
 		lblPlaylist.setBounds(645, 18, 55, 16);
 		contentPane.add(lblPlaylist);
-		
-		
+
 		JButton button_2 = new JButton("Criar Playlist");
 		button_2.setBounds(645, 58, 146, 28);
 		contentPane.add(button_2);
+
+		JButton btnPrintarMusica = new JButton("Printar Musica");
+		btnPrintarMusica.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				f.printarDadosMusica(f.procurarMusica("Waiting For Love", "Avicii"));
+			}
+		});
+		btnPrintarMusica.setBounds(645, 290, 146, 25);
+		contentPane.add(btnPrintarMusica);
 		
-		JLabel label = new JLabel(" ");
-		label.setBackground(new Color(119, 136, 153));
-		label.setBounds(0, -19, 844, 479);
-		label.setIcon(new ImageIcon("C:\\Users\\HP\\Pictures\\soundwave_by_nova_g-d5h9lnz.jpg"));
-		contentPane.add(label);
+		JButton btnTocarMusica = new JButton("Tocar Musica");
+		btnTocarMusica.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				Musica m = f.procurarMusica(textTitulo.getText(), textArtista.getText());
+				TelaPlayer telaPlayer = new TelaPlayer(m);
+				telaPlayer.setVisible(true);
+				telaPlayer.setResizable(false);
+				telaPlayer.setLocationRelativeTo(null);
+			}
+		});
+		btnTocarMusica.setBounds(645, 339, 146, 25);
+		contentPane.add(btnTocarMusica);
+		
+		JLabel lblTitulo = new JLabel("Titulo:");
+		lblTitulo.setBounds(278, 294, 56, 16);
+		contentPane.add(lblTitulo);
+		
+		JLabel lblArtista = new JLabel("Artista:");
+		lblArtista.setBounds(278, 348, 56, 16);
+		contentPane.add(lblArtista);
+		
+		textTitulo = new JTextField();
+		textTitulo.setBounds(346, 291, 116, 22);
+		contentPane.add(textTitulo);
+		textTitulo.setColumns(10);
+		
+		textArtista = new JTextField();
+		textArtista.setBounds(346, 342, 116, 22);
+		contentPane.add(textArtista);
+		textArtista.setColumns(10);
+
 	}
 }

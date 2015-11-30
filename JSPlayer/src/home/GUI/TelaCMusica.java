@@ -4,6 +4,8 @@ import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedInputStream;
+import java.io.FileInputStream;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -18,17 +20,19 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JButton;
+import javax.swing.JFileChooser;
 import javax.swing.JSpinner;
 import javax.swing.SpinnerNumberModel;
+import javax.swing.JTree;
 
 public class TelaCMusica extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField textTitulo;
 	private JTextField textArtista;
-	private JTextField textEndereco;
 	private JTextField textGenero;
 	private JTextField textAlbum;
+	private String end;
 
 	/**
 	 * Launch the application.
@@ -39,6 +43,7 @@ public class TelaCMusica extends JFrame {
 	 */
 	public TelaCMusica(Usuario u) {
 		IFachada f = Fachada.getInstance();
+		end = null;
 
 		setTitle("JSPlayer");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -68,14 +73,6 @@ public class TelaCMusica extends JFrame {
 		lblGnero.setBounds(12, 155, 56, 16);
 		contentPane.add(lblGnero);
 
-		JLabel lblEndereo = new JLabel("Endereco:");
-		lblEndereo.setBounds(12, 243, 82, 16);
-		contentPane.add(lblEndereo);
-
-		JLabel lblExemploMusicasmp = new JLabel("Modelo: Musicas\\\\<nome_da_musica>.mp3");
-		lblExemploMusicasmp.setBounds(95, 272, 288, 16);
-		contentPane.add(lblExemploMusicasmp);
-
 		textTitulo = new JTextField();
 		textTitulo.setBounds(142, 15, 158, 22);
 		contentPane.add(textTitulo);
@@ -101,12 +98,6 @@ public class TelaCMusica extends JFrame {
 		contentPane.add(textGenero);
 		textGenero.setColumns(10);
 
-		textEndereco = new JTextField();
-		textEndereco.setText("Musicas\\\\<escreva_aqui>.mp3");
-		textEndereco.setBounds(95, 240, 307, 22);
-		contentPane.add(textEndereco);
-		textEndereco.setColumns(10);
-
 		JButton btnCadastrar = new JButton("Confirmar");
 		btnCadastrar.addActionListener(new ActionListener() {
 
@@ -116,19 +107,13 @@ public class TelaCMusica extends JFrame {
 					if (textArtista.getText().length() > 0) {
 						if (textAlbum.getText().length() > 0) {
 							if (textGenero.getText().length() > 0) {
-								if (textEndereco.getText().length() > 0) {
-									f.cadastrarMusica(
-											new Musica(textTitulo.getText(), textArtista.getText(), textAlbum.getText(),
-													spinAno.getValue(), textGenero.getText(), textEndereco.getText()));
-									dispose();
-									TelaUsuario telaUsuario = new TelaUsuario(u);
-									telaUsuario.setVisible(true);
-									telaUsuario.setResizable(false);
-									telaUsuario.setLocationRelativeTo(null);
-									
-								} else {
-									JOptionPane.showMessageDialog(null, "ERRO, ENDERECO INVALIDO");
-								}
+								f.cadastrarMusica(new Musica(textTitulo.getText(), textArtista.getText(),
+										textAlbum.getText(), spinAno.getValue(), textGenero.getText(), end));
+								dispose();
+								TelaUsuario telaUsuario = new TelaUsuario(u);
+								telaUsuario.setVisible(true);
+								telaUsuario.setResizable(false);
+								telaUsuario.setLocationRelativeTo(null);
 							} else {
 								JOptionPane.showMessageDialog(null, "ERRO, GENERO INVALIDO");
 							}
@@ -148,7 +133,7 @@ public class TelaCMusica extends JFrame {
 
 		JButton btnRetornar = new JButton("Retornar");
 		btnRetornar.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				dispose();
@@ -160,5 +145,19 @@ public class TelaCMusica extends JFrame {
 		});
 		btnRetornar.setBounds(80, 443, 97, 25);
 		contentPane.add(btnRetornar);
+
+		JButton btnEndereco = new JButton("Endereco");
+		btnEndereco.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JFileChooser jfc = new JFileChooser();
+				int retorno = jfc.showOpenDialog(null);
+				if (retorno == JFileChooser.APPROVE_OPTION) {
+					end = jfc.getSelectedFile().getAbsolutePath();
+					end = end.substring(end.indexOf("Musicas\\"));
+				}
+			}
+		});
+		btnEndereco.setBounds(115, 226, 97, 25);
+		contentPane.add(btnEndereco);
 	}
 }

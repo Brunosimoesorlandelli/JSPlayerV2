@@ -20,6 +20,7 @@ public class CustomPlayer {
 	private int total;
 	private int stopped;
 	private boolean valid;
+	private int i = 0;
 
 	public CustomPlayer() {
 		player = null;
@@ -32,12 +33,24 @@ public class CustomPlayer {
 		canResume = false;
 	}
 
-	public boolean canResume() {
+	public boolean getCanResume() {
 		return canResume;
 	}
 
 	public void setPath(String path) {
 		this.path = path;
+	}
+	
+	public Player getPlayer() {
+		return player;
+	}
+	
+	public void setPlayer(Player player) {
+		this.player = player;
+	}
+	
+	public void setI(int i) {
+		this.i = i;
 	}
 
 	public void pause() {
@@ -74,15 +87,18 @@ public class CustomPlayer {
 			new Thread(new Runnable() {
 				public void run() {
 					try {
-						player.play();
+						if(i == 0) {
+							player.play();
+							i++;
+						}
 					} catch (Exception e) {
-						JOptionPane.showMessageDialog(null, "Erro");
+						JOptionPane.showMessageDialog(null, "Erro1");
 						valid = false;
 					}
 				}
 			}).start();
 		} catch (Exception e) {
-			JOptionPane.showMessageDialog(null, "Erro");
+			JOptionPane.showMessageDialog(null, "Erro2");
 			valid = false;
 		}
 		return valid;
@@ -90,11 +106,11 @@ public class CustomPlayer {
 
 	public void Play(Musica m) {
 		int w = 0;
-		Scanner sc = new Scanner(System.in);
+		//Scanner sc = new Scanner(System.in);
 		setPath(m.getEndereco());
 		play(-1);
 		System.out.println("\nTOCANDO: " + m.getArtista() + " - " + m.getTitulo());
-		while (w == 0) {
+		/*while (w == 0) {
 			w =0;
 			String controle = sc.nextLine();
 			
@@ -118,7 +134,7 @@ public class CustomPlayer {
 				System.out.println("MUSICA ANTERIOR\n");
 			}
 
-		}
+		}*/
 	}
 	
 	
