@@ -7,7 +7,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-public class telaPlaylist extends JFrame {
+public class TelaPlaylist extends JFrame {
 
 	private JPanel contentPane;
 
@@ -18,7 +18,7 @@ public class telaPlaylist extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					telaPlaylist frame = new telaPlaylist();
+					TelaPlaylist frame = new TelaPlaylist();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -30,7 +30,7 @@ public class telaPlaylist extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public telaPlaylist() {
+	public TelaPlaylist() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();

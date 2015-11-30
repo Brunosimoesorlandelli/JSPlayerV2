@@ -7,7 +7,7 @@ public class Musica implements Serializable, Comparable<Musica> {
 	private String titulo;
 	private String artista;
 	private String album;
-	private String ano;
+	private Object ano;
 	private String genero;
 	private String endereco;
 	private int minutos;
@@ -25,15 +25,15 @@ public class Musica implements Serializable, Comparable<Musica> {
 		this.minutos = minutos;
 		this.segundos = segundos;
 	}
-	/*
-	 * public Musica(String titulo, String artista, String album, String ano,
-	 * String genero, String endereco) {
-	 * 
-	 * this.titulo = titulo; this.artista = artista; this.album = album;
-	 * this.ano = ano; this.genero = genero; this.endereco = endereco;
-	 * 
-	 * }
-	 */
+
+	public Musica(String titulo, String artista, String album, Object ano, String genero, String endereco) {
+		this.titulo = titulo;
+		this.artista = artista;
+		this.album = album;
+		this.ano = ano;
+		this.genero = genero;
+		this.endereco = endereco;
+	}
 
 	@Override
 	public String toString() {
@@ -76,7 +76,7 @@ public class Musica implements Serializable, Comparable<Musica> {
 		return album;
 	}
 
-	public String getAno() {
+	public Object getAno() {
 		return ano;
 	}
 
@@ -96,7 +96,7 @@ public class Musica implements Serializable, Comparable<Musica> {
 		this.album = album;
 	}
 
-	public void setAno(String ano) {
+	public void setAno(Object ano) {
 		this.ano = ano;
 	}
 
@@ -107,13 +107,15 @@ public class Musica implements Serializable, Comparable<Musica> {
 	public boolean equals(Object o) {
 		if (o instanceof Musica) {
 			Musica s = (Musica) o;
-			if ((this.titulo.equals(s.titulo)) && (this.artista.equals(s.artista)) && (this.endereco.equals(s.endereco))){
+			if ((this.titulo.equals(s.titulo)) && (this.artista.equals(s.artista))
+					&& (this.endereco.equals(s.endereco))) {
 				return true;
-			} 
-		}  return false;
-			
+			}
+		}
+		return false;
+
 	}
-	
+
 	@Override
 	public int compareTo(Musica s) {
 		int artistaCmp = artista.compareTo(s.artista);

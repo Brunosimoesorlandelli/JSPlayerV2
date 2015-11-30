@@ -108,9 +108,19 @@ public class TelaUsuario extends JFrame {
 		button.setBounds(16, 31, 165, 23);
 		contentPane.add(button);
 		
-		JButton button_1 = new JButton("Adicionar Musica");
-		button_1.setBounds(645, 239, 165, 23);
-		contentPane.add(button_1);
+		JButton btnCMusica = new JButton("Cadastrar Musica");
+		btnCMusica.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+				TelaCMusica telaCMusica = new TelaCMusica(u);
+				telaCMusica.setVisible(true);
+				telaCMusica.setResizable(false);
+				telaCMusica.setLocationRelativeTo(null);
+			}
+		});
+		btnCMusica.setBounds(645, 239, 165, 23);
+		contentPane.add(btnCMusica);
 		
 		JLabel lblMusica = new JLabel("Musica");
 		lblMusica.setForeground(new Color(0, 255, 255));
