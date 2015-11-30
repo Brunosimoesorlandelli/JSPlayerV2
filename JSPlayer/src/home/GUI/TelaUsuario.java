@@ -15,6 +15,7 @@ import home.negocio.beans.Usuario;
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JSpinner;
 import javax.swing.JList;
 import javax.swing.AbstractListModel;
@@ -53,6 +54,9 @@ import net.miginfocom.swing.MigLayout;
 import javax.swing.JTabbedPane;
 import javax.swing.UIManager;
 import javax.swing.JTextField;
+import javax.swing.JScrollBar;
+import javax.swing.border.TitledBorder;
+import javax.swing.JScrollPane;
 
 public class TelaUsuario extends JFrame {
 
@@ -66,6 +70,7 @@ public class TelaUsuario extends JFrame {
 	 * Create the frame.
 	 */
 	public TelaUsuario(Usuario u) {
+
 		IFachada f = Fachada.getInstance();
 		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\HP\\Pictures\\unnamed (2).png"));
 		setTitle("JSPlayer");
@@ -150,44 +155,84 @@ public class TelaUsuario extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				f.printarDadosMusica(f.procurarMusica("Waiting For Love", "Avicii"));
+				f.printarDadosMusica();
 			}
 		});
 		btnPrintarMusica.setBounds(645, 290, 146, 25);
 		contentPane.add(btnPrintarMusica);
-		
+
 		JButton btnTocarMusica = new JButton("Tocar Musica");
 		btnTocarMusica.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				Musica m = f.procurarMusica(textTitulo.getText(), textArtista.getText());
-				TelaPlayer telaPlayer = new TelaPlayer(m);
-				telaPlayer.setVisible(true);
-				telaPlayer.setResizable(false);
-				telaPlayer.setLocationRelativeTo(null);
+				if (textTitulo.getText().length() > 0 && textArtista.getText().length() > 0) {
+					Musica m = f.procurarMusica(textTitulo.getText(), textArtista.getText());
+					if (m != null) {
+						TelaPlayer telaPlayer = TelaPlayer.getInstance();
+						if (telaPlayer.getFunk()) {
+							telaPlayer.fechar();
+							telaPlayer.setFunk(false);
+						}
+						telaPlayer.setMus(m);
+						telaPlayer.rodar();
+						telaPlayer.setFunk(true);
+						telaPlayer.setVisible(true);
+						telaPlayer.setResizable(false);
+						telaPlayer.setLocationRelativeTo(null);
+					} else {
+						JOptionPane.showMessageDialog(null, "ERRO\nMUSICA INCORRETA OU INEXISTENTE");
+					}
+				} else {
+					JOptionPane.showMessageDialog(null, "ERRO\nCAMPO VAZIO");
+				}
 			}
 		});
 		btnTocarMusica.setBounds(645, 339, 146, 25);
 		contentPane.add(btnTocarMusica);
-		
+
 		JLabel lblTitulo = new JLabel("Titulo:");
 		lblTitulo.setBounds(278, 294, 56, 16);
 		contentPane.add(lblTitulo);
-		
+
 		JLabel lblArtista = new JLabel("Artista:");
 		lblArtista.setBounds(278, 348, 56, 16);
 		contentPane.add(lblArtista);
-		
+
 		textTitulo = new JTextField();
 		textTitulo.setBounds(346, 291, 116, 22);
 		contentPane.add(textTitulo);
 		textTitulo.setColumns(10);
-		
+
 		textArtista = new JTextField();
 		textArtista.setBounds(346, 342, 116, 22);
 		contentPane.add(textArtista);
 		textArtista.setColumns(10);
+		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(16, 139, 188, 186);
+		contentPane.add(scrollPane);
+		
+		JList list = new JList();
+		list.setForeground(SystemColor.inactiveCaptionText);
+		scrollPane.setViewportView(list);
+		list.setBorder(new TitledBorder(null, "Banco de Musicas", TitledBorder.LEFT, TitledBorder.ABOVE_TOP, null, SystemColor.desktop));
+		list.setModel(new AbstractListModel() {
+			
+			String[] values = f.retornaMusicas();
+			
+			public int getSize() {
+				return values.length;
+			}
+			public Object getElementAt(int index) {
+				return values[index];
+			}
+		});
+		
+		JLabel labelFundo = new JLabel(" ");
+		  labelFundo.setIcon(new ImageIcon("Imagens\\Fundo Usuario.png"));
+		  labelFundo.setBounds(0, 0, 847, 478);
+		  contentPane.add(labelFundo);
 
 	}
 }

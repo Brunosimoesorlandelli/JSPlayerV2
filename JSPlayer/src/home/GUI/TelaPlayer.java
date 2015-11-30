@@ -13,6 +13,7 @@ import home.negocio.CustomPlayer;
 import home.negocio.beans.Musica;
 
 import javax.swing.JToggleButton;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.border.TitledBorder;
 import java.awt.Color;
@@ -27,8 +28,14 @@ import javax.swing.border.SoftBevelBorder;
 import java.awt.SystemColor;
 
 public class TelaPlayer extends JFrame {
+	private TelaPlayer() {
+	}
 
+	private static TelaPlayer instance;
 	private JPanel contentPane;
+	private Musica mus = null;
+	private CustomPlayer p = new CustomPlayer();
+	private boolean funk = false;
 
 	/**
 	 * Launch the application.
@@ -37,26 +44,46 @@ public class TelaPlayer extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public TelaPlayer(Musica m) {
+	public static synchronized TelaPlayer getInstance() {
+		if (instance == null) {
+			instance = new TelaPlayer();
+		}
+		return instance;
+	}
+
+	public void setMus(Musica mus) {
+		this.mus = mus;
+	}
+
+	public boolean getFunk() {
+		return funk;
+	}
+
+	public void setFunk(boolean funk) {
+		this.funk = funk;
+	}
+
+	public void rodar() {
 		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-		CustomPlayer p = new CustomPlayer();
-		
-		p.setPath(m.getEndereco());
 
 		setResizable(false);
 		setTitle("Player");
 		setUndecorated(true);
 		setBounds(100, 100, 301, 182);
 		contentPane = new JPanel();
-		contentPane.setBackground(new Color(46, 139, 87));
+		contentPane.setBorder(new TitledBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null), "Player",
+				TitledBorder.CENTER, TitledBorder.TOP, null, new Color(67, 78, 84)));
+		contentPane.setBackground(SystemColor.inactiveCaption);
 		contentPane.setForeground(new Color(0, 0, 255));
-		contentPane.setBorder(new TitledBorder(null, "Player", TitledBorder.LEFT, TitledBorder.ABOVE_TOP, null,
-				new Color(0, 0, 255)));
 		setContentPane(contentPane);
-		contentPane.setLayout(null);
 
-		p.play(-1);
+		if (mus != null) {
+			p.setPath(mus.getEndereco());
+			p.play(-1);
+		}
 		JToggleButton tglbtnPlay = new JToggleButton("Play/Pause");
+		tglbtnPlay.setSelectedIcon(new ImageIcon("Imagens\\PlayOF PauseOF.png"));
+		tglbtnPlay.setIcon(new ImageIcon("Imagens\\PlayOF PauseOF.png"));
 		tglbtnPlay.addActionListener(new ActionListener() {
 
 			@Override
@@ -68,33 +95,40 @@ public class TelaPlayer extends JFrame {
 				}
 			}
 		});
-		tglbtnPlay.setBounds(12, 39, 137, 25);
+		tglbtnPlay.setBounds(108, 74, 89, 102);
 		contentPane.add(tglbtnPlay);
 
-		JButton btnStop = new JButton("Stop");
-		btnStop.addActionListener(new ActionListener() {
+		JButton btnPrevious = new JButton(" ");
+		btnPrevious.setBounds(6, 74, 89, 102);
+		btnPrevious.setIcon(new ImageIcon("Imagens\\PreviousOF.png"));
+		contentPane.add(btnPrevious);
 
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				p.getPlayer().close();
-				p.play(-1);
-				p.pause();
-			}
-		});
-		btnStop.setBounds(12, 77, 97, 25);
-		contentPane.add(btnStop);
+		JButton btnNext = new JButton(" ");
+		btnNext.setBounds(204, 74, 90, 102);
+		btnNext.setIcon(new ImageIcon("Imagens\\NextOF.png"));
+		contentPane.add(btnNext);
 
-		JButton btnFechar = new JButton("Fechar");
+		JButton btnFechar = new JButton("");
+		btnFechar.setBounds(6, 18, 288, 44);
+		btnFechar.setBackground(new Color(139, 0, 0));
+		btnFechar.setIcon(new ImageIcon("Imagens\\Close1.png"));
 		btnFechar.addActionListener(new ActionListener() {
+			
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				dispose();
 				p.getPlayer().close();
+				funk = false;
 			}
 		});
-		btnFechar.setBounds(192, 144, 97, 25);
+		contentPane.setLayout(null);
 		contentPane.add(btnFechar);
+	}
+
+	public void fechar() {
+		dispose();
+		p.getPlayer().close();
 	}
 
 }

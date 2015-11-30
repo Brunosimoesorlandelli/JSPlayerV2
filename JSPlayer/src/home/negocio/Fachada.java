@@ -1,5 +1,7 @@
 package home.negocio;
 
+import java.util.ArrayList;
+
 import home.dados.IRepositorioPlaylist;
 import home.negocio.beans.Musica;
 import home.negocio.beans.Playlist;
@@ -68,8 +70,16 @@ public class Fachada implements IFachada {
 		musicas.remover(procurarMusica(titulo, artista));
 	}
 	
-	public void printarDadosMusica(Musica m) {
-		musicas.printar(m);
+	public void printarDadosMusica() {
+		musicas.printar();
+	}
+	
+	public String[] retornaMusicas() {
+		return this.musicas.retornaMusicas();
+	}
+	
+	public ArrayList<Musica> getMusicas() {
+		return musicas.getMusicas();
 	}
 
 	public void cadastrarPlaylist(Playlist list) {

@@ -67,15 +67,21 @@ public class RepositorioMusicaArray implements IRepositorioMusica, Serializable 
 
 	public void cadastrar(Musica mus) {
 		for (Musica s : musicas) {
-			if (mus.getTitulo().equals(s.getTitulo()) && mus.getArtista().equals(s.getArtista()) || mus.getEndereco().equals(s.getEndereco())) {
+			if (mus.getTitulo().equals(s.getTitulo()) && mus.getArtista().equals(s.getArtista())
+					|| mus.getEndereco().equals(s.getEndereco())) {
 				mus = null;
 				JOptionPane.showMessageDialog(null, "ERRO!\nMUSICA JA CADASTRADA!");
 			}
 		}
 		if (mus != null) {
 			musicas.add(mus);
-			ordenarMusicas(mus);
 			salvar();
+			
+			for(Musica m : musicas) {
+				for(Musica s : musicas) {
+					m.compareTo(s);
+				}
+			}
 		}
 	}
 
@@ -99,7 +105,7 @@ public class RepositorioMusicaArray implements IRepositorioMusica, Serializable 
 		return resultado;
 	}
 
-	public void printar(Musica m) {
+	public void printar() {
 		try {
 			JOptionPane.showMessageDialog(null, musicas.toString());
 		} catch (Exception e) {
@@ -111,6 +117,22 @@ public class RepositorioMusicaArray implements IRepositorioMusica, Serializable 
 		for (Musica s : musicas) {
 			m.compareTo(s);
 		}
+	}
+
+	public String[] retornaMusicas() {
+		int i = 0;
+		String[] listaMusicas = new String[1000];
+		for (Musica m : musicas) {
+			if (m != null) {
+				listaMusicas[i] = m.getTitulo() + " - " + m.getArtista();
+			}
+			i++;
+		}
+		return listaMusicas;
+	}
+	
+	public ArrayList<Musica> getMusicas() {
+		return musicas;
 	}
 
 }

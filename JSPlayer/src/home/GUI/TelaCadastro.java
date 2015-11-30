@@ -50,7 +50,7 @@ public class TelaCadastro extends JFrame {
 	public TelaCadastro() {
 		IFachada f = Fachada.getInstance();
 
-		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\HP\\Pictures\\unnamed (2).png"));
+		setIconImage(Toolkit.getDefaultToolkit().getImage("Imagens\\f39bfcb5.png"));
 		setTitle("JSPlayer");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 850, 528);
@@ -193,7 +193,7 @@ public class TelaCadastro extends JFrame {
 		contentPane.add(btnRetornar);
 		
 				JLabel label = new JLabel(" ");
-				label.setIcon(new ImageIcon("Imagens\\JSPlayer 3.jpg"));
+				label.setIcon(new ImageIcon("Imagens\\JSPlayer 4.jpg"));
 				label.setBounds(0, 0, 844, 500);
 				contentPane.add(label);
 

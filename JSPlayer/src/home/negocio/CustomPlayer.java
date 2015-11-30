@@ -20,7 +20,6 @@ public class CustomPlayer {
 	private int total;
 	private int stopped;
 	private boolean valid;
-	private int i = 0;
 
 	public CustomPlayer() {
 		player = null;
@@ -40,17 +39,13 @@ public class CustomPlayer {
 	public void setPath(String path) {
 		this.path = path;
 	}
-	
+
 	public Player getPlayer() {
 		return player;
 	}
-	
+
 	public void setPlayer(Player player) {
 		this.player = player;
-	}
-	
-	public void setI(int i) {
-		this.i = i;
 	}
 
 	public void pause() {
@@ -87,10 +82,7 @@ public class CustomPlayer {
 			new Thread(new Runnable() {
 				public void run() {
 					try {
-						if(i == 0) {
-							player.play();
-							i++;
-						}
+						player.play();
 					} catch (Exception e) {
 						JOptionPane.showMessageDialog(null, "Erro1");
 						valid = false;
@@ -106,43 +98,32 @@ public class CustomPlayer {
 
 	public void Play(Musica m) {
 		int w = 0;
-		//Scanner sc = new Scanner(System.in);
+		// Scanner sc = new Scanner(System.in);
 		setPath(m.getEndereco());
 		play(-1);
 		System.out.println("\nTOCANDO: " + m.getArtista() + " - " + m.getTitulo());
-		/*while (w == 0) {
-			w =0;
-			String controle = sc.nextLine();
-			
-			if (controle.equals("P") || controle.equals("p")) {
-				pause();
-				System.out.println("PAUSADA!");
-			} else if (controle.equals("R") || controle.equals("r")) {
-				resume();
-				System.out.println("TOCANDO!");
-
-			} else if (controle.equals("S") || controle.equals("s")) {
-				pause();
-				player = null;
-				System.out.println("ENCERRADA!");
-				w++;
-			} else if (controle.equals(".")){
-				nextMusic();
-				System.out.println("PROXIMA MUSICA\n");
-			} else if (controle.equals(",")) {
-				previousMusic();
-				System.out.println("MUSICA ANTERIOR\n");
-			}
-
-		}*/
+		/*
+		 * while (w == 0) { w =0; String controle = sc.nextLine();
+		 * 
+		 * if (controle.equals("P") || controle.equals("p")) { pause();
+		 * System.out.println("PAUSADA!"); } else if (controle.equals("R") ||
+		 * controle.equals("r")) { resume(); System.out.println("TOCANDO!");
+		 * 
+		 * } else if (controle.equals("S") || controle.equals("s")) { pause();
+		 * player = null; System.out.println("ENCERRADA!"); w++; } else if
+		 * (controle.equals(".")){ nextMusic(); System.out.println(
+		 * "PROXIMA MUSICA\n"); } else if (controle.equals(",")) {
+		 * previousMusic(); System.out.println("MUSICA ANTERIOR\n"); }
+		 * 
+		 * }
+		 */
 	}
-	
-	
-	public void nextMusic(){
-	
+
+	public void nextMusic() {
+
 	}
-	
-	public void previousMusic(){
-		
+
+	public void previousMusic() {
+
 	}
 }

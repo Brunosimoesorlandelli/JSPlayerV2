@@ -1,5 +1,7 @@
 package home.dados;
 
+import java.util.ArrayList;
+
 import home.negocio.beans.Musica;
 
 public interface IRepositorioMusica {
@@ -12,8 +14,12 @@ public interface IRepositorioMusica {
 	
 	public Musica procurar(String titulo, String artista);
 	
-	public void printar(Musica m);
+	public void printar();
 	
 	public void ordenarMusicas(Musica m);
+	
+	public String[] retornaMusicas();
+	
+	public ArrayList<Musica> getMusicas();
 
 }

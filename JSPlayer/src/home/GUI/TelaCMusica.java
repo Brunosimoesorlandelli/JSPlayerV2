@@ -24,6 +24,7 @@ import javax.swing.JFileChooser;
 import javax.swing.JSpinner;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.JTree;
+import javax.swing.JComboBox;
 
 public class TelaCMusica extends JFrame {
 
