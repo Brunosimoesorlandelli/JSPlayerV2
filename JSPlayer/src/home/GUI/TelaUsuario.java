@@ -7,6 +7,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import home.negocio.CustomPlayer;
 import home.negocio.Fachada;
 import home.negocio.IFachada;
 import home.negocio.beans.Musica;
@@ -45,6 +46,8 @@ import java.awt.event.ActionEvent;
 import java.awt.Toolkit;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+
 import javax.swing.JInternalFrame;
 import java.awt.FlowLayout;
 import javax.swing.BoxLayout;
@@ -56,15 +59,22 @@ import javax.swing.UIManager;
 import javax.swing.JTextField;
 import javax.swing.JScrollBar;
 import javax.swing.border.TitledBorder;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.JScrollPane;
+import javax.swing.ListSelectionModel;
 
 public class TelaUsuario extends JFrame {
 
+	private CustomPlayer p = CustomPlayer.getInstance();
 	private JPanel contentPane;
 	private JTextField textTituloTocar;
 	private JTextField textArtistaTocar;
-	private JTextField textTitulo;
-	private JTextField textArtista;
+	private String titulo = null;
+	private String artista = null;
+	private boolean comp = false;
+	private String a = null;
+	private int i;
 
 	/**
 	 * Create the frame.
@@ -72,7 +82,7 @@ public class TelaUsuario extends JFrame {
 	public TelaUsuario(Usuario u) {
 
 		IFachada f = Fachada.getInstance();
-		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\HP\\Pictures\\unnamed (2).png"));
+		setIconImage(Toolkit.getDefaultToolkit().getImage("Imagens\\f39bfcb5.png"));
 		setTitle("JSPlayer");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 850, 528);
@@ -106,6 +116,13 @@ public class TelaUsuario extends JFrame {
 		menuBar.add(mnNewMenu);
 
 		JMenuItem mntmSobreOJsplayer = new JMenuItem("Sobre o JSPlayer");
+		mntmSobreOJsplayer.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JOptionPane.showMessageDialog(null,
+						"Aplicativo desenvolvido pela Organização Dream Team, composta por:\nBruno Simões (Touldor)\nEduardo Lisbôa (Snotmetal)\nEduardo Roque (Mestreedu)\nMateus Fittipaldi (Flyby)");
+
+			}
+		});
 		mnNewMenu.add(mntmSobreOJsplayer);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -133,13 +150,13 @@ public class TelaUsuario extends JFrame {
 				telaCMusica.setLocationRelativeTo(null);
 			}
 		});
-		btnCMusica.setBounds(645, 239, 165, 23);
+		btnCMusica.setBounds(645, 123, 165, 23);
 		contentPane.add(btnCMusica);
 
 		JLabel lblMusica = new JLabel("Musica");
 		lblMusica.setForeground(new Color(0, 255, 255));
 		lblMusica.setFont(new Font("OCR A Extended", Font.PLAIN, 14));
-		lblMusica.setBounds(646, 213, 85, 14);
+		lblMusica.setBounds(646, 97, 85, 14);
 		contentPane.add(lblMusica);
 
 		JLabel lblPlaylist = new JLabel("Playlist");
@@ -158,81 +175,189 @@ public class TelaUsuario extends JFrame {
 				f.printarDadosMusica();
 			}
 		});
-		btnPrintarMusica.setBounds(645, 290, 146, 25);
+		btnPrintarMusica.setBounds(645, 174, 146, 25);
 		contentPane.add(btnPrintarMusica);
 
-		JButton btnTocarMusica = new JButton("Tocar Musica");
-		btnTocarMusica.addActionListener(new ActionListener() {
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(222, 9, 365, 453);
+		contentPane.add(scrollPane);
+
+		JList list = new JList();
+		list.addMouseListener(new MouseListener() {
 
 			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				if (textTitulo.getText().length() > 0 && textArtista.getText().length() > 0) {
-					Musica m = f.procurarMusica(textTitulo.getText(), textArtista.getText());
-					if (m != null) {
-						TelaPlayer telaPlayer = TelaPlayer.getInstance();
-						if (telaPlayer.getFunk()) {
-							telaPlayer.fechar();
-							telaPlayer.setFunk(false);
+			public void mouseReleased(MouseEvent e) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void mousePressed(MouseEvent e) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				// TODO Auto-generated method stub
+				if (e.getClickCount() == 2) {
+					a = (String) list.getModel().getElementAt(list.getSelectedIndex());
+					i = list.getSelectedIndex();
+					titulo = a.substring(0, a.indexOf("-"));
+					artista = a.substring(a.indexOf("-") + 1);
+					if (!titulo.equals(null) && !artista.equals(null)) {
+						Musica m = f.procurarMusica(titulo, artista);
+
+						if (m != null) {
+							if (comp) {
+								p.resume();
+								p.getPlayer().close();
+								comp = false;
+							}
+							p.setPath(m.getEndereco());
+							p.play(-1);
+							comp = true;
+
+						} else {
+							JOptionPane.showMessageDialog(null, "ERRO\nMUSICA INCORRETA OU INEXISTENTE");
 						}
-						telaPlayer.setMus(m);
-						telaPlayer.rodar();
-						telaPlayer.setFunk(true);
-						telaPlayer.setVisible(true);
-						telaPlayer.setResizable(false);
-						telaPlayer.setLocationRelativeTo(null);
 					} else {
-						JOptionPane.showMessageDialog(null, "ERRO\nMUSICA INCORRETA OU INEXISTENTE");
+						JOptionPane.showMessageDialog(null, "ERRO\nCAMPO VAZIO");
 					}
-				} else {
-					JOptionPane.showMessageDialog(null, "ERRO\nCAMPO VAZIO");
 				}
 			}
+
 		});
-		btnTocarMusica.setBounds(645, 339, 146, 25);
-		contentPane.add(btnTocarMusica);
 
-		JLabel lblTitulo = new JLabel("Titulo:");
-		lblTitulo.setBounds(278, 294, 56, 16);
-		contentPane.add(lblTitulo);
-
-		JLabel lblArtista = new JLabel("Artista:");
-		lblArtista.setBounds(278, 348, 56, 16);
-		contentPane.add(lblArtista);
-
-		textTitulo = new JTextField();
-		textTitulo.setBounds(346, 291, 116, 22);
-		contentPane.add(textTitulo);
-		textTitulo.setColumns(10);
-
-		textArtista = new JTextField();
-		textArtista.setBounds(346, 342, 116, 22);
-		contentPane.add(textArtista);
-		textArtista.setColumns(10);
-		
-		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(16, 139, 188, 186);
-		contentPane.add(scrollPane);
-		
-		JList list = new JList();
+		list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		list.setForeground(SystemColor.inactiveCaptionText);
 		scrollPane.setViewportView(list);
-		list.setBorder(new TitledBorder(null, "Banco de Musicas", TitledBorder.LEFT, TitledBorder.ABOVE_TOP, null, SystemColor.desktop));
+		list.setBorder(new TitledBorder(null, "Banco de Musicas", TitledBorder.LEFT, TitledBorder.ABOVE_TOP, null,
+				SystemColor.desktop));
 		list.setModel(new AbstractListModel() {
-			
+
 			String[] values = f.retornaMusicas();
-			
+
 			public int getSize() {
 				return values.length;
 			}
+
 			public Object getElementAt(int index) {
 				return values[index];
 			}
 		});
-		
+
+		JButton previous = new JButton("");
+		previous.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (!a.equals(null)) {
+					list.setSelectedIndex(i);
+					if (list.getSelectedIndex() - 1 < 0) {
+						list.setSelectedIndex(list.getLastVisibleIndex());
+					} else {
+						list.setSelectedIndex(list.getSelectedIndex() - 1);
+					}
+					i = list.getSelectedIndex();
+					a = (String) list.getModel().getElementAt(list.getSelectedIndex());
+					titulo = a.substring(0, a.indexOf("-"));
+					artista = a.substring(a.indexOf("-") + 1);
+					if (!titulo.equals(null) && !artista.equals(null)) {
+						Musica m = f.procurarMusica(titulo, artista);
+
+						if (m != null) {
+							if (comp) {
+								p.resume();
+								p.getPlayer().close();
+								comp = false;
+							}
+							p.setPath(m.getEndereco());
+							p.play(-1);
+							comp = true;
+
+						} else {
+							JOptionPane.showMessageDialog(null, "ERRO\nMUSICA INCORRETA OU INEXISTENTE");
+						}
+					} else {
+						JOptionPane.showMessageDialog(null, "ERRO\nCAMPO VAZIO");
+					}
+				}
+			}
+		});
+		previous.setIcon(new ImageIcon("Imagens\\previous.novo.png"));
+		previous.setBounds(616, 259, 63, 39);
+		contentPane.add(previous);
+
+		JButton next = new JButton("");
+		next.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (!a.equals(null)) {
+					list.setSelectedIndex(i);
+					if (list.getSelectedIndex() + 1 > list.getLastVisibleIndex()) {
+						list.setSelectedIndex(0);
+					} else {
+						list.setSelectedIndex(list.getSelectedIndex() + 1);
+					}
+					i = list.getSelectedIndex();
+					a = (String) list.getModel().getElementAt(list.getSelectedIndex());
+					titulo = a.substring(0, a.indexOf("-"));
+					artista = a.substring(a.indexOf("-") + 1);
+					if (!titulo.equals(null) && !artista.equals(null)) {
+						Musica m = f.procurarMusica(titulo, artista);
+
+						if (m != null) {
+							if (comp) {
+								p.resume();
+								p.getPlayer().close();
+								comp = false;
+							}
+							p.setPath(m.getEndereco());
+							p.play(-1);
+							comp = true;
+
+						} else {
+							JOptionPane.showMessageDialog(null, "ERRO\nMUSICA INCORRETA OU INEXISTENTE");
+						}
+					} else {
+						JOptionPane.showMessageDialog(null, "ERRO\nCAMPO VAZIO");
+					}
+				}
+			}
+		});
+		next.setIcon(new ImageIcon("Imagens\\next.novo.png"));
+		next.setBounds(762, 259, 63, 39);
+		contentPane.add(next);
+
+		JToggleButton playPause = new JToggleButton("");
+		playPause.setSelectedIcon(new ImageIcon("Imagens\\pause.novo.png"));
+		playPause.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				if (playPause.isSelected()) {
+					p.pause();
+				} else {
+					p.resume();
+				}
+			}
+		});
+		playPause.setIcon(new ImageIcon("Imagens\\play.novo.png"));
+		playPause.setBounds(689, 259, 63, 39);
+		contentPane.add(playPause);
+
 		JLabel labelFundo = new JLabel(" ");
-		  labelFundo.setIcon(new ImageIcon("Imagens\\Fundo Usuario.png"));
-		  labelFundo.setBounds(0, 0, 847, 478);
-		  contentPane.add(labelFundo);
+		labelFundo.setIcon(new ImageIcon("Imagens\\Fundo Usuario.png"));
+		labelFundo.setBounds(0, 0, 847, 478);
+		contentPane.add(labelFundo);
 
 	}
 }

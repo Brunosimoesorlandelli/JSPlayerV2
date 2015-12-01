@@ -125,7 +125,7 @@ public class TelaLogin extends JFrame {
 		btnLogar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Usuario u = f.procurarUsuario(textNome.getText(), textEmail.getText());
-				f.pegarRepositorioPlaylistDoUsuario(u.getRepoP());
+				//f.pegarRepositorioPlaylistDoUsuario(u.getRepoP());
 				if (f.loginUsuario(u.getNome(), u.getEmail())) {
 					dispose();
 					TelaUsuario telaUsuario = new TelaUsuario(u);

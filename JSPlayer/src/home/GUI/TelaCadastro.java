@@ -9,7 +9,6 @@ import javax.swing.border.EmptyBorder;
 
 import home.negocio.Fachada;
 import home.negocio.IFachada;
-import home.negocio.RecebimentoDados;
 import home.negocio.beans.Usuario;
 
 import javax.swing.JLabel;

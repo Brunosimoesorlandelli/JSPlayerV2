@@ -1,30 +1,26 @@
 package home.GUI;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.BufferedInputStream;
-import java.io.FileInputStream;
+import java.io.File;
 
+import javax.swing.JButton;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JSpinner;
+import javax.swing.JTextField;
+import javax.swing.SpinnerNumberModel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.filechooser.FileFilter;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 import home.negocio.Fachada;
 import home.negocio.IFachada;
 import home.negocio.beans.Musica;
 import home.negocio.beans.Usuario;
-
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JTextField;
-import javax.swing.JButton;
-import javax.swing.JFileChooser;
-import javax.swing.JSpinner;
-import javax.swing.SpinnerNumberModel;
-import javax.swing.JTree;
-import javax.swing.JComboBox;
 
 public class TelaCMusica extends JFrame {
 
@@ -33,6 +29,7 @@ public class TelaCMusica extends JFrame {
 	private JTextField textArtista;
 	private JTextField textGenero;
 	private JTextField textAlbum;
+	private JTextField textEndereco;
 	private String end;
 
 	/**
@@ -98,6 +95,11 @@ public class TelaCMusica extends JFrame {
 		textGenero.setBounds(142, 158, 158, 22);
 		contentPane.add(textGenero);
 		textGenero.setColumns(10);
+		
+		textEndereco = new JTextField();
+		textEndereco.setBounds(115, 266, 258, 22);
+		contentPane.add(textEndereco);
+		textEndereco.setColumns(10);
 
 		JButton btnCadastrar = new JButton("Confirmar");
 		btnCadastrar.addActionListener(new ActionListener() {
@@ -148,17 +150,24 @@ public class TelaCMusica extends JFrame {
 		contentPane.add(btnRetornar);
 
 		JButton btnEndereco = new JButton("Endereco");
-		btnEndereco.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				JFileChooser jfc = new JFileChooser();
-				int retorno = jfc.showOpenDialog(null);
-				if (retorno == JFileChooser.APPROVE_OPTION) {
-					end = jfc.getSelectedFile().getAbsolutePath();
-					end = end.substring(end.indexOf("Musicas\\"));
-				}
-			}
-		});
-		btnEndereco.setBounds(115, 226, 97, 25);
-		contentPane.add(btnEndereco);
+		  btnEndereco.addActionListener(new ActionListener() {
+		   public void actionPerformed(ActionEvent e) {
+		    final JFileChooser jfc = new JFileChooser(new File("JSPMusicas\\"));
+		    
+		    FileFilter filter = new FileNameExtensionFilter("MP3 File","mp3");
+		    jfc.setFileFilter(filter);
+		    
+		    int retorno = jfc.showOpenDialog(null);
+		    if (retorno == JFileChooser.APPROVE_OPTION) {
+		     end = jfc.getSelectedFile().getAbsolutePath();
+		     end = end.substring(end.indexOf("JSPMusicas\\"));
+		     textEndereco.setText(end);
+		    }
+		   }
+		  });
+		  btnEndereco.setBounds(115, 226, 97, 25);
+		  contentPane.add(btnEndereco);
+		  
+		  
 	}
 }

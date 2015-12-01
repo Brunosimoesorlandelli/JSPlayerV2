@@ -12,6 +12,7 @@ import javazoom.jl.player.Player;
 
 public class CustomPlayer {
 
+	private static CustomPlayer instance;
 	private Player player;
 	private FileInputStream FIS;
 	private BufferedInputStream BIS;
@@ -21,7 +22,14 @@ public class CustomPlayer {
 	private int stopped;
 	private boolean valid;
 
-	public CustomPlayer() {
+	public static synchronized CustomPlayer getInstance(){
+		if(instance == null){
+			instance = new CustomPlayer();
+		}
+		return instance;
+	}
+	
+	private CustomPlayer() {
 		player = null;
 		FIS = null;
 		valid = false;
@@ -96,34 +104,4 @@ public class CustomPlayer {
 		return valid;
 	}
 
-	public void Play(Musica m) {
-		int w = 0;
-		// Scanner sc = new Scanner(System.in);
-		setPath(m.getEndereco());
-		play(-1);
-		System.out.println("\nTOCANDO: " + m.getArtista() + " - " + m.getTitulo());
-		/*
-		 * while (w == 0) { w =0; String controle = sc.nextLine();
-		 * 
-		 * if (controle.equals("P") || controle.equals("p")) { pause();
-		 * System.out.println("PAUSADA!"); } else if (controle.equals("R") ||
-		 * controle.equals("r")) { resume(); System.out.println("TOCANDO!");
-		 * 
-		 * } else if (controle.equals("S") || controle.equals("s")) { pause();
-		 * player = null; System.out.println("ENCERRADA!"); w++; } else if
-		 * (controle.equals(".")){ nextMusic(); System.out.println(
-		 * "PROXIMA MUSICA\n"); } else if (controle.equals(",")) {
-		 * previousMusic(); System.out.println("MUSICA ANTERIOR\n"); }
-		 * 
-		 * }
-		 */
-	}
-
-	public void nextMusic() {
-
-	}
-
-	public void previousMusic() {
-
-	}
 }

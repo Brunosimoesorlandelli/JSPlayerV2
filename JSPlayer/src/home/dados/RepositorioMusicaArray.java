@@ -76,9 +76,9 @@ public class RepositorioMusicaArray implements IRepositorioMusica, Serializable 
 		if (mus != null) {
 			musicas.add(mus);
 			salvar();
-			
-			for(Musica m : musicas) {
-				for(Musica s : musicas) {
+
+			for (Musica m : musicas) {
+				for (Musica s : musicas) {
 					m.compareTo(s);
 				}
 			}
@@ -121,16 +121,21 @@ public class RepositorioMusicaArray implements IRepositorioMusica, Serializable 
 
 	public String[] retornaMusicas() {
 		int i = 0;
-		String[] listaMusicas = new String[1000];
+		String[] listaMusicas = new String[0];
 		for (Musica m : musicas) {
 			if (m != null) {
-				listaMusicas[i] = m.getTitulo() + " - " + m.getArtista();
+				String[] listaMusicas2 = new String[listaMusicas.length + 1];
+				for (int h = 0; h < listaMusicas.length; h++) {
+					listaMusicas2[h] = listaMusicas[h];
+				}
+				listaMusicas = listaMusicas2;
+				listaMusicas[i] = m.getTitulo() + "-" + m.getArtista();
 			}
 			i++;
 		}
 		return listaMusicas;
 	}
-	
+
 	public ArrayList<Musica> getMusicas() {
 		return musicas;
 	}
