@@ -4,6 +4,7 @@ import home.negocio.beans.Musica;
 
 import java.io.BufferedInputStream;
 import java.io.FileInputStream;
+import java.io.IOException;
 import java.util.Scanner;
 
 import javax.swing.JOptionPane;
@@ -56,6 +57,19 @@ public class CustomPlayer {
 		this.player = player;
 	}
 
+	public boolean canRepeat() throws IOException{
+		int i = 0;
+		boolean can = false;
+		while(i == 0){
+		total = FIS.available();
+		if(total == 0){
+			can = true;
+			i++;
+		}
+		}
+		return can;
+	}
+	
 	public void pause() {
 		try {
 			stopped = FIS.available();

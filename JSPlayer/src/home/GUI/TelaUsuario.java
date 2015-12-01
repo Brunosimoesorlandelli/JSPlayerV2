@@ -19,6 +19,7 @@ import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JSpinner;
 import javax.swing.JList;
+import javax.sound.sampled.AudioFileFormat;
 import javax.swing.AbstractListModel;
 import javax.swing.JEditorPane;
 import javax.swing.JFormattedTextField;
@@ -47,6 +48,7 @@ import java.awt.Toolkit;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.io.IOException;
 
 import javax.swing.JInternalFrame;
 import java.awt.FlowLayout;
@@ -130,20 +132,20 @@ public class TelaUsuario extends JFrame {
 		contentPane.setLayout(null);
 
 		JLabel label_1 = new JLabel("Bem Vindo ao JSPlayer");
-		label_1.setForeground(new Color(0, 255, 255));
+		label_1.setForeground(SystemColor.textHighlight);
 		label_1.setFont(new Font("OCR A Extended", Font.PLAIN, 14));
-		label_1.setBounds(16, 6, 188, 14);
+		label_1.setBounds(16, 19, 188, 14);
 		contentPane.add(label_1);
 
 		JButton button = new JButton("Procurar Usuario");
-		button.setBounds(16, 31, 165, 23);
+		button.setBounds(16, 56, 165, 28);
 		contentPane.add(button);
 
 		JButton btnCMusica = new JButton("Cadastrar Musica");
 		btnCMusica.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				dispose();
+				//dispose();
 				TelaCMusica telaCMusica = new TelaCMusica(u);
 				telaCMusica.setVisible(true);
 				telaCMusica.setResizable(false);
@@ -154,13 +156,15 @@ public class TelaUsuario extends JFrame {
 		contentPane.add(btnCMusica);
 
 		JLabel lblMusica = new JLabel("Musica");
-		lblMusica.setForeground(new Color(0, 255, 255));
+		lblMusica.setForeground(SystemColor.textHighlight);
 		lblMusica.setFont(new Font("OCR A Extended", Font.PLAIN, 14));
 		lblMusica.setBounds(646, 97, 85, 14);
 		contentPane.add(lblMusica);
 
 		JLabel lblPlaylist = new JLabel("Playlist");
-		lblPlaylist.setBounds(645, 18, 55, 16);
+		lblPlaylist.setForeground(SystemColor.textHighlight);
+		lblPlaylist.setFont(new Font("OCR A Extended", Font.PLAIN, 14));
+		lblPlaylist.setBounds(645, 18, 96, 16);
 		contentPane.add(lblPlaylist);
 
 		JButton button_2 = new JButton("Criar Playlist");
@@ -358,6 +362,6 @@ public class TelaUsuario extends JFrame {
 		labelFundo.setIcon(new ImageIcon("Imagens\\Fundo Usuario.png"));
 		labelFundo.setBounds(0, 0, 847, 478);
 		contentPane.add(labelFundo);
-
+				
 	}
 }

@@ -113,10 +113,10 @@ public class TelaCMusica extends JFrame {
 								f.cadastrarMusica(new Musica(textTitulo.getText(), textArtista.getText(),
 										textAlbum.getText(), spinAno.getValue(), textGenero.getText(), end));
 								dispose();
-								TelaUsuario telaUsuario = new TelaUsuario(u);
-								telaUsuario.setVisible(true);
-								telaUsuario.setResizable(false);
-								telaUsuario.setLocationRelativeTo(null);
+								//TelaUsuario telaUsuario = new TelaUsuario(u);
+								//telaUsuario.setVisible(true);
+								//telaUsuario.setResizable(false);
+								//telaUsuario.setLocationRelativeTo(null);
 							} else {
 								JOptionPane.showMessageDialog(null, "ERRO, GENERO INVALIDO");
 							}
@@ -140,10 +140,10 @@ public class TelaCMusica extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				dispose();
-				TelaUsuario telaUsuario = new TelaUsuario(u);
-				telaUsuario.setVisible(true);
-				telaUsuario.setResizable(false);
-				telaUsuario.setLocationRelativeTo(null);
+				//TelaUsuario telaUsuario = new TelaUsuario(u);
+				//telaUsuario.setVisible(true);
+				//telaUsuario.setResizable(false);
+				//telaUsuario.setLocationRelativeTo(null);
 			}
 		});
 		btnRetornar.setBounds(80, 443, 97, 25);
