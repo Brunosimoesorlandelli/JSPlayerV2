@@ -37,7 +37,8 @@ public class Musica implements Serializable, Comparable<Musica> {
 
 	@Override
 	public String toString() {
-		return "\nTitulo:" + titulo + "\nArtista:" + artista + "\nEndereco:" + endereco;
+		return "\nTitulo: " + titulo + "\nArtista: " + artista + "\nAlbum: " + album + "\nAno: " + ano + "\nGenero: "
+			    + genero + "\nEndereco: " + endereco;
 	}
 
 	public int getMinutos() {

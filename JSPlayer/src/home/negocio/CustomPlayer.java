@@ -57,17 +57,11 @@ public class CustomPlayer {
 		this.player = player;
 	}
 
-	public boolean canRepeat() throws IOException{
-		int i = 0;
-		boolean can = false;
-		while(i == 0){
-		total = FIS.available();
-		if(total == 0){
-			can = true;
-			i++;
-		}
-		}
-		return can;
+	public void repeat() throws IOException{
+			total = FIS.available();
+			if(total == 0){
+				play(-1);
+			}
 	}
 	
 	public void pause() {

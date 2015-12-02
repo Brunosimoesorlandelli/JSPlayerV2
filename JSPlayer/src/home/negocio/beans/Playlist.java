@@ -39,84 +39,6 @@ public class Playlist implements Serializable {
 		playlist = new ArrayList<Musica>();
 	}
 
-	public boolean loadSongs(String fileName) {
-		File file = new File(fileName);
-		Scanner scan;
-		try {
-			scan = new Scanner(file);
-
-			while (scan.hasNext()) {
-				String titulo = null;
-				String artista = null;
-				int minutes = -1;
-				int seconds = -1;
-
-				String s = scan.nextLine();
-
-				if (!(s.equalsIgnoreCase(""))) {
-
-					if (titulo == null) {
-
-						trimmer(s);
-						titulo = s;
-					}
-					if (artista == null) {
-						try {
-							s = scan.nextLine();
-							trimmer(s);
-							artista = s;
-						} catch (Exception e) {
-							break;
-						}
-
-					}
-					if (minutes == -1) {
-						s = scan.nextLine();
-						trimmer(s);
-						String[] s1 = s.split(":");
-						int min = Integer.parseInt(s1[0]);
-						int sec = Integer.parseInt(s1[1]);
-
-						while (sec >= 60) {
-							sec = sec - 60;
-							min++;
-						}
-
-						minutes = min;
-						seconds = sec;
-					}
-
-					if (!(seconds == -1)) {
-						Musica s1 = new Musica(titulo, artista, minutes, seconds);
-						addSong(s1);
-					}
-
-				}
-
-			}
-
-			return true;
-
-		} catch (FileNotFoundException e) {
-
-			e.printStackTrace();
-			return false;
-		}
-
-	}
-
-	private void trimmer(String s) {
-		if (s == "") {
-			return;
-		} else {
-			s = s.trim();
-			if (s.contains("//")) {
-				s = s.substring(s.indexOf("//"));
-			}
-		}
-
-	}
-
 	public boolean clear() {
 		playlist.clear();
 		return true;
@@ -163,36 +85,22 @@ public class Playlist implements Serializable {
 		playlist.trimToSize();
 		return playlist.size();
 	}
-
-	public String totalPlayTime() {
-		int tempHoras = 0;
-		int tempMinutos = 0;
-		int tempSegundos = 0;
-
-		for (Musica s : playlist) {
-			tempMinutos += s.getMinutos();
-			tempSegundos += s.getSegundos();
+	
+	public String[] retornaMusicasP() {
+		int i = 0;
+		String[] listaMusicas = new String[0];
+		for (Musica m : playlist) {
+			if (m != null) {
+				String[] listaMusicas2 = new String[listaMusicas.length + 1];
+				for (int h = 0; h < listaMusicas.length; h++) {
+					listaMusicas2[h] = listaMusicas[h];
+				}
+				listaMusicas = listaMusicas2;
+				listaMusicas[i] = m.getTitulo() + "-" + m.getArtista();
+			}
+			i++;
 		}
-
-		while (tempSegundos >= 60) {
-			tempSegundos = tempSegundos - 60;
-			tempMinutos++;
-		}
-		while (tempMinutos >= 60) {
-			tempMinutos = tempMinutos - 60;
-			tempHoras++;
-		}
-		return tempHoras + ":" + tempMinutos + ":" + tempSegundos;
-	}
-
-	public static void main(String[] args) {
-		Playlist p = new Playlist();
-		p.loadSongs("BancoDeMusicas\\RepositorioMusicaArray.db");
-		System.out.println(p.getPlaylist());
-		p.sortByArtist();
-		System.out.println(p.totalPlayTime());
-		p.clear();
-		System.out.println(p.getPlaylist());
+		return listaMusicas;
 	}
 
 	public ArrayList<Musica> ordenar() {

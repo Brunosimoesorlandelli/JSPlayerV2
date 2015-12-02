@@ -24,7 +24,7 @@ public class Usuario implements Serializable{
 		this.estado = estado;
 		this.sexo = sexo;
 		this.idade = idade;
-		repoP = new RepositorioPlaylistArray(100);
+		this.repoP = new RepositorioPlaylistArray(100);
 
 	}
 
@@ -56,7 +56,7 @@ public class Usuario implements Serializable{
 		this.cidade = cidade;
 	}
 
-	public void setEstado(String estado) {
+	public void setEstado(Object estado) {
 		this.estado = estado;
 	}
 
@@ -68,11 +68,11 @@ public class Usuario implements Serializable{
 		this.email = email;
 	}
 
-	public void setSexo(String sexo) {
+	public void setSexo(Object sexo) {
 		this.sexo = sexo;
 	}
 
-	public void setIdade(String idade) {
+	public void setIdade(Object idade) {
 		this.idade = idade;
 	}
 

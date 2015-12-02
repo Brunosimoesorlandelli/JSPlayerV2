@@ -36,6 +36,10 @@ private IRepositorioPlaylist repositorio;
 		} else {
 		    }
     }
+    
+    public String[] retornarPlaylist(){
+    	return this.repositorio.retornarPlaylist();
+    }
 
     public Playlist procurar(String nomeP) {
         return this.repositorio.procurar(nomeP);

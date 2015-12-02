@@ -2,6 +2,7 @@ package home.dados;
 
 import java.io.Serializable;
 
+import home.negocio.beans.Musica;
 import home.negocio.beans.Playlist;
 
 public class RepositorioPlaylistArray implements IRepositorioPlaylist, Serializable{
@@ -25,6 +26,7 @@ public class RepositorioPlaylistArray implements IRepositorioPlaylist, Serializa
 			} else {
 
 			}
+			
 		}
 
 		private void duplicaArrayPlaylist() {
@@ -74,7 +76,24 @@ public class RepositorioPlaylistArray implements IRepositorioPlaylist, Serializa
 			}
 			return existe;
 		}
-
+		
+		public String[] retornarPlaylist() {
+			int i = 0;
+			String[] listaPlaylist = new String[0];
+			for (Playlist p : playlists) {
+				if (p != null) {
+					String[] listaPlaylist2 = new String[listaPlaylist.length + 1];
+					for (int h = 0; h < listaPlaylist.length; h++) {
+						listaPlaylist2[h] = listaPlaylist[h];
+					}
+					listaPlaylist = listaPlaylist2;
+					listaPlaylist[i] = p.getNomeP();
+				}
+				i++;
+			}
+			return listaPlaylist;
+		}
+		
 		public Playlist procurar(String nomeP) {
 			int psearch = this.procurarIndice(nomeP);
 			Playlist resultado = null;

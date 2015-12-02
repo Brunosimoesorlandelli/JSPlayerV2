@@ -13,4 +13,6 @@ public interface IRepositorioPlaylist {
 	public boolean existe(String nomeP);
 	
 	public Playlist procurar(String nomeP);
+	
+	public String[] retornarPlaylist();
 }

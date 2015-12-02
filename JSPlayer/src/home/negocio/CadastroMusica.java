@@ -26,8 +26,8 @@ private IRepositorioMusica repositorio;
         return this.repositorio.procurar(titulo, artista);
     }
     
-    public void printar (){
-    	this.repositorio.printar();
+    public void printar (Musica m){
+    	this.repositorio.printar(m);
     }
     
     public String[] retornaMusicas() {

@@ -31,6 +31,10 @@ public class Fachada implements IFachada {
 	public void pegarRepositorioPlaylistDoUsuario(IRepositorioPlaylist repoP) {
 		listas.pegarRepositorioDoUsuario(repoP);
 	}
+	
+	public void salvar(){
+		usuarios.salvar();
+	}
 
 	public boolean cadastrarUsuario(Usuario u) {
 		return usuarios.cadastrar(u);
@@ -70,8 +74,8 @@ public class Fachada implements IFachada {
 		musicas.remover(procurarMusica(titulo, artista));
 	}
 	
-	public void printarDadosMusica() {
-		musicas.printar();
+	public void printarDadosMusica(Musica m) {
+		musicas.printar(m);
 	}
 	
 	public String[] retornaMusicas() {
@@ -85,10 +89,14 @@ public class Fachada implements IFachada {
 	public void cadastrarPlaylist(Playlist list) {
 		listas.cadastrar(list);
 	}
-
+	
 	public Playlist procurarPlaylist(String nomeP) {
 		return listas.procurar(nomeP);
 
+	}
+	
+	public String[] retornarPlaylist(){
+		return listas.retornarPlaylist();
 	}
 
 	public boolean existePlaylist(String nomeP) {

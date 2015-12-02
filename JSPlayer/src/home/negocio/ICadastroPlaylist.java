@@ -16,4 +16,6 @@ public interface ICadastroPlaylist {
 	public boolean existe(String nomeP);
 	
 	public void remover(String nomeP);
+	
+	public String[] retornarPlaylist();
 }

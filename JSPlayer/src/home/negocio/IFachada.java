@@ -11,6 +11,8 @@ public interface IFachada {
 	
 	public void pegarRepositorioPlaylistDoUsuario(IRepositorioPlaylist repoP);
 	
+	public void salvar();
+	
 	public boolean cadastrarUsuario(Usuario u);
 	
 	public boolean loginUsuario(String nome, String email);
@@ -29,7 +31,7 @@ public interface IFachada {
 	
 	public void removerMusica(String titulo, String artista);
 	
-	public void printarDadosMusica();
+	public void printarDadosMusica(Musica m);
 	
 	public String[] retornaMusicas();
 	
@@ -40,6 +42,8 @@ public interface IFachada {
 	public Playlist procurarPlaylist(String nomeP);
 	
 	public boolean existePlaylist(String nomeP);
+	
+	public String[] retornarPlaylist();
 	
 	public void removerPlaylist(String nomeP);
 }

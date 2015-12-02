@@ -14,6 +14,10 @@ public class CadastroUsuario implements ICadastroUsuario {
 		this.repositorio = RepositorioUsuarioArray.getInstance();
 	}
 
+	public void salvar(){
+		repositorio.salvar();
+	}
+	
 	public boolean cadastrar(Usuario u) {
 		boolean i = false;
 		if (u == null) {

@@ -105,11 +105,12 @@ public class RepositorioMusicaArray implements IRepositorioMusica, Serializable 
 		return resultado;
 	}
 
-	public void printar() {
+	public void printar(Musica m) {
 		try {
-			JOptionPane.showMessageDialog(null, musicas.toString());
+			JOptionPane.showMessageDialog(null, m.toString());
 		} catch (Exception e) {
 			e.printStackTrace();
+			JOptionPane.showMessageDialog(null, "NADA PARA MOSTRAR!");
 		}
 	}
 

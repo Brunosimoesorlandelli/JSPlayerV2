@@ -12,7 +12,7 @@ public interface ICadastroMusica {
 	
 	public Musica procurar(String titulo, String artista);
 	
-	public void printar();
+	public void printar(Musica m);
 	
 	public String[] retornaMusicas();
 	

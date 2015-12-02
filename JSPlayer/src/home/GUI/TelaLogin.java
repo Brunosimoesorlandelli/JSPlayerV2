@@ -26,9 +26,11 @@ import javax.swing.border.EmptyBorder;
 import home.negocio.Fachada;
 import home.negocio.IFachada;
 import home.negocio.beans.Usuario;
+import java.awt.Font;
 
 public class TelaLogin extends JFrame {
 
+	
 	private JPanel contentPane;
 	private JTextField textNome;
 	private JTextField textEmail;
@@ -84,34 +86,39 @@ public class TelaLogin extends JFrame {
 		contentPane.setLayout(null);
 
 		JLabel lblNomeDoUsuario = new JLabel("Nome do Usuario: ");
+		lblNomeDoUsuario.setFont(new Font("OCR A Extended", Font.PLAIN, 15));
 		lblNomeDoUsuario.setForeground(Color.LIGHT_GRAY);
-		lblNomeDoUsuario.setBounds(10, 70, 105, 14);
+		lblNomeDoUsuario.setBounds(10, 70, 166, 14);
 		contentPane.add(lblNomeDoUsuario);
 
 		JLabel lblEmail = new JLabel("Email: ");
+		lblEmail.setFont(new Font("OCR A Extended", Font.PLAIN, 15));
 		lblEmail.setForeground(Color.LIGHT_GRAY);
-		lblEmail.setBounds(10, 95, 51, 14);
+		lblEmail.setBounds(10, 151, 166, 14);
 		contentPane.add(lblEmail);
 
 		textNome = new JTextField();
-		textNome.setBounds(136, 64, 245, 23);
+		textNome.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		textNome.setBounds(186, 61, 245, 35);
 		contentPane.add(textNome);
 		textNome.setColumns(10);
 
 		textEmail = new JTextField();
-		textEmail.setBounds(136, 92, 245, 23);
+		textEmail.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		textEmail.setBounds(186, 142, 245, 35);
 		contentPane.add(textEmail);
 		textEmail.setColumns(10);
 
 		JButton btnLogar = new JButton("Logar");
+		btnLogar.setFont(new Font("OCR A Extended", Font.PLAIN, 12));
 		btnLogar.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent e) {
 				if(e.getKeyCode() == KeyEvent.VK_ENTER){
 					btnLogar.requestFocusInWindow();
 					Usuario u = f.procurarUsuario(textNome.getText(), textEmail.getText());
-					f.pegarRepositorioPlaylistDoUsuario(u.getRepoP());
 				if (f.loginUsuario(u.getNome(), u.getEmail())) {
+					f.pegarRepositorioPlaylistDoUsuario(u.getRepoP());
 					dispose();
 					TelaUsuario telaUsuario = new TelaUsuario(u);
 					telaUsuario.setVisible(true);
@@ -125,9 +132,9 @@ public class TelaLogin extends JFrame {
 		btnLogar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Usuario u = f.procurarUsuario(textNome.getText(), textEmail.getText());
-				//f.pegarRepositorioPlaylistDoUsuario(u.getRepoP());
 				if (f.loginUsuario(u.getNome(), u.getEmail())) {
-					dispose();
+					f.pegarRepositorioPlaylistDoUsuario(u.getRepoP());
+					dispose();					
 					TelaUsuario telaUsuario = new TelaUsuario(u);
 					telaUsuario.setVisible(true);
 					telaUsuario.setLocationRelativeTo(null);
@@ -135,10 +142,11 @@ public class TelaLogin extends JFrame {
 				}
 			}
 		});
-		btnLogar.setBounds(216, 136, 89, 28);
+		btnLogar.setBounds(219, 236, 89, 28);
 		contentPane.add(btnLogar);
 
 		JButton btnNewButton = new JButton("Registre-se agora!");
+		btnNewButton.setFont(new Font("OCR A Extended", Font.PLAIN, 12));
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				dispose();
@@ -148,7 +156,7 @@ public class TelaLogin extends JFrame {
 				telaCadastro.setLocationRelativeTo(null);
 			}
 		});
-		btnNewButton.setBounds(136, 435, 245, 28);
+		btnNewButton.setBounds(141, 435, 245, 28);
 		contentPane.add(btnNewButton);
 
 		JLabel label = new JLabel(" ");

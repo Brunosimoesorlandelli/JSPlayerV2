@@ -1,98 +1,32 @@
 package home.GUI;
 
-import java.util.List;
-import java.util.SortedSet;
-import java.util.TreeSet;
+import java.awt.BorderLayout;
+import java.awt.EventQueue;
+import java.awt.Font;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Iterator;
+import java.util.List;
 
-import javax.swing.AbstractListModel;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextField;
+import javax.swing.ListModel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.border.TitledBorder;
 
 import home.negocio.Fachada;
 import home.negocio.IFachada;
-import home.negocio.beans.Musica;
 import home.negocio.beans.Playlist;
 import home.negocio.beans.Usuario;
-
-import java.awt.Toolkit;
 import javax.swing.ListSelectionModel;
-import javax.swing.JTextField;
-import javax.swing.ListModel;
 
-import java.awt.Font;
-import javax.swing.border.TitledBorder;
-import java.awt.BorderLayout;
-import javax.swing.JScrollPane;
-
- class SortedListModel extends AbstractListModel {
-	SortedSet<Object> model;
-
-	public SortedListModel() {
-		model = new TreeSet<Object>();
-	}
-
-	public int getSize() {
-		return model.size();
-	}
-
-	public Object getElementAt(int index) {
-		return model.toArray()[index];
-	}
-
-	public void add(Object element) {
-		if (model.add(element)) {
-			fireContentsChanged(this, 0, getSize());
-		}
-	}
-
-	public void addAll(Object elements[]) {
-		Collection<Object> c = Arrays.asList(elements);
-		model.addAll(c);
-		fireContentsChanged(this, 0, getSize());
-	}
-
-	public void clear() {
-		model.clear();
-		fireContentsChanged(this, 0, getSize());
-	}
-
-	public boolean contains(Object element) {
-		return model.contains(element);
-	}
-
-	public Object firstElement() {
-		return model.first();
-	}
-
-	public Iterator iterator() {
-		return model.iterator();
-	}
-
-	public Object lastElement() {
-		return model.last();
-	}
-
-	public boolean removeElement(Object element) {
-		boolean removed = model.remove(element);
-		if (removed) {
-			fireContentsChanged(this, 0, getSize());
-		}
-		return removed;
-	}
-}
-
-public class TelaCPlaylist extends JFrame {
+public class TelaOrganizar extends JFrame {
 
 	private String[] valores;
 	private int i;
@@ -101,9 +35,9 @@ public class TelaCPlaylist extends JFrame {
 	private List<String> stringsInput = new ArrayList<String>();
 	private List<String> stringsOutput = new ArrayList<String>();
 	private JTextField textNomeP;
-	private JList list;
+	private JList Banco;
 	private SortedListModel sourceListModel;
-	private JList list_1;
+	private JList Playlist;
 	private SortedListModel destListModel;
 
 	public void clearSourceListModel() {
@@ -152,28 +86,29 @@ public class TelaCPlaylist extends JFrame {
 	}
 
 	private void clearSourceSelected() {
-		Object selected[] = list.getSelectedValues();
+		Object selected[] = Banco.getSelectedValues();
 		for (int i = selected.length - 1; i >= 0; --i) {
 			sourceListModel.removeElement(selected[i]);
 		}
-		list.getSelectionModel().clearSelection();
+		Banco.getSelectionModel().clearSelection();
 	}
 
 	private void clearDestinationSelected() {
-		Object selected[] = list_1.getSelectedValues();
+		Object selected[] = Playlist.getSelectedValues();
 		for (int i = selected.length - 1; i >= 0; --i) {
 			destListModel.removeElement(selected[i]);
 		}
-		list_1.getSelectionModel().clearSelection();
+		Playlist.getSelectionModel().clearSelection();
 	}
 
-	
-	public TelaCPlaylist(Usuario u) {
-		
+	public TelaOrganizar(Usuario u, Playlist lista) {
+
 		sourceListModel = new SortedListModel();
-		list = new JList(sourceListModel);
+		Banco = new JList(sourceListModel);
+		Banco.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		destListModel = new SortedListModel();
-		list_1 = new JList(destListModel);
+		Playlist = new JList(destListModel);
+		Playlist.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
 		IFachada f = Fachada.getInstance();
 		setIconImage(Toolkit.getDefaultToolkit().getImage("Imagens\\f39bfcb5.png"));
@@ -185,15 +120,13 @@ public class TelaCPlaylist extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 
-		
-		
-		JLabel lblDigiteONome = new JLabel("Digite o nome da sua Playlist: ");
+		JLabel lblDigiteONome = new JLabel("Deseja mudar o nome da sua playlist?");
 		lblDigiteONome.setFont(new Font("OCR A Extended", Font.PLAIN, 15));
-		lblDigiteONome.setBounds(10, 34, 284, 14);
+		lblDigiteONome.setBounds(10, 34, 360, 14);
 		contentPane.add(lblDigiteONome);
 
 		textNomeP = new JTextField();
-		textNomeP.setBounds(304, 25, 260, 33);
+		textNomeP.setBounds(380, 26, 260, 33);
 		contentPane.add(textNomeP);
 		textNomeP.setColumns(10);
 
@@ -207,10 +140,16 @@ public class TelaCPlaylist extends JFrame {
 		JScrollPane scrollPane = new JScrollPane();
 		leftPanel.add(scrollPane, BorderLayout.CENTER);
 
-		scrollPane.setViewportView(list);
+		scrollPane.setViewportView(Banco);
 
 		JButton addButton = new JButton(">>");
-		addButton.addActionListener(new AddListener());
+		addButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Object selected[] = Banco.getSelectedValues();
+				addDestinationElements(selected);
+				clearSourceSelected();
+			}
+		});
 
 		leftPanel.add(addButton, BorderLayout.SOUTH);
 
@@ -224,23 +163,33 @@ public class TelaCPlaylist extends JFrame {
 		JScrollPane scrollPane_1 = new JScrollPane();
 		rightPanel.add(scrollPane_1, BorderLayout.CENTER);
 
-		scrollPane_1.setViewportView(list_1);
+		scrollPane_1.setViewportView(Playlist);
 
 		JButton removeButton = new JButton("<<");
-		removeButton.addActionListener(new RemoveListener());
+		removeButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg1) {
+				Object selected[] = Playlist.getSelectedValues();
+				String a = (String) Playlist.getModel().getElementAt(Playlist.getSelectedIndex());
+				String titulo = a.substring(0, a.indexOf("-"));
+				String artista = a.substring(a.indexOf("-") + 1);
+				lista.removeSong(f.procurarMusica(titulo, artista));
+				addSourceElements(selected);
+				clearDestinationSelected();
+			}
+		});
+
 		rightPanel.add(removeButton, BorderLayout.SOUTH);
 
-		JButton btnCriar = new JButton("Criar");
-		btnCriar.setFont(new Font("OCR A Extended", Font.PLAIN, 12));
-		btnCriar.addActionListener(new ActionListener() {
+		JButton btnSalvar = new JButton("Salvar");
+		btnSalvar.setFont(new Font("OCR A Extended", Font.PLAIN, 12));
+		btnSalvar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				Playlist lista = new Playlist();
 				lista.setNomeP(textNomeP.getText());
-				for (int indice = 0; indice <= list_1.getLastVisibleIndex(); indice++) {
-					String a = (String) list_1.getModel().getElementAt(indice);
+				for (int indice = 0; indice <= Playlist.getLastVisibleIndex(); indice++) {
+					String a = (String) Playlist.getModel().getElementAt(indice);
 					String titulo = a.substring(0, a.indexOf("-"));
 					String artista = a.substring(a.indexOf("-") + 1);
-					lista.addSong(f.procurarMusica(titulo, artista));			
+					lista.addSong(f.procurarMusica(titulo, artista));
 				}
 				f.cadastrarPlaylist(lista);
 				f.salvar();
@@ -251,9 +200,9 @@ public class TelaCPlaylist extends JFrame {
 				telaUsuario.setResizable(false);
 			}
 		});
-		btnCriar.setBounds(709, 437, 90, 33);
-		contentPane.add(btnCriar);
-		
+		btnSalvar.setBounds(709, 437, 90, 33);
+		contentPane.add(btnSalvar);
+
 		JButton btnRetornar = new JButton("Retornar");
 		btnRetornar.setFont(new Font("OCR A Extended", Font.PLAIN, 12));
 		btnRetornar.addActionListener(new ActionListener() {
@@ -270,21 +219,4 @@ public class TelaCPlaylist extends JFrame {
 
 	}
 
-	
-
-	public class AddListener implements ActionListener {
-		public void actionPerformed(ActionEvent e) {
-			Object selected[] = list.getSelectedValues();
-			addDestinationElements(selected);
-			clearSourceSelected();
-		}
-	}
-
-	public class RemoveListener implements ActionListener {
-		public void actionPerformed(ActionEvent e) {
-			Object selected[] = list_1.getSelectedValues();
-			addSourceElements(selected);
-			clearDestinationSelected();
-		}
-	}
 }
