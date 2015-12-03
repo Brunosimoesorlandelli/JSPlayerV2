@@ -15,9 +15,7 @@ public interface IRepositorioMusica {
 	public Musica procurar(String titulo, String artista);
 	
 	public void printar(Musica m);
-	
-	public void ordenarMusicas(Musica m);
-	
+		
 	public String[] retornaMusicas();
 	
 	public ArrayList<Musica> getMusicas();
