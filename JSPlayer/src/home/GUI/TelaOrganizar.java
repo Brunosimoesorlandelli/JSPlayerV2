@@ -9,6 +9,7 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -25,6 +26,9 @@ import home.negocio.IFachada;
 import home.negocio.beans.Playlist;
 import home.negocio.beans.Usuario;
 import javax.swing.ListSelectionModel;
+import java.awt.SystemColor;
+import javax.swing.UIManager;
+import java.awt.Color;
 
 public class TelaOrganizar extends JFrame {
 
@@ -105,9 +109,11 @@ public class TelaOrganizar extends JFrame {
 
 		sourceListModel = new SortedListModel();
 		Banco = new JList(sourceListModel);
+		Banco.setFont(new Font("OCR A Extended", Font.PLAIN, 14));
 		Banco.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		destListModel = new SortedListModel();
 		Playlist = new JList(destListModel);
+		Playlist.setFont(new Font("OCR A Extended", Font.PLAIN, 14));
 		Playlist.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
 		IFachada f = Fachada.getInstance();
@@ -121,18 +127,21 @@ public class TelaOrganizar extends JFrame {
 		contentPane.setLayout(null);
 
 		JLabel lblDigiteONome = new JLabel("Deseja mudar o nome da sua playlist?");
-		lblDigiteONome.setFont(new Font("OCR A Extended", Font.PLAIN, 15));
-		lblDigiteONome.setBounds(10, 34, 360, 14);
+		lblDigiteONome.setForeground(SystemColor.controlHighlight);
+		lblDigiteONome.setFont(new Font("OCR A Extended", Font.PLAIN, 14));
+		lblDigiteONome.setBounds(10, 34, 344, 15);
 		contentPane.add(lblDigiteONome);
 
 		textNomeP = new JTextField();
+		if (lista != null)
+			textNomeP.setText(lista.getNomeP());
 		textNomeP.setBounds(380, 26, 260, 33);
 		contentPane.add(textNomeP);
 		textNomeP.setColumns(10);
 
 		JPanel leftPanel = new JPanel();
-		leftPanel.setBorder(
-				new TitledBorder(null, "Banco de Musicas", TitledBorder.LEFT, TitledBorder.ABOVE_TOP, null, null));
+		leftPanel.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Banco de M\u00FAsicas",
+				TitledBorder.LEFT, TitledBorder.ABOVE_TOP, null, new Color(0, 0, 0)));
 		leftPanel.setBounds(100, 96, 274, 354);
 		contentPane.add(leftPanel);
 		leftPanel.setLayout(new BorderLayout(0, 0));
@@ -181,7 +190,7 @@ public class TelaOrganizar extends JFrame {
 		rightPanel.add(removeButton, BorderLayout.SOUTH);
 
 		JButton btnSalvar = new JButton("Salvar");
-		btnSalvar.setFont(new Font("OCR A Extended", Font.PLAIN, 12));
+		btnSalvar.setFont(new Font("OCR A Extended", Font.PLAIN, 14));
 		btnSalvar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				lista.setNomeP(textNomeP.getText());
@@ -200,11 +209,11 @@ public class TelaOrganizar extends JFrame {
 				telaUsuario.setResizable(false);
 			}
 		});
-		btnSalvar.setBounds(709, 437, 90, 33);
+		btnSalvar.setBounds(709, 437, 87, 23);
 		contentPane.add(btnSalvar);
 
 		JButton btnRetornar = new JButton("Retornar");
-		btnRetornar.setFont(new Font("OCR A Extended", Font.PLAIN, 12));
+		btnRetornar.setFont(new Font("OCR A Extended", Font.PLAIN, 14));
 		btnRetornar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				dispose();
@@ -214,8 +223,13 @@ public class TelaOrganizar extends JFrame {
 				telaUsuario.setResizable(false);
 			}
 		});
-		btnRetornar.setBounds(10, 451, 90, 33);
+		btnRetornar.setBounds(10, 451, 105, 23);
 		contentPane.add(btnRetornar);
+
+		JLabel label = new JLabel(" ");
+		label.setIcon(new ImageIcon("Imagens\\JSPlayer 4.jpg"));
+		label.setBounds(0, 0, 844, 500);
+		contentPane.add(label);
 
 	}
 
