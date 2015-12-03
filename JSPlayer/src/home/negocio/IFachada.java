@@ -29,7 +29,7 @@ public interface IFachada {
 	
 	public Musica procurarMusica(String titulo, String artista);
 	
-	public void removerMusica(String titulo, String artista);
+	public void removerMusica(Musica m);
 	
 	public void printarDadosMusica(Musica m);
 	
