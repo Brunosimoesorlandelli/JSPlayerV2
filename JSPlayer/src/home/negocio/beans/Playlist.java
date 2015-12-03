@@ -77,10 +77,6 @@ public class Playlist implements Serializable {
 			return null;
 	}
 
-	public void sortByArtist() {
-		Collections.sort(playlist);
-	}
-
 	public int size() {
 		playlist.trimToSize();
 		return playlist.size();
@@ -101,15 +97,6 @@ public class Playlist implements Serializable {
 			i++;
 		}
 		return listaMusicas;
-	}
-
-	public ArrayList<Musica> ordenar() {
-		for (Musica m : playlist) {
-			for (Musica s : playlist) {
-				m.compareTo(s);
-			}
-		}
-		return playlist;
 	}
 
 }
