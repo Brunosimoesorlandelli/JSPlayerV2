@@ -59,54 +59,56 @@ public class TelaCadastro extends JFrame {
 		contentPane.add(spinIdade);
 
 		JLabel lblConfirmaoDeEmail = new JLabel("Confirma\u00E7\u00E3o de Email: ");
-		lblConfirmaoDeEmail.setFont(new Font("OCR A Extended", Font.PLAIN, 15));
+		lblConfirmaoDeEmail.setFont(new Font("OCR A Extended", Font.PLAIN, 14));
 		lblConfirmaoDeEmail.setForeground(SystemColor.controlHighlight);
 		lblConfirmaoDeEmail.setBounds(10, 136, 227, 37);
 		contentPane.add(lblConfirmaoDeEmail);
 
 		JLabel lblNomeDoUsuario = new JLabel("Nome do Usuario: ");
-		lblNomeDoUsuario.setFont(new Font("OCR A Extended", Font.PLAIN, 15));
+		lblNomeDoUsuario.setFont(new Font("OCR A Extended", Font.PLAIN, 14));
 		lblNomeDoUsuario.setForeground(SystemColor.controlHighlight);
 		lblNomeDoUsuario.setBounds(10, 35, 188, 14);
 		contentPane.add(lblNomeDoUsuario);
 
 		JLabel lblEmail = new JLabel("Email: ");
-		lblEmail.setFont(new Font("OCR A Extended", Font.PLAIN, 15));
+		lblEmail.setFont(new Font("OCR A Extended", Font.PLAIN, 14));
 		lblEmail.setForeground(SystemColor.controlHighlight);
 		lblEmail.setBounds(10, 91, 188, 14);
 		contentPane.add(lblEmail);
 
 		JLabel lblLocalizao = new JLabel("Cidade: ");
-		lblLocalizao.setFont(new Font("OCR A Extended", Font.PLAIN, 15));
+		lblLocalizao.setFont(new Font("OCR A Extended", Font.PLAIN, 14));
 		lblLocalizao.setForeground(SystemColor.controlHighlight);
 		lblLocalizao.setBounds(10, 203, 188, 14);
 		contentPane.add(lblLocalizao);
 
 		JLabel lblEstado = new JLabel("Estado: ");
-		lblEstado.setFont(new Font("OCR A Extended", Font.PLAIN, 15));
+		lblEstado.setFont(new Font("OCR A Extended", Font.PLAIN, 14));
 		lblEstado.setForeground(SystemColor.controlHighlight);
 		lblEstado.setBounds(447, 203, 108, 14);
 		contentPane.add(lblEstado);
 
 		JLabel lblSexo = new JLabel("Sexo: ");
-		lblSexo.setFont(new Font("OCR A Extended", Font.PLAIN, 15));
+		lblSexo.setFont(new Font("OCR A Extended", Font.PLAIN, 14));
 		lblSexo.setForeground(SystemColor.controlHighlight);
 		lblSexo.setBounds(10, 257, 97, 14);
 		contentPane.add(lblSexo);
 
 		JLabel lblIdade = new JLabel("Idade: ");
-		lblIdade.setFont(new Font("OCR A Extended", Font.PLAIN, 15));
+		lblIdade.setFont(new Font("OCR A Extended", Font.PLAIN, 14));
 		lblIdade.setForeground(SystemColor.controlHighlight);
 		lblIdade.setBounds(10, 314, 97, 14);
 		contentPane.add(lblIdade);
 
 		JComboBox comboSexo = new JComboBox();
+		comboSexo.setFont(new Font("OCR A Extended", Font.PLAIN, 14));
 		comboSexo.setToolTipText("");
 		comboSexo.setModel(new DefaultComboBoxModel(new String[] { "<Selecione>", "Masculino", "Feminino" }));
 		comboSexo.setBounds(180, 250, 132, 29);
 		contentPane.add(comboSexo);
 
 		JComboBox comboEstado = new JComboBox();
+		comboEstado.setFont(new Font("OCR A Extended", Font.PLAIN, 14));
 		comboEstado.setModel(new DefaultComboBoxModel(
 				new String[] { "<Selecione>", "AC\t ", "AL\t ", "AP\t ", "AM\t ", "BA\t ", "CE\t ", "DF\t ", "ES\t ",
 						"GO\t ", "MA\t ", "MT\t ", "MS\t ", "MG\t ", "PA\t ", "PB\t ", "PR\t ", "PE\t ", "PI\t ",
@@ -134,7 +136,8 @@ public class TelaCadastro extends JFrame {
 		contentPane.add(textNome);
 		textNome.setColumns(10);
 
-		JButton btnNewButton = new JButton("Confimar");
+		JButton btnNewButton = new JButton("Confirmar");
+		btnNewButton.setFont(new Font("OCR A Extended", Font.PLAIN, 14));
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				if (textNome.getText().length() > 0) {
@@ -178,6 +181,7 @@ public class TelaCadastro extends JFrame {
 		contentPane.add(btnNewButton);
 		
 		JButton btnRetornar = new JButton("Retornar");
+		btnRetornar.setFont(new Font("OCR A Extended", Font.PLAIN, 14));
 		btnRetornar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				dispose();
@@ -187,8 +191,14 @@ public class TelaCadastro extends JFrame {
 				telaLogin.setResizable(false);
 			}
 		});
-		btnRetornar.setBounds(140, 450, 89, 29);
+		btnRetornar.setBounds(140, 450, 108, 29);
 		contentPane.add(btnRetornar);
+				
+				JLabel lblserUsadoPara = new JLabel("(Ser\u00E1 usado para o login)");
+				lblserUsadoPara.setForeground(SystemColor.controlHighlight);
+				lblserUsadoPara.setFont(new Font("OCR A Extended", Font.BOLD, 15));
+				lblserUsadoPara.setBounds(450, 34, 266, 16);
+				contentPane.add(lblserUsadoPara);
 		
 				JLabel label = new JLabel(" ");
 				label.setIcon(new ImageIcon("Imagens\\JSPlayer 4.jpg"));
