@@ -44,15 +44,6 @@ public class RepositorioUsuarioArray implements IRepositorioUsuarios, Serializab
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		/*
-		 * try { FileOutputStream fo = new
-		 * FileOutputStream("Usuarios\\RepositorioUsuarioArray.db");
-		 * ObjectOutputStream oo = new ObjectOutputStream(fo);
-		 * oo.writeObject(this); oo.close(); System.out.println(
-		 * "Class RepositorioUsuarioArray - object serializado com sucesso"); }
-		 * catch (Exception e) { e.printStackTrace(); }
-		 */
-
 	}
 
 	private static IRepositorioUsuarios ler() {
@@ -74,15 +65,6 @@ public class RepositorioUsuarioArray implements IRepositorioUsuarios, Serializab
 		return repo;
 	}
 
-	/**
-	 * IRepositorioUsuarios repo = null; try { FileInputStream fi = new
-	 * FileInputStream( "Usuarios\\RepositorioUsuarioArray.db");
-	 * ObjectInputStream oi = new ObjectInputStream(fi); repo =
-	 * (IRepositorioUsuarios) oi.readObject(); oi.close(); System.out.println(
-	 * "agora ele foi des-serializado com sucesso"); } catch (Exception ex) {
-	 * repo = new RepositorioUsuarioArray(next); ex.printStackTrace(); }
-	 */
-
 	public void cadastrar(Usuario u) {
 		this.usuarios[this.next] = u;
 		if (u.getEmail().equals(this.usuarios[this.next].getEmail())) {
@@ -91,8 +73,9 @@ public class RepositorioUsuarioArray implements IRepositorioUsuarios, Serializab
 			if (this.next == this.usuarios.length) {
 				this.duplicaArrayUsuario();
 			}
-			System.out.println("O USUARIO FOI CADASTRADO!");
+			JOptionPane.showMessageDialog(null, "O USUARIO FOI CADASTRADO!");
 		} else {
+			JOptionPane.showMessageDialog(null, "O USUARIO JA EXISTE!");
 
 		}
 		salvar();
@@ -152,8 +135,6 @@ public class RepositorioUsuarioArray implements IRepositorioUsuarios, Serializab
 		if (indice != next) {
 			existe = true;
 			System.out.println("O USUARIO EXISTE!");
-		} else {
-			JOptionPane.showMessageDialog(null, "O USUARIO NAO EXISTE!");
 		}
 		return existe;
 	}
@@ -164,8 +145,6 @@ public class RepositorioUsuarioArray implements IRepositorioUsuarios, Serializab
 		if (indice != next) {
 			existe = true;
 			System.out.println("O USUARIO EXISTE!");
-		} else {
-			JOptionPane.showMessageDialog(null, "O USUARIO NAO EXISTE!");
 		}
 		return existe;
 	}
