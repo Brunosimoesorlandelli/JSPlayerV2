@@ -53,48 +53,49 @@ public class TelaAlterar extends JFrame {
 		contentPane.add(spinIdade);
 
 		JLabel lblConfirmaoDeEmail = new JLabel("Confirma\u00E7\u00E3o de Email: ");
-		lblConfirmaoDeEmail.setFont(new Font("OCR A Extended", Font.PLAIN, 15));
+		lblConfirmaoDeEmail.setFont(new Font("OCR A Extended", Font.PLAIN, 14));
 		lblConfirmaoDeEmail.setForeground(SystemColor.controlHighlight);
 		lblConfirmaoDeEmail.setBounds(10, 136, 227, 37);
 		contentPane.add(lblConfirmaoDeEmail);
 
-		JLabel lblNomeDoUsuario = new JLabel("Nome do Usuario: ");
-		lblNomeDoUsuario.setFont(new Font("OCR A Extended", Font.PLAIN, 15));
+		JLabel lblNomeDoUsuario = new JLabel("Nome do Usu\u00E1rio: ");
+		lblNomeDoUsuario.setFont(new Font("OCR A Extended", Font.PLAIN, 14));
 		lblNomeDoUsuario.setForeground(SystemColor.controlHighlight);
 		lblNomeDoUsuario.setBounds(10, 35, 188, 14);
 		contentPane.add(lblNomeDoUsuario);
 
 		JLabel lblEmail = new JLabel("Email: ");
-		lblEmail.setFont(new Font("OCR A Extended", Font.PLAIN, 15));
+		lblEmail.setFont(new Font("OCR A Extended", Font.PLAIN, 14));
 		lblEmail.setForeground(SystemColor.controlHighlight);
 		lblEmail.setBounds(10, 91, 188, 14);
 		contentPane.add(lblEmail);
 
 		JLabel lblLocalizao = new JLabel("Cidade: ");
-		lblLocalizao.setFont(new Font("OCR A Extended", Font.PLAIN, 15));
+		lblLocalizao.setFont(new Font("OCR A Extended", Font.PLAIN, 14));
 		lblLocalizao.setForeground(SystemColor.controlHighlight);
 		lblLocalizao.setBounds(10, 203, 188, 14);
 		contentPane.add(lblLocalizao);
 
 		JLabel lblEstado = new JLabel("Estado: ");
-		lblEstado.setFont(new Font("OCR A Extended", Font.PLAIN, 15));
+		lblEstado.setFont(new Font("OCR A Extended", Font.PLAIN, 14));
 		lblEstado.setForeground(SystemColor.controlHighlight);
 		lblEstado.setBounds(447, 203, 108, 14);
 		contentPane.add(lblEstado);
 
 		JLabel lblSexo = new JLabel("Sexo: ");
-		lblSexo.setFont(new Font("OCR A Extended", Font.PLAIN, 15));
+		lblSexo.setFont(new Font("OCR A Extended", Font.PLAIN, 14));
 		lblSexo.setForeground(SystemColor.controlHighlight);
 		lblSexo.setBounds(10, 257, 97, 14);
 		contentPane.add(lblSexo);
 
 		JLabel lblIdade = new JLabel("Idade: ");
-		lblIdade.setFont(new Font("OCR A Extended", Font.PLAIN, 15));
+		lblIdade.setFont(new Font("OCR A Extended", Font.PLAIN, 14));
 		lblIdade.setForeground(SystemColor.controlHighlight);
 		lblIdade.setBounds(10, 314, 97, 14);
 		contentPane.add(lblIdade);
 
 		JComboBox comboSexo = new JComboBox();
+		comboSexo.setFont(new Font("OCR A Extended", Font.PLAIN, 14));
 		comboSexo.setToolTipText("");
 		comboSexo.setModel(new DefaultComboBoxModel(new String[] { "<Selecione>", "Masculino", "Feminino" }));
 		comboSexo.setSelectedItem(u.getSexo());
@@ -102,6 +103,7 @@ public class TelaAlterar extends JFrame {
 		contentPane.add(comboSexo);
 
 		JComboBox comboEstado = new JComboBox();
+		comboEstado.setFont(new Font("OCR A Extended", Font.PLAIN, 14));
 		comboEstado.setModel(new DefaultComboBoxModel(
 				new String[] { "<Selecione>", "AC\t ", "AL\t ", "AP\t ", "AM\t ", "BA\t ", "CE\t ", "DF\t ", "ES\t ",
 						"GO\t ", "MA\t ", "MT\t ", "MS\t ", "MG\t ", "PA\t ", "PB\t ", "PR\t ", "PE\t ", "PI\t ",
@@ -133,8 +135,8 @@ public class TelaAlterar extends JFrame {
 		contentPane.add(textNome);
 		textNome.setColumns(10);
 
-		JButton btnNewButton = new JButton("Confimar");
-		btnNewButton.setFont(new Font("OCR A Extended", Font.PLAIN, 12));
+		JButton btnNewButton = new JButton("Confirmar");
+		btnNewButton.setFont(new Font("OCR A Extended", Font.PLAIN, 14));
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				if (textNome.getText().length() > 0) {
@@ -180,7 +182,7 @@ public class TelaAlterar extends JFrame {
 		contentPane.add(btnNewButton);
 
 		JButton btnRetornar = new JButton("Retornar");
-		btnRetornar.setFont(new Font("OCR A Extended", Font.PLAIN, 12));
+		btnRetornar.setFont(new Font("OCR A Extended", Font.PLAIN, 14));
 		btnRetornar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				dispose();
@@ -190,7 +192,7 @@ public class TelaAlterar extends JFrame {
 				telaUsuario.setResizable(false);
 			}
 		});
-		btnRetornar.setBounds(140, 450, 89, 29);
+		btnRetornar.setBounds(140, 450, 97, 23);
 		contentPane.add(btnRetornar);
 
 		JLabel label = new JLabel(" ");
