@@ -51,6 +51,7 @@ import java.awt.Toolkit;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.io.File;
 import java.io.IOException;
 import java.util.SortedSet;
 
@@ -86,9 +87,6 @@ public class TelaUsuario extends JFrame {
 	private String a = null;
 	private int i;
 
-	/**
-	 * Create the frame.
-	 */
 	public TelaUsuario(Usuario u) {
 
 		SortedListModel model = new SortedListModel();
@@ -123,8 +121,6 @@ public class TelaUsuario extends JFrame {
 		});
 		mnPerfil.add(mntmAlterarDados);
 
-		
-
 		JMenuItem mntmDeslogar = new JMenuItem("Deslogar");
 		mntmDeslogar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -150,7 +146,7 @@ public class TelaUsuario extends JFrame {
 		mntmSobreOJsplayer.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				JOptionPane.showMessageDialog(null,
-						"Aplicativo desenvolvido pela OrganizaÁ„o Dream Team, composta por:\nBruno Simıes (Touldor)\nEduardo LisbÙa (Snotmetal)\nEduardo Roque (Mestreedu)\nMateus Fittipaldi (Flyby)");
+						"Aplicativo desenvolvido pela Organiza√ß√£o Dream Team, composta por:\nAlexandre Callado (Odallac)\nBruno Sim√µes (Touldor)\nEduardo Lisb√¥a (Snotmetal)\nEduardo Roque (Mestreedu)\nMateus Fittipaldi (Flyby)");
 
 			}
 		});
@@ -160,11 +156,28 @@ public class TelaUsuario extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 
-		JLabel label_1 = new JLabel("Bem Vindo ao JSPlayer");
-		label_1.setForeground(new Color(204, 255, 51));
-		label_1.setFont(new Font("OCR A Extended", Font.BOLD, 14));
-		label_1.setBounds(16, 14, 210, 14);
-		contentPane.add(label_1);
+		JLabel lblBemVindoAo = new JLabel("Bem Vindo ao");
+		lblBemVindoAo.setForeground(new Color(204, 255, 51));
+		lblBemVindoAo.setFont(new Font("OCR A Extended", Font.BOLD, 14));
+		lblBemVindoAo.setBounds(16, 14, 129, 14);
+		contentPane.add(lblBemVindoAo);
+		
+		JComboBox comboUsuario = new JComboBox();
+		comboUsuario.setFont(new Font("OCR A Extended", Font.PLAIN, 12));
+		comboUsuario.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				if (arg0.getClickCount() == 1) {
+					uso = (String) comboUsuario.getSelectedItem();
+					Playlist p = f.procurarPlaylist(uso);
+					model.clear();
+					model.addAll(p.retornaMusicasP());
+				}
+			}
+		});
+		comboUsuario.setModel(new DefaultComboBoxModel(f.retornarPlaylist()));
+		comboUsuario.setBounds(625, 110, 164, 26);
+		contentPane.add(comboUsuario);
 
 		JComboBox comboMigo = new JComboBox();
 		comboMigo.setFont(new Font("OCR A Extended", Font.PLAIN, 12));
@@ -184,13 +197,13 @@ public class TelaUsuario extends JFrame {
 				}
 			}
 		});
-		comboMigo.setBounds(23, 218, 165, 26);
+		comboMigo.setBounds(26, 251, 165, 26);
 		contentPane.add(comboMigo);
 
 		JButton btnMigo = new JButton("Visualizar");
 		btnMigo.setForeground(new Color(204, 255, 51));
 		btnMigo.setBackground(new Color(0, 0, 0));
-		btnMigo.setFont(new Font("OCR A Extended", Font.PLAIN, 12));
+		btnMigo.setFont(new Font("OCR A Extended", Font.PLAIN, 14));
 		btnMigo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (!(comboMigo == null)) {
@@ -207,10 +220,10 @@ public class TelaUsuario extends JFrame {
 				}
 			}
 		});
-		btnMigo.setBounds(43, 275, 124, 39);
+		btnMigo.setBounds(46, 308, 124, 39);
 		contentPane.add(btnMigo);
 
-		JMenuItem mntmProcurarUsuarios = new JMenuItem("Procurar Usuarios");
+		JMenuItem mntmProcurarUsuarios = new JMenuItem("Procurar Usu\u00E1rios");
 		mntmProcurarUsuarios.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String nomeDoAmigo = JOptionPane.showInputDialog("Nome: ",
@@ -226,11 +239,11 @@ public class TelaUsuario extends JFrame {
 			}
 		});
 		mnPerfil.add(mntmProcurarUsuarios);
-		
-		JButton procurar = new JButton("Procurar Usuario");
+
+		JButton procurar = new JButton("Procurar Usu\u00E1rio");
 		procurar.setForeground(new Color(204, 255, 51));
 		procurar.setBackground(new Color(0, 0, 0));
-		procurar.setFont(new Font("OCR A Extended", Font.PLAIN, 12));
+		procurar.setFont(new Font("OCR A Extended", Font.PLAIN, 14));
 		procurar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String nomeDoAmigo = JOptionPane.showInputDialog("Nome: ",
@@ -245,13 +258,13 @@ public class TelaUsuario extends JFrame {
 				}
 			}
 		});
-		procurar.setBounds(23, 140, 165, 39);
+		procurar.setBounds(26, 173, 165, 39);
 		contentPane.add(procurar);
 
-		JButton btnCMusica = new JButton("Cadastrar Musica");
+		JButton btnCMusica = new JButton("Cadastrar M\u00FAsica");
 		btnCMusica.setForeground(new Color(204, 255, 51));
 		btnCMusica.setBackground(new Color(0, 0, 0));
-		btnCMusica.setFont(new Font("OCR A Extended", Font.PLAIN, 12));
+		btnCMusica.setFont(new Font("OCR A Extended", Font.PLAIN, 14));
 		btnCMusica.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -267,10 +280,10 @@ public class TelaUsuario extends JFrame {
 				telaCMusica.setLocationRelativeTo(null);
 			}
 		});
-		btnCMusica.setBounds(637, 308, 165, 39);
+		btnCMusica.setBounds(625, 308, 165, 39);
 		contentPane.add(btnCMusica);
 
-		JLabel lblMusica = new JLabel("Musica");
+		JLabel lblMusica = new JLabel("M\u00FAsica");
 		lblMusica.setForeground(new Color(204, 255, 51));
 		lblMusica.setFont(new Font("OCR A Extended", Font.BOLD, 14));
 		lblMusica.setBounds(758, 270, 70, 26);
@@ -285,7 +298,7 @@ public class TelaUsuario extends JFrame {
 		JButton button_2 = new JButton("Criar Playlist");
 		button_2.setForeground(new Color(204, 255, 51));
 		button_2.setBackground(new Color(0, 0, 0));
-		button_2.setFont(new Font("OCR A Extended", Font.PLAIN, 12));
+		button_2.setFont(new Font("OCR A Extended", Font.PLAIN, 14));
 		button_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				if (comp) {
@@ -301,13 +314,13 @@ public class TelaUsuario extends JFrame {
 				telaCPlaylist.addSourceElements(f.retornaMusicas());
 			}
 		});
-		button_2.setBounds(646, 45, 146, 39);
+		button_2.setBounds(634, 45, 146, 39);
 		contentPane.add(button_2);
 
-		JButton btnPrintarMusica = new JButton("Printar Musica");
+		JButton btnPrintarMusica = new JButton("Informa\u00E7\u00F5es da M\u00FAsica");
 		btnPrintarMusica.setForeground(new Color(204, 255, 51));
 		btnPrintarMusica.setBackground(new Color(0, 0, 0));
-		btnPrintarMusica.setFont(new Font("OCR A Extended", Font.PLAIN, 12));
+		btnPrintarMusica.setFont(new Font("OCR A Extended", Font.PLAIN, 14));
 		btnPrintarMusica.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -318,7 +331,7 @@ public class TelaUsuario extends JFrame {
 				}
 			}
 		});
-		btnPrintarMusica.setBounds(646, 359, 146, 39);
+		btnPrintarMusica.setBounds(604, 359, 207, 39);
 		contentPane.add(btnPrintarMusica);
 
 		JScrollPane scrollPane = new JScrollPane();
@@ -332,6 +345,7 @@ public class TelaUsuario extends JFrame {
 		contentPane.add(dtrpnTocando);
 
 		JList list = new JList();
+		list.setFont(new Font("OCR A Extended", Font.PLAIN, 14));
 		list.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent arg0) {
@@ -349,10 +363,22 @@ public class TelaUsuario extends JFrame {
 								p.getPlayer().close();
 								comp = false;
 							}
-							p.setPath(m.getEndereco());
-							p.play(-1);
-							dtrpnTocando.setText("Tocando: " + a);
-							comp = true;
+							File arq = new File(m.getEndereco());
+							if (arq.exists()) {
+								p.setPath(m.getEndereco());
+								p.play(-1);
+								dtrpnTocando.setText("Tocando: " + a);
+								comp = true;
+							} else {
+								f.removerMusica(m);
+								Playlist x = f.procurarPlaylist((String) comboUsuario.getSelectedItem());
+								if(x.getSong(x.getPlaylist().indexOf(m)) == m) {
+									f.procurarPlaylist((String) comboUsuario.getSelectedItem()).removeSong(m);
+								}
+								m = null;
+								arq = null;
+								x = null;
+							}
 
 						} else {
 							JOptionPane.showMessageDialog(null, "ERRO\nMUSICA INCORRETA OU INEXISTENTE");
@@ -382,11 +408,22 @@ public class TelaUsuario extends JFrame {
 								p.getPlayer().close();
 								comp = false;
 							}
-							p.setPath(m.getEndereco());
-							p.play(-1);
-							dtrpnTocando.setText("Tocando: " + a);
-							comp = true;
-
+							File arq = new File(m.getEndereco());
+							if (arq.exists()) {
+								p.setPath(m.getEndereco());
+								p.play(-1);
+								dtrpnTocando.setText("Tocando: " + a);
+								comp = true;
+							} else {
+								f.removerMusica(m);
+								Playlist x = f.procurarPlaylist((String) comboUsuario.getSelectedItem());
+								if(x.getSong(x.getPlaylist().indexOf(m)) == m) {
+									f.procurarPlaylist((String) comboUsuario.getSelectedItem()).removeSong(m);
+								}
+								m = null;
+								arq = null;
+								x = null;
+							}
 						} else {
 							JOptionPane.showMessageDialog(null, "ERRO\nMUSICA INCORRETA OU INEXISTENTE");
 						}
@@ -407,7 +444,7 @@ public class TelaUsuario extends JFrame {
 
 		JButton previous = new JButton("");
 		previous.setForeground(new Color(204, 255, 51));
-		previous.setBackground(new Color(0, 0, 0));
+		previous.setBackground(new Color(204, 255, 51));
 		previous.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (!a.equals(null)) {
@@ -430,11 +467,22 @@ public class TelaUsuario extends JFrame {
 								p.getPlayer().close();
 								comp = false;
 							}
-							p.setPath(m.getEndereco());
-							p.play(-1);
-							dtrpnTocando.setText("Tocando: " + a);
-							comp = true;
-
+							File arq = new File(m.getEndereco());
+							if (arq.exists()) {
+								p.setPath(m.getEndereco());
+								p.play(-1);
+								dtrpnTocando.setText("Tocando: " + a);
+								comp = true;
+							} else {
+								f.removerMusica(m);
+								Playlist x = f.procurarPlaylist((String) comboUsuario.getSelectedItem());
+								if(x.getSong(x.getPlaylist().indexOf(m)) == m) {
+									f.procurarPlaylist((String) comboUsuario.getSelectedItem()).removeSong(m);
+								}
+								m = null;
+								arq = null;
+								x = null;
+							}
 						} else {
 							JOptionPane.showMessageDialog(null, "ERRO\nMUSICA INCORRETA OU INEXISTENTE");
 						}
@@ -450,7 +498,7 @@ public class TelaUsuario extends JFrame {
 
 		JButton next = new JButton("");
 		next.setForeground(new Color(204, 255, 51));
-		next.setBackground(new Color(0, 0, 0));
+		next.setBackground(new Color(204, 255, 51));
 		next.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (!a.equals(null)) {
@@ -473,11 +521,22 @@ public class TelaUsuario extends JFrame {
 								p.getPlayer().close();
 								comp = false;
 							}
-							p.setPath(m.getEndereco());
-							p.play(-1);
-							dtrpnTocando.setText("Tocando: " + a);
-							comp = true;
-
+							File arq = new File(m.getEndereco());
+							if (arq.exists()) {
+								p.setPath(m.getEndereco());
+								p.play(-1);
+								dtrpnTocando.setText("Tocando: " + a);
+								comp = true;
+							} else {
+								f.removerMusica(m);
+								Playlist x = f.procurarPlaylist((String) comboUsuario.getSelectedItem());
+								if(x.getSong(x.getPlaylist().indexOf(m)) == m) {
+									f.procurarPlaylist((String) comboUsuario.getSelectedItem()).removeSong(m);
+								}
+								m = null;
+								arq = null;
+								x = null;
+							}
 						} else {
 							JOptionPane.showMessageDialog(null, "ERRO\nMUSICA INCORRETA OU INEXISTENTE");
 						}
@@ -493,7 +552,7 @@ public class TelaUsuario extends JFrame {
 
 		JToggleButton playPause = new JToggleButton("");
 		playPause.setForeground(new Color(204, 255, 51));
-		playPause.setBackground(new Color(0, 0, 0));
+		playPause.setBackground(new Color(204, 255, 51));
 		playPause.setSelectedIcon(new ImageIcon("Imagens\\pause.novo.png"));
 		playPause.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -511,7 +570,7 @@ public class TelaUsuario extends JFrame {
 		JButton btnTocar = new JButton("Tocar");
 		btnTocar.setForeground(new Color(204, 255, 51));
 		btnTocar.setBackground(new Color(0, 0, 0));
-		btnTocar.setFont(new Font("OCR A Extended", Font.PLAIN, 12));
+		btnTocar.setFont(new Font("OCR A Extended", Font.PLAIN, 14));
 		btnTocar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				a = (String) list.getModel().getElementAt(list.getSelectedIndex());
@@ -527,11 +586,22 @@ public class TelaUsuario extends JFrame {
 							p.getPlayer().close();
 							comp = false;
 						}
-						p.setPath(m.getEndereco());
-						p.play(-1);
-						dtrpnTocando.setText("Tocando: " + a);
-						comp = true;
-
+						File arq = new File(m.getEndereco());
+						if (arq.exists()) {
+							p.setPath(m.getEndereco());
+							p.play(-1);
+							dtrpnTocando.setText("Tocando: " + a);
+							comp = true;
+						} else {
+							f.removerMusica(m);
+							Playlist x = f.procurarPlaylist((String) comboUsuario.getSelectedItem());
+							if(x.getSong(x.getPlaylist().indexOf(m)) == m) {
+								f.procurarPlaylist((String) comboUsuario.getSelectedItem()).removeSong(m);
+							}
+							m = null;
+							arq = null;
+							x = null;
+						}
 					} else {
 						JOptionPane.showMessageDialog(null, "ERRO\nMUSICA INCORRETA OU INEXISTENTE");
 					}
@@ -543,27 +613,10 @@ public class TelaUsuario extends JFrame {
 		btnTocar.setBounds(372, 332, 90, 34);
 		contentPane.add(btnTocar);
 
-		JComboBox comboUsuario = new JComboBox();
-		comboUsuario.setFont(new Font("OCR A Extended", Font.PLAIN, 12));
-		comboUsuario.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent arg0) {
-				if (arg0.getClickCount() == 1) {
-					uso = (String) comboUsuario.getSelectedItem();
-					Playlist p = f.procurarPlaylist(uso);
-					model.clear();
-					model.addAll(p.retornaMusicasP());
-				}
-			}
-		});
-		comboUsuario.setModel(new DefaultComboBoxModel(f.retornarPlaylist()));
-		comboUsuario.setBounds(638, 110, 164, 26);
-		contentPane.add(comboUsuario);
-
 		JButton btnUsuario = new JButton("Visualizar");
 		btnUsuario.setForeground(new Color(204, 255, 51));
 		btnUsuario.setBackground(new Color(0, 0, 0));
-		btnUsuario.setFont(new Font("OCR A Extended", Font.PLAIN, 12));
+		btnUsuario.setFont(new Font("OCR A Extended", Font.PLAIN, 14));
 		btnUsuario.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				uso = (String) comboUsuario.getSelectedItem();
@@ -573,9 +626,9 @@ public class TelaUsuario extends JFrame {
 
 			}
 		});
-		btnUsuario.setBounds(657, 210, 124, 39);
+		btnUsuario.setBounds(645, 210, 124, 39);
 		contentPane.add(btnUsuario);
-		
+
 		JButton btnOrganizar = new JButton("Organizar");
 		btnOrganizar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -585,24 +638,45 @@ public class TelaUsuario extends JFrame {
 					comp = false;
 				}
 				dispose();
-				TelaOrganizar telaOrganizar = new TelaOrganizar(u,f.procurarPlaylist((String)comboUsuario.getSelectedItem()));
+				TelaOrganizar telaOrganizar = new TelaOrganizar(u,
+						f.procurarPlaylist((String) comboUsuario.getSelectedItem()));
 				telaOrganizar.setVisible(true);
 				telaOrganizar.setResizable(false);
 				telaOrganizar.setLocationRelativeTo(null);
 				telaOrganizar.addSourceElements(f.retornaMusicas());
-				telaOrganizar.addDestinationElements(f.procurarPlaylist((String)comboUsuario.getSelectedItem()).retornaMusicasP());
+				telaOrganizar.addDestinationElements(
+						f.procurarPlaylist((String) comboUsuario.getSelectedItem()).retornaMusicasP());
 			}
 		});
 		btnOrganizar.setForeground(new Color(204, 255, 51));
 		btnOrganizar.setBackground(new Color(0, 0, 0));
-		btnOrganizar.setFont(new Font("OCR A Extended", Font.PLAIN, 12));
-		btnOrganizar.setBounds(646, 159, 146, 39);
+		btnOrganizar.setFont(new Font("OCR A Extended", Font.PLAIN, 14));
+		btnOrganizar.setBounds(634, 159, 146, 39);
 		contentPane.add(btnOrganizar);
-		
-				JLabel labelFundo = new JLabel(" ");
-				labelFundo.setIcon(new ImageIcon("Imagens\\JSPlayer fundo 2.png"));
-				labelFundo.setBounds(6, -61, 844, 528);
-				contentPane.add(labelFundo);
+
+		JButton btnTodasAsMusicas = new JButton("Todas as M\u00FAsicas");
+		btnTodasAsMusicas.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				model.clear();
+				model.addAll(f.retornaMusicas());
+			}
+		});
+		btnTodasAsMusicas.setFont(new Font("OCR A Extended", Font.PLAIN, 14));
+		btnTodasAsMusicas.setForeground(new Color(204, 255, 51));
+		btnTodasAsMusicas.setBackground(new Color(0, 0, 0));
+		btnTodasAsMusicas.setBounds(28, 98, 163, 39);
+		contentPane.add(btnTodasAsMusicas);
+
+		JLabel lblJsplayer = new JLabel("JSPlayer");
+		lblJsplayer.setFont(new Font("OCR A Extended", Font.PLAIN, 24));
+		lblJsplayer.setForeground(new Color(204, 255, 51));
+		lblJsplayer.setBounds(16, 29, 165, 39);
+		contentPane.add(lblJsplayer);
+
+		JLabel labelFundo = new JLabel(" ");
+		labelFundo.setIcon(new ImageIcon("Imagens\\JSPlayer fundo 2.png"));
+		labelFundo.setBounds(6, -61, 844, 528);
+		contentPane.add(labelFundo);
 
 	}
 }
