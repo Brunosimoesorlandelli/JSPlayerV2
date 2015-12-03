@@ -76,12 +76,6 @@ public class RepositorioMusicaArray implements IRepositorioMusica, Serializable 
 		if (mus != null) {
 			musicas.add(mus);
 			salvar();
-
-			for (Musica m : musicas) {
-				for (Musica s : musicas) {
-					m.compareTo(s);
-				}
-			}
 		}
 	}
 
@@ -90,7 +84,7 @@ public class RepositorioMusicaArray implements IRepositorioMusica, Serializable 
 			musicas.remove(musicas.indexOf(s));
 			JOptionPane.showMessageDialog(null, "MUSICA REMOVIDA");
 		} catch (Exception e) {
-			JOptionPane.showMessageDialog(null, "ERRO!\nMUSICA NÃO PÔDE SER REMOVIDA!");
+			JOptionPane.showMessageDialog(null, "ERRO!\nMUSICA NÃƒO PÃ”DE SER REMOVIDA!");
 			e.printStackTrace();
 		}
 	}
@@ -111,12 +105,6 @@ public class RepositorioMusicaArray implements IRepositorioMusica, Serializable 
 		} catch (Exception e) {
 			e.printStackTrace();
 			JOptionPane.showMessageDialog(null, "NADA PARA MOSTRAR!");
-		}
-	}
-
-	public void ordenarMusicas(Musica m) {
-		for (Musica s : musicas) {
-			m.compareTo(s);
 		}
 	}
 
