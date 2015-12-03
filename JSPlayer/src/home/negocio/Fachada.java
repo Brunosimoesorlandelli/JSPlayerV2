@@ -70,8 +70,8 @@ public class Fachada implements IFachada {
 
 	}
 
-	public void removerMusica(String titulo, String artista) {
-		musicas.remover(procurarMusica(titulo, artista));
+	public void removerMusica(Musica m) {
+		musicas.remover(m);
 	}
 	
 	public void printarDadosMusica(Musica m) {
