@@ -85,14 +85,14 @@ public class TelaLogin extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 
-		JLabel lblNomeDoUsuario = new JLabel("Nome do Usuario: ");
-		lblNomeDoUsuario.setFont(new Font("OCR A Extended", Font.PLAIN, 15));
+		JLabel lblNomeDoUsuario = new JLabel("Nome do Usu\u00E1rio: ");
+		lblNomeDoUsuario.setFont(new Font("OCR A Extended", Font.PLAIN, 14));
 		lblNomeDoUsuario.setForeground(Color.LIGHT_GRAY);
 		lblNomeDoUsuario.setBounds(10, 70, 166, 14);
 		contentPane.add(lblNomeDoUsuario);
 
 		JLabel lblEmail = new JLabel("Email: ");
-		lblEmail.setFont(new Font("OCR A Extended", Font.PLAIN, 15));
+		lblEmail.setFont(new Font("OCR A Extended", Font.PLAIN, 14));
 		lblEmail.setForeground(Color.LIGHT_GRAY);
 		lblEmail.setBounds(10, 151, 166, 14);
 		contentPane.add(lblEmail);
@@ -110,7 +110,7 @@ public class TelaLogin extends JFrame {
 		textEmail.setColumns(10);
 
 		JButton btnLogar = new JButton("Logar");
-		btnLogar.setFont(new Font("OCR A Extended", Font.PLAIN, 12));
+		btnLogar.setFont(new Font("OCR A Extended", Font.PLAIN, 14));
 		btnLogar.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent e) {
@@ -146,7 +146,7 @@ public class TelaLogin extends JFrame {
 		contentPane.add(btnLogar);
 
 		JButton btnNewButton = new JButton("Registre-se agora!");
-		btnNewButton.setFont(new Font("OCR A Extended", Font.PLAIN, 12));
+		btnNewButton.setFont(new Font("OCR A Extended", Font.PLAIN, 14));
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				dispose();
